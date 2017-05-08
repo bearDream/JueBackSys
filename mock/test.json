@@ -1,0 +1,17 @@
+{"login": [
+    { "code": 1,
+      "msg": "后端正常",
+      "data": [{
+          "userinfo" : {"username":"zc", "age":"11"}
+          },
+          {
+            "token" : "1ed12r23r23r23r23r232r34"
+      }]}
+  ],
+  "register": [
+    { "code": 1, "msg": "后端正常", "data": "注册成功"}
+  ],
+  "userList": [
+    { "code": 1, "msg": "后端正常", "data": "用户信息"}
+  ]
+}
