@@ -12,8 +12,10 @@
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
       <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <List :current="current" :columns="columns" :data="log.list"
-      :total="log.total"
+    <p>12312312312</p>
+    <p>ssssasdasdasd</p>
+    <List :current="current" :columns="columns" :data="log.logs.list"
+      :total="log.logs.page.total"
       @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
@@ -62,19 +64,19 @@
         columns: [
           {
             title: 'ID',
-            key: 'id',
+            key: 'roleId',
             width: 60
           },
           {
-            title: '标题',
-            key: 'title'
+            title: '角色名',
+            key: 'roleName'
           },
           {
-            title: '发布时间',
-            key: 'created_at',
+            title: '添加时间',
+            key: 'addTime',
             width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.created_at + '000')}</span>`
+              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
             }
           },
           {
@@ -93,6 +95,8 @@
       'log'
     ]),
     created () {
+      console.info('when created ----------')
+      console.info(this.log)
       this.get()
     },
     methods: {

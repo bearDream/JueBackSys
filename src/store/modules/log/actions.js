@@ -8,9 +8,9 @@ export default {
    */
   getArticles ({commit}, {params}) {
     return new Model().GET({params}).then((res) => {
-      console.info(res.data)
-      commit(types.GET_ARTICLES, {
-        data: res.data
+      console.info(res.data.data)
+      commit(types.GET_LOGS, {
+        data: res.data.data
       })
     })
   },
@@ -20,7 +20,7 @@ export default {
    */
   getArticle ({commit}, {uri}) {
     return new Model().GET({uri}).then((res) => {
-      commit(types.GET_ARTICLE, {
+      commit(types.GET_LOG, {
         data: res.data
       })
     })
