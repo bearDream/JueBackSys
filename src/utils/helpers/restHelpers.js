@@ -25,10 +25,10 @@ export default {
    * @return {Object}
    */
   getHeaders () {
-    const {manager, token} = auth.get()
+    const {userinfo, token} = auth.get()
 
     return {
-      auth: window.btoa(`${manager.username}\n${token}`)
+      auth: window.btoa(`${userinfo.username}\n${token}`)
     }
   }
 }

@@ -1,6 +1,6 @@
 import storage from './helpers/storageLite'
 
-const MANAGER = 'manager'
+const USERINFO = 'userinfo'
 const TOKEN = 'token'
 
 export default {
@@ -12,7 +12,7 @@ export default {
    */
   get () {
     return {
-      [MANAGER]: storage.get(MANAGER),
+      [USERINFO]: storage.get(USERINFO),
       [TOKEN]: storage.get(TOKEN)
     }
   },
@@ -22,8 +22,10 @@ export default {
    * @param {string} manager 登录管理员
    * @param {string} token 登录 token
    */
-  login ({manager, token}) {
-    storage.set(MANAGER, manager)
+  login ({userinfo, token}) {
+    console.warn(token)
+    console.warn(userinfo)
+    storage.set(USERINFO, userinfo)
     storage.set(TOKEN, token)
   },
 
@@ -31,7 +33,7 @@ export default {
    * 登出
    */
   logout () {
-    storage.remove(MANAGER)
+    storage.remove(USERINFO)
     storage.remove(TOKEN)
   },
 
@@ -40,6 +42,6 @@ export default {
    * @return {boolean}
    */
   loggedIn () {
-    return !!storage.get(MANAGER) && !!storage.get(TOKEN)
+    return !!storage.get(USERINFO) && !!storage.get(TOKEN)
   }
 }

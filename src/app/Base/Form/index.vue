@@ -21,7 +21,7 @@
         </Form-item>
         <Form-item>
           <Button type="primary" @click="handleSave" class="margin-right-sm">保存</Button>
-          <Button type="ghost" @click="$router.push('/articles')">返回</Button>
+          <Button type="ghost" @click="$router.push('/log')">返回</Button>
         </Form-item>
       </Form>
     </div>

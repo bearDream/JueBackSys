@@ -2,7 +2,6 @@ import axios from 'axios'
 
 /**
  * 基于 axios 的 RESTful HTTP 简单封装
- * @author 赵金添 <729234283@qq.com>
  */
 export default class REST {
   /**
@@ -64,7 +63,8 @@ export default class REST {
     if (uri) {
       url = `${url}/${uri}`
     }
-
+    // console.info('this is params:')
+    // console.info(params)
     // GET
     if (params) {
       url = url + this._objToUrl(params)

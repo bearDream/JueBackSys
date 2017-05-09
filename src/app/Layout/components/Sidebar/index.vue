@@ -1,49 +1,26 @@
 <template>
   <div class="sidebar">
     <Menu ref="menu" :active-name="activeName" width="auto" :open-names="openNames" @on-select="handleSelect">
-      <Submenu name="articles">
-        <template slot="title">
-          <Icon type="document-text"></Icon>
-          文章管理
-        </template>
-        <Menu-item name="/articles">文章列表</Menu-item>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="document"></Icon>
-          文件管理
-        </template>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="person-stalker"></Icon>
-          会员管理
-        </template>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="ios-home-outline"></Icon>
-          店铺管理
-        </template>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="android-cart"></Icon>
-          商品管理
-        </template>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="android-cart"></Icon>
-          订单管理
-        </template>
-      </Submenu>
-      <Submenu name="x">
-        <template slot="title">
-          <Icon type="gear-b"></Icon>
-          网站设置
-        </template>
-      </Submenu>
+      <Menu-item name="baseFrame">
+        <Icon type="ios-paper"></Icon>
+        基础信息管理
+      </Menu-item>
+
+      <Menu-item name="businessFrame">
+        <Icon type="document"></Icon>
+        商家管理
+      </Menu-item>
+
+      <Menu-item name="dishFrame">
+        <Icon type="person-stalker"></Icon>
+        菜品管理
+      </Menu-item>
+
+      <Menu-item name="userFrame">
+        <Icon type="ios-home-outline"></Icon>
+        用户管理
+      </Menu-item>
+
     </Menu>
   </div>
 </template>

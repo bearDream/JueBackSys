@@ -9,15 +9,15 @@
     </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
-      <Breadcrumb-item href="#">文章管理</Breadcrumb-item>
-      <Breadcrumb-item>文章列表</Breadcrumb-item>
+      <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
+      <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <List :current="current" :columns="columns" :data="articles.articles.data.items"
-      :total="articles.articles.data.total"
+    <List :current="current" :columns="columns" :data="log.list"
+      :total="log.total"
       @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <Button class="margin-right-sm" type="primary" @click="$router.push('articles/form')">新增</Button>
+          <Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
@@ -90,7 +90,7 @@
       }
     },
     computed: mapState([
-      'articles'
+      'log'
     ]),
     created () {
       this.get()

@@ -7,9 +7,9 @@ import i18next from 'i18next'
  * // 新建实例、初始化、添加全局语言资源
  * const i18n = new I18N('zh-CN').init().addResources(null, require.context('./locales/', true, /\.json$/))
  * // 添加业务模块语言资源
- * i18n.addResources('articles', require.context('./locales/', true, /\.json$/))
+ * i18n.addResources('log', require.context('./locales/', true, /\.json$/))
  * // 获取翻译函数
- * const t = i18n.getT('articles')
+ * const t = i18n.getT('log')
  * // 读取翻译
  * t('articleList')
  */

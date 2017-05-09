@@ -1,17 +1,109 @@
-{"login": [
-    { "code": 1,
+{
+  "login": [
+    {
+      "code": 1,
       "msg": "后端正常",
-      "data": [{
-          "userinfo" : {"username":"zc", "age":"11"}
-          },
-          {
-            "token" : "1ed12r23r23r23r23r232r34"
-      }]}
+      "data": {
+        "userinfo": {
+          "id": 1,
+          "username": "zc"
+        },
+        "token": "1ed12r23r23r23r23r232r34"
+      }
+    }
   ],
   "register": [
-    { "code": 1, "msg": "后端正常", "data": "注册成功"}
+    {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": "注册成功"
+    }
   ],
-  "userList": [
-    { "code": 1, "msg": "后端正常", "data": "用户信息"}
-  ]
+  "log": {
+      "code": 1,
+      "msg": "后端正常",
+      "data": {
+        "page": {
+          "pageNum": 1,
+          "pageSize": 10,
+          "size": 3,
+          "orderBy": "add_time asc",
+          "startRow": 1,
+          "endRow": 3,
+          "total": 3,
+          "pages": 1,
+          "list": [
+            {
+              "roleId": 1,
+              "roleName": "全局管理员",
+              "roleContent": "可以操作所有内容",
+              "addTime": 1493626300000,
+              "roleYxbz": 1,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 2,
+              "roleName": "用户管理员",
+              "roleContent": "只可以操作用户管理",
+              "addTime": 1493626300000,
+              "roleYxbz": 1,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 3,
+              "roleName": "商家管理员",
+              "roleContent": "只可以操作商家管理",
+              "addTime": 1493626300000,
+              "roleYxbz": 1,
+              "roleType": 2,
+              "promission": null
+            }
+          ],
+          "firstPage": 1,
+          "prePage": 0,
+          "nextPage": 0,
+          "lastPage": 1,
+          "isFirstPage": true,
+          "isLastPage": true,
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "navigatePages": 8,
+          "navigatepageNums": [
+            1
+          ]
+        },
+        "list": [
+          {
+            "roleId": 1,
+            "roleName": "全局管理员",
+            "roleContent": "可以操作所有内容",
+            "addTime": 1493626300000,
+            "roleYxbz": 1,
+            "roleType": 2,
+            "promission": null
+          },
+          {
+            "roleId": 2,
+            "roleName": "用户管理员",
+            "roleContent": "只可以操作用户管理",
+            "addTime": 1493626300000,
+            "roleYxbz": 1,
+            "roleType": 2,
+            "promission": null
+          },
+          {
+            "roleId": 3,
+            "roleName": "商家管理员",
+            "roleContent": "只可以操作商家管理",
+            "addTime": 1493626300000,
+            "roleYxbz": 1,
+            "roleType": 2,
+            "promission": null
+          }
+        ]
+      }
+    }
 }

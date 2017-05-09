@@ -1,14 +1,3 @@
-## 项目地址
-https://github.com/zhaotoday/iview
-
-## 线上的例子
-http://admin.liruan.cn/#/login
-```
-用户：admin
-密码：admin
-```
-> 我的服务器 gzip 开启有点问题，所以访问可能会慢点。大家可以点击左边菜单栏的：文章管理 > 文章列表，查看效果。目前，只写了一个简单的业务模块，供大家参考。
-
 ## 介绍
 基于 vue-cli + iView 的 Vue js 后台管理系统，在 vue-cli 基础上做了一些合理的修改和增强。功能包括：调试、构建、代码规范校验、单元测试、国际化等。
 
@@ -43,6 +32,12 @@ $ git clone https://github.com/zhaotoday/vue.js.git
 
 # 安装依赖
 $ npm install
+
+# 安装mock和json-server
+$ npm install --save-dev mock json-server
+
+# 安装 node-sass、sass-loader
+$ npm install --save-dev node-sass sass-loader
 
 # 开发调试
 $ npm run dev
@@ -223,4 +218,14 @@ $ git clone https://github.com/zhaotoday/update-your-browser.git
   if (!((bowser.msie && bowser.version >= 10) || bowser.msedge || bowser.webkit || bowser.firefox))
     location.replace('static/update-browser/index.html')
 </script>
+```
+
+## 项目地址
+https://github.com/zhaotoday/iview
+
+## 线上的例子
+http://admin.liruan.cn/#/login
+```
+用户：admin
+密码：admin
 ```

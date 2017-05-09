@@ -5,13 +5,14 @@ import Root from '@/app/Root'
 import Layout from '@/app/Layout'
 import notFound from './routes/notFound'
 import home from './routes/home'
-import articles from './routes/articles'
+import baseFrame from './routes/base_frame'
 import login from './routes/login'
 import logout from './routes/logout'
 import iView from 'iview'
 
 Vue.use(Router)
 
+// 构造路由器
 const router = new Router({
   routes: [
     {
@@ -23,7 +24,7 @@ const router = new Router({
           component: Layout,
           children: [
             home,
-            articles
+            baseFrame
           ],
           meta: {
             requiresAuth: true
@@ -37,6 +38,7 @@ const router = new Router({
   ]
 })
 
+// 路由前判断是否登录
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
 
@@ -54,6 +56,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 路由结束时回调
 router.afterEach((to, from, next) => {
   iView.LoadingBar.finish()
 })

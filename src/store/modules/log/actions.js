@@ -1,12 +1,14 @@
 import types from './types'
-import Model from '../../../models/articles'
+import Model from '../../../models/log'
 
+// 角色的所有请求
 export default {
   /**
    * 获取列表
    */
   getArticles ({commit}, {params}) {
     return new Model().GET({params}).then((res) => {
+      console.info(res.data)
       commit(types.GET_ARTICLES, {
         data: res.data
       })
