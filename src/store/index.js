@@ -4,6 +4,7 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 import log from './modules/log'
+import navigation from './modules/navigation'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   actions,
   mutations,
   modules: {
-    log
+    log,
+    navigation
   }
 })

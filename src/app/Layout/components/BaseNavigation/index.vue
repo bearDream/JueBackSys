@@ -1,5 +1,5 @@
 <template>
-  <Menu mode="horizontal" active-name="1">
+  <Menu mode="horizontal" active-name="logFrame" @on-select="handleSelect">
     <Menu-item name="logFrame">
       <Icon type="ios-paper"></Icon>
       日志

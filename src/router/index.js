@@ -5,7 +5,11 @@ import Root from '@/app/Root'
 import Layout from '@/app/Layout'
 import notFound from './routes/notFound'
 import home from './routes/home'
+import businessFrame from './routes/business_frame'
 import baseFrame from './routes/base_frame'
+
+import baseNavigation from './routes/base_navigation'
+
 import login from './routes/login'
 import logout from './routes/logout'
 import iView from 'iview'
@@ -24,7 +28,9 @@ const router = new Router({
           component: Layout,
           children: [
             home,
-            baseFrame
+            baseFrame,
+            businessFrame,
+            baseNavigation
           ],
           meta: {
             requiresAuth: true

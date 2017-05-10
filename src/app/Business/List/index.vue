@@ -9,8 +9,8 @@
     </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
-      <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
-      <Breadcrumb-item>日志管理</Breadcrumb-item>
+      <Breadcrumb-item href="#">商家管理</Breadcrumb-item>
+      <Breadcrumb-item>商家管理</Breadcrumb-item>
     </Breadcrumb>
     <List :current="current" :columns="columns" :data="log.logs.list"
       :total="log.logs.page.total"
@@ -93,8 +93,6 @@
       'log'
     ]),
     created () {
-      console.info('when created ----------')
-      console.info(this.log)
       this.get()
     },
     methods: {

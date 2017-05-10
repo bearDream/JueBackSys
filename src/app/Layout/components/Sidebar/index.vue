@@ -39,6 +39,7 @@
     },
     methods: {
       handleSelect (name) {
+//        this.$router.push('baseNavigation/' + name)
         this.$router.push(name)
       },
       update (route) {

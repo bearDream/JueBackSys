@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-center">
-      <Button type="ghost" size="large" icon="social-windows" @click="$router.push('/')">后台管理系统</Button>
+      <Button type="ghost" size="large" icon="social-windows" @click="home">后台管理系统</Button>
       <div class="operations">
         <Button-group size="small">
           <Button type="ghost" icon="android-person">当前用户：admin</Button>
@@ -13,12 +13,21 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'header',
     methods: {
       handleLogout () {
         this.$router.push('/logout')
         this.$Message.success('退出成功')
+      },
+      computed: mapState([
+        'navigation'
+      ]),
+      home () {
+        this.$store.dispatch('show_none_nav', {})
+        this.$router.push('/')
       }
     }
   }

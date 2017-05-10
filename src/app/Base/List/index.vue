@@ -12,19 +12,17 @@
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
       <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <p>12312312312</p>
-    <p>ssssasdasdasd</p>
     <List :current="current" :columns="columns" :data="log.logs.list"
       :total="log.logs.page.total"
       @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>
+          <!--<Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>-->
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
-              <Input type="text" placeholder="请输入标题" v-model="search.title" style="width: 230px;"
+              <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
                 @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
@@ -92,18 +90,17 @@
       }
     },
     computed: mapState([
-      'log'
+      'log',
+      'navigation'
     ]),
     created () {
-      console.info('when created ----------')
-      console.info(this.log)
       this.get()
     },
     methods: {
       get (current = 1) {
         this.$set(this, 'current', current)
 
-        this.$store.dispatch('getArticles', {
+        this.$store.dispatch('getLogs', {
           params: {
             offset: (current - 1) * consts.PAGE_SIZE,
             limit: consts.PAGE_SIZE,

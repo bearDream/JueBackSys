@@ -6,7 +6,7 @@ export default {
   /**
    * 获取列表
    */
-  getArticles ({commit}, {params}) {
+  getLogs ({commit}, {params}) {
     return new Model().GET({params}).then((res) => {
       console.info(res.data.data)
       commit(types.GET_LOGS, {
@@ -18,7 +18,7 @@ export default {
   /**
    * 获取详情
    */
-  getArticle ({commit}, {uri}) {
+  getLog ({commit}, {uri}) {
     return new Model().GET({uri}).then((res) => {
       commit(types.GET_LOG, {
         data: res.data
@@ -27,23 +27,9 @@ export default {
   },
 
   /**
-   * 新增
-   */
-  postArticle ({commit}, {data}) {
-    return new Model().POST({data})
-  },
-
-  /**
-   * 编辑
-   */
-  putArticle ({commit}, {uri, data}) {
-    return new Model().PUT({uri, data})
-  },
-
-  /**
    * 删除
    */
-  deleteArticle ({commit}, {params}) {
+  deleteLog ({commit}, {params}) {
     return new Model().DELETE({params})
   }
 }

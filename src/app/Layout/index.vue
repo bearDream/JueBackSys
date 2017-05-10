@@ -18,7 +18,8 @@
           <i-col span="14">
             <Row>
               <i-col>
-                <Navigation></Navigation>
+                <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
+                <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
               </i-col>
             </Row>
             <Row>
@@ -29,28 +30,42 @@
           </i-col>
         </Row>
       </div>
-      <!--<Sidebar ref="sidebar"></Sidebar>-->
-      <!--<Navigation></Navigation>-->
-      <!--<Body></Body>-->
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import Sidebar from './components/Sidebar'
   import Header from './components/Header'
   import Body from './components/Body'
-  import Navigation from './components/Navigation'
+  import BaseNavigationtio from './components/BaseNavigation'
+  import BusinessNavigation from './components/BusinessNavigation'
 
   export default {
     name: 'layout',
+    computed: mapState([
+      'navigation'
+    ]),
     components: {
       Sidebar,
       Header,
       Body,
-      Navigation
+      BaseNavigationtio,
+      BusinessNavigation
     },
     beforeRouteUpdate (to, from, next) {
+      console.info('--------beforeRouteUpdate----------')
+      let path = to.path
+      // 控制导航栏的显示
+      switch (path) {
+        case '/baseFrame':
+          this.$store.dispatch('show_base_nav', {})
+          break
+        case '/businessFrame':
+          this.$store.dispatch('show_business_nav', {})
+          break
+      }
       this.$nextTick(() => {
         this.$refs.sidebar.update(to)
       })
