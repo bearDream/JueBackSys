@@ -1,13 +1,28 @@
 .login {
-  background-color: white;
+  border-radius:5px ;
+  background-color: rgba(207,209,210,.4);
   position: absolute;
   left: 50%;
-  top: 250px;
+  top: 130px;
   margin-left: -180px;
   width: 360px;
-
+  border: none;
+  text-align: center;
+  padding-right: 50px;
   form {
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 50px;
   }
+  .userForm{
+    margin-left: -30px;
+  }
+  #txt{
+     font-size: 5em;
+     font-family: Kristen ITC;
+     font-weight:bold;
+     color: #796F64;
+     margin:25px 0 25px -25px ;
+   }
+
 }

@@ -1,17 +1,42 @@
 <template>
   <div>
     <Card class="login" dis-hover>
-      <p slot="title">蕨菜后台管理系统</p>
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="60" label-position="left">
-        <Form-item label="用户" prop="username">
-          <Input v-model="formValidate.username" placeholder="请输入用户" @on-enter="handleLogin"></Input>
-        </Form-item>
-        <Form-item label="密码" prop="password">
-          <Input type="password" v-model="formValidate.password" placeholder="请输入密码" @on-enter="handleLogin"></Input>
-        </Form-item>
-        <Form-item>
-          <Button type="primary" @click="handleLogin">登录</Button>
-        </Form-item>
+       <Row>
+         <i-col span="24">
+           <Form-item>
+           <p id="txt">Welcome</p>
+           </Form-item>
+         </i-col>
+         <i-col span="24">
+          <Form-item prop="username" label="" class="userForm">
+             <Input type="text"style="width:265px;" @on-enter="handleLogin" v-model="formValidate.username" placeholder="用户名">
+             <Icon type="person" slot="prepend"></Icon>
+             </Input>
+           </Form-item><br>
+         </i-col>
+         <i-col span="24">
+           <Form-item prop="password" label=""class="userForm">
+             <Input  type="password"style="width:265px;" v-model="formValidate.password" placeholder="密码"@on-enter="handleLogin">
+             <Icon type="locked" slot="prepend"></Icon>
+             </Input>
+           </Form-item>
+           <br>
+         </i-col>
+         <i-col span="24">
+           <Form-item>
+           <Checkbox label="facebook"><span>记住用户名和密码</span></Checkbox><br>
+           </Form-item>
+         </i-col>
+         <i-col span="24">
+           <Form-item>
+             <Button  to="/baidu" class="userForm" style="height: 40px;width: 265px;
+              background: #59850B;color: #E2E9DB; border: none"@click="handleLogin">
+               登录
+             </Button>
+           </Form-item>
+         </i-col>
+       </Row>
       </Form>
     </Card>
   </div>
@@ -27,7 +52,7 @@
       return {
         formValidate: {
           username: 'admin',
-          password: 'admin'
+          password: 'admin123456'
         },
         ruleValidate: {
           username: [

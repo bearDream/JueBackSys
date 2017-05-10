@@ -54,16 +54,19 @@
       BaseNavigationtio,
       BusinessNavigation
     },
+    created () {
+      console.info(this.navigation.base)
+    },
     beforeRouteUpdate (to, from, next) {
       console.info('--------beforeRouteUpdate----------')
       let path = to.path
       // 控制导航栏的显示
       switch (path) {
         case '/baseFrame':
-          this.$store.dispatch('show_base_nav', {})
+          this.$store.dispatch('show_base_nav')
           break
         case '/businessFrame':
-          this.$store.dispatch('show_business_nav', {})
+          this.$store.dispatch('show_business_nav')
           break
       }
       this.$nextTick(() => {
