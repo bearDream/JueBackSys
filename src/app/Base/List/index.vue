@@ -62,19 +62,23 @@
         columns: [
           {
             title: 'ID',
-            key: 'roleId',
+            key: 'logId',
             width: 60
           },
           {
-            title: '角色名',
-            key: 'roleName'
+            title: '用户id',
+            key: 'userId'
+          },
+          {
+            title: '操作方法',
+            key: 'actionkey'
           },
           {
             title: '添加时间',
-            key: 'addTime',
+            key: 'logAddtime',
             width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
+              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
             }
           },
           {

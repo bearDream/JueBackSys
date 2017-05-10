@@ -1,3 +1,4 @@
+<!-- 基础信息的文件 -->
 <template>
   <router-view></router-view>
 </template>
