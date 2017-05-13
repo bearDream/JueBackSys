@@ -20,6 +20,7 @@
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
+                <UserNavigationtio v-show="navigation.user"></UserNavigationtio>
               </i-col>
             </Row>
             <Row>
@@ -41,6 +42,7 @@
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
+  import UserNavigationtio from './components/UserNavigationtio'
 
   export default {
     name: 'layout',
@@ -52,7 +54,8 @@
       Header,
       Body,
       BaseNavigationtio,
-      BusinessNavigation
+      BusinessNavigation,
+      UserNavigationtio
     },
     created () {
       console.info(this.navigation.base)
@@ -67,6 +70,9 @@
           break
         case '/businessFrame':
           this.$store.dispatch('show_business_nav')
+          break
+        case '/userFrame':
+          this.$store.dispatch('show_user_nav')
           break
       }
       this.$nextTick(() => {

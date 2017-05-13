@@ -8,7 +8,7 @@ export default {
    */
   getLogs ({commit}, {params}) {
     return new Model().GET({params}).then((res) => {
-      console.info(res.data.data)
+      console.info(res.data)
       commit(types.GET_LOGS, {
         data: res.data.data
       })

@@ -7,6 +7,7 @@ import notFound from './routes/notFound'
 import home from './routes/home'
 import businessFrame from './routes/business_frame'
 import baseFrame from './routes/base_frame'
+import userFrame from './routes/user_frame'
 
 import baseNavigation from './routes/base_navigation'
 
@@ -30,7 +31,8 @@ const router = new Router({
             home,
             baseFrame,
             businessFrame,
-            baseNavigation
+            baseNavigation,
+            userFrame
           ],
           meta: {
             requiresAuth: true
