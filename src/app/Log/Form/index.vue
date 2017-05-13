@@ -10,9 +10,9 @@
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
         <Form-item label="标题" prop="title">
           <Row>
-            <Col span="12">
+            <i-col span="12">
               <Input v-model="formValidate.title" placeholder="请输入标题"></Input>
-            </Col>
+            </i-col>
           </Row>
         </Form-item>
         <Form-item label="内容" prop="content">
@@ -31,10 +31,12 @@
 <script>
   import { mapState } from 'vuex'
   import Editor from '@/components/Editor'
+  import ICol from "../../../../node_modules/iview/src/components/grid/col";
 
   export default {
     name: 'form',
     components: {
+      ICol,
       Editor
     },
     created () {

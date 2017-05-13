@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img src="../src/assets/jue.jpg" alt="">
     <router-view></router-view>
   </div>
 </template>
@@ -13,8 +14,13 @@
 <style>
   body{
     overflow: hidden;
-    background: url("../src/assets/login_3.png")center center fixed no-repeat;
+    background:center center fixed no-repeat;
     background-size: cover;
+  }
+  img{
+    position:absolute;
+    left: 30%;
+    -webkit-filter: blur(4.5px);
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

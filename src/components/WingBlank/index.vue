@@ -6,7 +6,7 @@
 </WingBlank>
 -->
 <template>
-  <span :class="[size, ...dirs]">
+  <span :class="[size, dirs]">
     <slot></slot>
   </span>
 </template>

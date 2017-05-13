@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card class="login" dis-hover>
-      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="60" label-position="left">
+      <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="60" label-position="left">
        <Row>
          <i-col span="24">
            <Form-item>
@@ -10,16 +10,16 @@
          </i-col>
          <i-col span="24">
           <Form-item prop="username" label="" class="userForm">
-             <Input type="text"style="width:265px;" @on-enter="handleLogin" v-model="formValidate.username" placeholder="用户名">
+             <i-input type="text"style="width:265px;" @on-enter="handleLogin" v-model="formValidate.username" placeholder="用户名">
              <Icon type="person" slot="prepend"></Icon>
-             </Input>
+             </i-input >
            </Form-item><br>
          </i-col>
          <i-col span="24">
            <Form-item prop="password" label=""class="userForm">
-             <Input  type="password"style="width:265px;" v-model="formValidate.password" placeholder="密码"@on-enter="handleLogin">
+             <i-input   type="password"style="width:265px;" v-model="formValidate.password" placeholder="密码"@on-enter="handleLogin">
              <Icon type="locked" slot="prepend"></Icon>
-             </Input>
+             </i-input >
            </Form-item>
            <br>
          </i-col>
@@ -37,7 +37,7 @@
            </Form-item>
          </i-col>
        </Row>
-      </Form>
+      </i-form>
     </Card>
   </div>
 </template>

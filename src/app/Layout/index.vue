@@ -17,13 +17,14 @@
           <i-col span="2"></i-col>
           <i-col span="14">
             <Row>
-              <i-col>
+              <i-col span="24">
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
+                <DishNavigationtio v-show="navigation.dish"></DishNavigationtio>
               </i-col>
             </Row>
             <Row>
-              <i-col>
+              <i-col span="24" style="margin-top:20px;background-color:#FCFCFC;">
                 <Body></Body>
               </i-col>
             </Row>
@@ -41,6 +42,7 @@
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
+  import DishNavigationtio from './components/DishNavigationtio'
 
   export default {
     name: 'layout',
@@ -52,7 +54,8 @@
       Header,
       Body,
       BaseNavigationtio,
-      BusinessNavigation
+      BusinessNavigation,
+      DishNavigationtio
     },
     created () {
       console.info(this.navigation.base)
@@ -67,6 +70,9 @@
           break
         case '/businessFrame':
           this.$store.dispatch('show_business_nav')
+          break
+        case '/dishFrame':
+          this.$store.dispatch('show_dish_nav')
           break
       }
       this.$nextTick(() => {
