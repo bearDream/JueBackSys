@@ -1,5 +1,5 @@
 <template>
-  <div>not found</div>
+  <div style="text-align: center; font-size: 30px; color: #000">404 not found</div>
 </template>
 
 <script>

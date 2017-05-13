@@ -1,26 +1,27 @@
 <template>
   <div id="app">
-    <img src="../src/assets/jue.jpg" alt="">
+    <!-- 顶部title -->
+    <Header></Header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import Header from './app/Layout/components/Header'
+
   export default {
-    name: 'app'
+    name: 'app',
+    components: {
+      Header
+    }
   }
 </script>
 
 <style>
   body{
-    overflow: hidden;
-    background:center center fixed no-repeat;
+    overflow: auto;
+    background: url("../src/assets/login_3.png")center center fixed no-repeat;
     background-size: cover;
-  }
-  img{
-    position:absolute;
-    left: 30%;
-    -webkit-filter: blur(4.5px);
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
