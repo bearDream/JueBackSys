@@ -15,3 +15,64 @@
     }
   }
 }
+
+
+/*右上角样式*/
+/*
+土的颜色：#b3892e
+深绿色：#59850b
+浅绿色：#dbec48
+      B9C89F
+文字颜色：#b8c734
+眼泪颜色：#43b9e0
+404:140px
+其他字：48px
+*/
+
+/*边框*/
+
+/*自定义样式*/
+    /*以下i是小图片加载的样式*/
+div.ivu-row div.ivu-row div.ivu-col i{
+  //border:1px solid #000;
+  display:inline-block;
+  width:25px;
+  height:25px;
+}
+
+i.i1{
+  background-repeat:no-repeat;
+  background-image:url(../../../../../../assets/search.png);
+
+}
+i.i2{
+  background-repeat:no-repeat;
+  background-image:url(../../../../../../assets/delete.png);
+}
+i.i3{
+  background-repeat:no-repeat;
+  background-image:url(../../../../../../assets/add.png);
+}i.i4{
+   background-repeat:no-repeat;
+   background-image:url(../../../../../../assets/edit.png);
+ }
+i.i5{
+  background-repeat:no-repeat;
+  background-image:url(../../../../../../assets/refresh.png);
+}
+    /*以下是表格样式*/
+div.ivu-col.ivu-col-span-4{
+  text-align:center;
+  border:1px solid #A9A9A9;
+  height:40px;
+  line-height:40px;
+}
+  /*设置所有的字体颜色为绿色*/
+div.ivu-col{
+  color:#59850b;
+  font-weight:bold;
+}
+
+
+
+
