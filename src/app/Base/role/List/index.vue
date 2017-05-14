@@ -29,7 +29,8 @@
             </Radio-group>
           </Form-item>
           <Form-item label="角色介绍" prop="roleContent">
-            <Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>
+            <!--<Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>-->
+            <Editor ref="editor" v-model="formValidate.roleContent" @change="handleEditorChange"></Editor>
           </Form-item>
           <Button type="success" long @click="handleSave('formValidate')">保存</Button>
         </Form>
@@ -77,6 +78,7 @@
   import consts from '@/utils/consts'
   import time from '@/utils/helpers/timeLite'
   import List, { ListHeader, ListOperations, ListSearch } from '@/components/List'
+  import Editor from '@/components/Editor'
 
   export default {
     name: 'list',
@@ -84,7 +86,8 @@
       List,
       ListHeader,
       ListOperations,
-      ListSearch
+      ListSearch,
+      Editor
     },
     data () {
       return {
@@ -248,7 +251,7 @@
             const action = this.id ? 'putRole' : 'postRole'
             const uri = this.id
 
-            console.info(this.formValidate)
+//            console.info(this.formValidate)
             this.$store.dispatch(action, {
               uri,
               data: this.formValidate
@@ -261,6 +264,10 @@
             this.$Message.error('保存失败!')
           }
         })
+      },
+      handleEditorChange (html) {
+        console.info(html)
+        this.$set(this.formValidate, 'roleContent', html)
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
