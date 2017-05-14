@@ -12,7 +12,6 @@
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
       <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <!-- 分页 -->
     <List :current="current" :columns="columns" :data="log.logs.page.list"
       :total="log.logs.page.total"
       @on-change="handlePageChange">
@@ -102,7 +101,6 @@
       this.get()
     },
     methods: {
-        // 拉取数据
       get (current = 1) {
         this.$set(this, 'current', current)
 

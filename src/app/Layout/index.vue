@@ -13,12 +13,11 @@
             <Sidebar ref="sidebar"></Sidebar>
           </i-col>
           <i-col span="2"></i-col>
-          <i-col span="14">
+          <i-col span="16">
             <Row>
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
-                <UserNavigationtio v-show="navigation.user"></UserNavigationtio>
               </i-col>
             </Row>
             <Row>
@@ -39,7 +38,6 @@
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
-  import UserNavigationtio from './components/UserNavigationtio'
 
   export default {
     name: 'layout',
@@ -50,8 +48,7 @@
       Sidebar,
       Body,
       BaseNavigationtio,
-      BusinessNavigation,
-      UserNavigationtio
+      BusinessNavigation
     },
     created () {
       console.info(this.navigation.base)
