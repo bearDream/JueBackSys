@@ -35,14 +35,14 @@ export default {
   /**
    * 添加数据
    */
-  addRole ({commit}, {params}) {
-    return new Model().POST({params})
+  postRole ({commit}, {uri, data}) {
+    return new Model().POST({uri, data})
   },
 
   /**
    * 修改数据
    */
-  alterRole ({commit}, {params}) {
-    return new Model().PUT({params})
+  putRole ({commit}, {uri, data}) {
+    return new Model().PUT({uri, data})
   }
 }

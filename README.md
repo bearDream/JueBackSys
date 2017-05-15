@@ -4,6 +4,39 @@
 - 更新数据  PUT
 - 删除数据  DELETE
 
+## 使用
+```bash
+# 下载代码
+$ git clone https://github.com/zhaotoday/vue.js.git
+
+# 安装依赖
+$ npm install
+
+# 安装mock和json-server
+$ npm install --save-dev mock json-server
+
+# 安装 node-sass、sass-loader
+$ npm install --save-dev node-sass sass-loader
+
+# 安装 wangeditor
+$ npm install wangeditor
+
+# 开发调试
+$ npm run dev
+
+# 构建
+$ npm run build
+
+# 执行单元测试
+$ npm run unit
+
+# 执行 e2e 测试
+$ npm run e2e
+
+# 执行所有测试
+$ npm test
+```
+
 ## 介绍
 基于 vue-cli + iView 的 Vue js 后台管理系统，在 vue-cli 基础上做了一些合理的修改和增强。功能包括：调试、构建、代码规范校验、单元测试、国际化等。
 
@@ -30,36 +63,6 @@ Vue、Webpack、ES6、vue-router、Vuex、Sass、PostCSS 等。
 - [基于 i18next 实现 Vue js 项目的国际化（整理中）](https://github.com/zhaotoday/i18n)
 - [基于 CodeIgniter 的轻量级 PHP MVC 框架](https://github.com/zhaotoday/php-rich-app)
 - [老版本的浏览器上访问时提示升级](https://github.com/zhaotoday/update-your-browser)
-
-## 使用
-```bash
-# 下载代码
-$ git clone https://github.com/zhaotoday/vue.js.git
-
-# 安装依赖
-$ npm install
-
-# 安装mock和json-server
-$ npm install --save-dev mock json-server
-
-# 安装 node-sass、sass-loader
-$ npm install --save-dev node-sass sass-loader
-
-# 开发调试
-$ npm run dev
-
-# 构建
-$ npm run build
-
-# 执行单元测试
-$ npm run unit
-
-# 执行 e2e 测试
-$ npm run e2e
-
-# 执行所有测试
-$ npm test
-```
 
 ## 对 vue-cli 的一些修改和增强
 #### 1. 将模板文件 index.html 从根目录移至 src 目录，将构建文件 index.html 移至根目录
