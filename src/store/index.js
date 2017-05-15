@@ -5,6 +5,11 @@ import actions from './actions'
 import mutations from './mutations'
 import log from './modules/log'
 import role from './modules/role'
+import tag from './modules/tag'
+import businessname from './modules/businessname'
+import businesstype from './modules/businesstype'
+import businesstable from './modules/businesstable'
+import businesstake from './modules/businesstake'
 import navigation from './modules/navigation'
 
 Vue.use(Vuex)
@@ -19,6 +24,11 @@ export default new Vuex.Store({
   modules: {
     log,
     navigation,
-    role
+    role,
+    tag,
+    businessname,
+    businesstype,
+    businesstable,
+    businesstake
   }
 })
