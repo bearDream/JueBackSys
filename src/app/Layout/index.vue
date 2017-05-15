@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="main">
+      <!-- 顶部title -->
+      <Header class="header"></Header>
       <Row>
         <i-col>
           <p style="height: 30px"></p>
@@ -18,7 +20,7 @@
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
-                <UserNavigationtio v-show="navigation.user"></UserNavigationtio>
+                <DishNavigationtio v-show="navigation.dish"></DishNavigationtio>
               </i-col>
             </Row>
             <Row>
@@ -36,10 +38,11 @@
 <script>
   import { mapState } from 'vuex'
   import Sidebar from './components/Sidebar'
+  import Header from './components/Header'
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
-  import UserNavigationtio from './components/UserNavigationtio'
+  import DishNavigationtio from './components/DishNavigationtio'
 
   export default {
     name: 'layout',
@@ -48,15 +51,17 @@
     ]),
     components: {
       Sidebar,
+      Header,
       Body,
       BaseNavigationtio,
       BusinessNavigation,
-      UserNavigationtio
+      DishNavigationtio
     },
     created () {
       console.info(this.navigation.base)
     },
     beforeRouteUpdate (to, from, next) {
+      console.info('--------beforeRouteUpdate----------')
       let path = to.path
       // 控制导航栏的显示
       switch (path) {
@@ -66,8 +71,8 @@
         case '/businessFrame':
           this.$store.dispatch('show_business_nav')
           break
-        case '/userFrame':
-          this.$store.dispatch('show_user_nav')
+        case '/dishFrame':
+          this.$store.dispatch('show_dish_nav')
           break
       }
       this.$nextTick(() => {

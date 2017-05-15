@@ -6,7 +6,7 @@
     </Menu-item>
     <Menu-item name="roleFrame">
       <Icon type="ios-people"></Icon>
-      权限
+      角色
     </Menu-item>
     <Menu-item name="tagFrame">
       <Icon type="settings"></Icon>

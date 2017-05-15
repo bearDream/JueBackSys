@@ -4,11 +4,23 @@ export default {
   children: [
     {
       path: '/',
-      component: resolved => require(['@/app/Dishes/List'], resolved)
+      component: resolve => require(['@/app/Dishes/List'], resolve)
     },
     {
       path: '/sortFrame',
-      component: resolved => require(['@/app/Dishes/List/sort'], resolved)
+      component: resolve => require(['@/app/Dishes/sort/List'], resolve)
+    },
+    {
+      path: '/labelFrame',
+      component: resolve => require(['@/app/Dishes/label/List'], resolve)
+    },
+    {
+      path: '/dietFrame',
+      component: resolve => require(['@/app/Dishes/diet/List'], resolve)
+    },
+    {
+      path: 'form/:id?',
+      component: resolve => require(['@/app/Dishes/From'], resolve)
     }
   ]
 }

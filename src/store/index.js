@@ -6,7 +6,10 @@ import mutations from './mutations'
 import log from './modules/log'
 import role from './modules/role'
 import navigation from './modules/navigation'
-
+import dish from './modules/dish'
+import dishtype from './modules/dishtype'
+import dishtag from './modules/dishtag'
+import nutrition from './modules/nutrition'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,6 +22,10 @@ export default new Vuex.Store({
   modules: {
     log,
     navigation,
-    role
+    role,
+    dish,
+    dishtype,
+    dishtag,
+    nutrition
   }
 })

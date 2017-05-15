@@ -34,11 +34,11 @@
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">菜品管理</Breadcrumb-item>
-      <Breadcrumb-item>菜品</Breadcrumb-item>
+      <Breadcrumb-item>营养价值</Breadcrumb-item>
     </Breadcrumb>
     <!-- 分页 -->
-    <List :current="current" :columns="columns" :data="dish.dishs.page.list"
-          :total="dish.dishs.page.total"
+    <List :current="current" :columns="columns" :data="nutrition.nutritions.page.list"
+          :total="nutrition.nutritions.page.total"
           @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
@@ -124,17 +124,20 @@
         columns: [
           {
             title: '序号',
-            key: 'dishId',
+            key: 'nutritionId',
             width: 80
           },
           {
-            title: '菜品名称',
-            key: 'dishName',
-            width: 125
+            title: '油脂',
+            key: 'grease'
           },
           {
-            title: '菜品类型',
-            key: 'dishDesc',
+            title: '热量',
+            key: 'heat'
+          },
+          {
+            title: '糖含量',
+            key: 'sugarContent',
             width: 125
           },
           {
@@ -150,22 +153,22 @@
             key: 'action',
             width: 125,
             render: (row, column, index) => {
-              return `</a><i-button type="ghost" size="small" @click="handleEdit(${row.dishId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.dishId})">删除</i-button>`
+              return `</a><i-button type="ghost" size="small" @click="handleEdit(${row.nutritionId})">编辑</i-button>
+                <i-button type="ghost" size="small" @click="handleDel(${row.nutritionId})">删除</i-button>`
             }
           }
         ]
       }
     },
     computed: mapState([
-      'dish'
+      'nutrition'
     ]),
     methods: {
       // 拉取数据
       get (current = 1) {
         this.$set(this, 'current', current)
 
-        this.$store.dispatch('getDishs', {
+        this.$store.dispatch('getNutritions', {
           params: {
             offset: (current - 1) * consts.PAGE_SIZE,
             limit: consts.PAGE_SIZE,
@@ -173,8 +176,8 @@
           }
         })
       },
-      getDish (id) {
-        this.$store.dispatch('getDish', {
+      getNutrition (id) {
+        this.$store.dispatch('getNutrition', {
           params: {
             dishId: id
           }
@@ -194,7 +197,7 @@
       handleSave (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            const action = this.id ? 'putDish' : 'postDish'
+            const action = this.id ? 'putNutrition' : 'postNutrition'
             const uri = this.id
 
             console.info(this.formValidate)
@@ -205,7 +208,7 @@
               this.$Message.success((this.id ? '编辑' : '新增') + '成功！')
               this.resetFields()
               this.$Modal.remove()
-              this.$set(this.add, 'modal', false)
+              this.$set(this.add, 'modal1', false)
             })
           } else {
             this.$Message.error('保存失败')
@@ -215,11 +218,11 @@
       handleEdit (id) {
 //        this.$router.push(`/articles/form/${id}`)
         /*
-         1、把id存到data里面
-         2、显示对话框
-         3、执行get请求获取数据，watch监听数据变化了就自动将数据放到validator里面
+          1、把id存到data里面
+          2、显示对话框
+          3、执行get请求获取数据，watch监听数据变化了就自动将数据放到validator里面
          */
-        this.getDish(id)
+        this.getNutrition(id)
         this.$set(this.add, 'id', id)
         this.$set(this.add, 'modal', true)
       },
@@ -232,7 +235,7 @@
         this.$refs.formValidate.resetFields()
       },
       handleDelOk () {
-        this.$store.dispatch('deleteDish', {
+        this.$store.dispatch('deleteNutrition', {
           params: {
             id: this.del.id
           }

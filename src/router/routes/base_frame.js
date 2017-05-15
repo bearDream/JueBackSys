@@ -11,10 +11,6 @@ export default {
       component: resolve => require(['@/app/Base/List'], resolve)
     },
     {
-      path: '/roleFrame',
-      component: resolve => require(['@/app/Base/role/List'], resolve)
-    },
-    {
       path: 'form/:id?',
       component: resolve => require(['@/app/Base/Form'], resolve)
     }
