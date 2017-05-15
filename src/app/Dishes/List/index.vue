@@ -34,7 +34,7 @@
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">菜品管理</Breadcrumb-item>
-      <Breadcrumb-item>菜品</Breadcrumb-item>
+      <Breadcrumb-item>菜品基础信息</Breadcrumb-item>
     </Breadcrumb>
     <!-- 分页 -->
     <List :current="current" :columns="columns" :data="dish.dishs.page.list"
@@ -124,18 +124,48 @@
         columns: [
           {
             title: '序号',
-            key: 'dishId',
-            width: 80
+            key: 'dishBusinessId'
+          },
+          {
+            title: '菜品序号',
+            key: 'dishId'
+          },
+          {
+            title: '商家序号',
+            key: 'businessId'
           },
           {
             title: '菜品名称',
-            key: 'dishName',
-            width: 125
+            key: 'dishName'
           },
           {
             title: '菜品类型',
-            key: 'dishDesc',
-            width: 125
+            key: 'dishType'
+          },
+          {
+            title: '菜品详细介绍',
+            key: 'dishContent'
+          },
+          {
+            title: '菜品简短介绍',
+            key: 'dishDesc'
+          },
+          {
+            title: '是否参加活动',
+            key: 'isFavorable'
+          },
+          {
+            title: '是否显示',
+            key: 'isShow'
+          },
+          {
+            title: '是否置顶',
+            key: 'isTop'
+          },
+          {
+            title: '订单数量',
+            key: 'dishId',
+            width: 80
           },
           {
             title: '添加时间',
@@ -240,6 +270,15 @@
           this.$Message.success('删除成功！')
           this.get()
         })
+      },
+      watch: {
+        'dish.dish': {
+          handler (newVal) {
+            console.info('------------------')
+            console.log(newVal.data.page.list[0])
+            this.$set(this, 'formValidate', newVal.data.page.list[0])
+          }
+        }
       }
     }
   }

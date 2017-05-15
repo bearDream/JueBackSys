@@ -7,6 +7,30 @@
       @on-ok="handleDelOk">
       <p>确认删除该记录？</p>
     </Modal>
+    <Modal
+      width="300"
+      v-model="add.modal"
+      title="添加菜品分类">
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+        <Form-item label="菜品名称" prop="dishName">
+          <Row>
+            <i-col span="12">
+              <Input v-model="formValidate.dishName" placeholder="请输入菜品类名称"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="菜品类型" prop="typeName">
+          <Row>
+            <i-col span="12">
+              <Input v-model="formValidate.typeName" placeholder="请输入菜品类型"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item>
+          <Button type="success" @click="handleSave('formValidate')" class="margin-right-sm">保存</Button>
+        </Form-item>
+      </Form>
+    </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">菜品管理</Breadcrumb-item>
@@ -18,7 +42,7 @@
           @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <!--<Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>-->
+          <Button class="margin-right-sm" type="primary" @click="handleAdd">新增</Button>
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
@@ -52,7 +76,39 @@
     },
     data () {
       return {
+        id: '',
+        formValidate: {
+          typeName: '',
+          dishName: ''
+        },
+        ruleValidate: {
+          dishName: [
+            {
+              required: true,
+              message: '菜名不能为空'
+            },
+            {
+              max: 30,
+              message: '菜名不能多于 30 个字'
+            }
+          ],
+          typeName: [
+            {
+              required: true,
+              message: '类型名称不能为空'
+            },
+            {
+              max: 2000,
+              message: '类型名称长度过长'
+            }
+          ]
+        },
         del: {
+          modal: false,
+          id: 0
+        },
+        dish_spin: false,
+        add: {
           modal: false,
           id: 0
         },
@@ -112,6 +168,43 @@
           }
         })
       },
+      getDishtype (id) {
+        this.$store.dispatch('getDishtype', {
+          params: {
+            dishId: id
+          }
+        })
+      },
+      handleAdd (id) {
+        this.$set(this.add, 'id', id)
+        this.$set(this.add, 'modal', true)
+      },
+      handleSave (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            const action = this.id ? 'putDishtype' : 'postDishtype'
+            const uri = this.id
+
+            console.info(this.formValidate)
+            this.$store.dispatch(action, {
+              uri,
+              data: this.formValidate
+            }).then(() => {
+              this.$Message.success((this.id ? '编辑' : '新增') + '成功！')
+              this.resetFields()
+              this.$Modal.remove()
+              this.$set(this.add, 'modal', false)
+            })
+          } else {
+            this.$Message.error('保存失败')
+          }
+        })
+      },
+      handleEdit (id) {
+        this.getDishtype(id)
+        this.$set(this.add, 'id', id)
+        this.$set(this.add, 'modal', true)
+      },
       handlePageChange (current) {
         this.get(current)
       },
@@ -119,15 +212,12 @@
         this.get()
         this.$set(this, 'current', 1)
       },
-      handleEdit (id) {
-        this.$router.push(`/articles/form/${id}`)
-      },
       handleDel (id) {
         this.$set(this.del, 'modal', true)
         this.$set(this.del, 'id', id)
       },
       handleDelOk () {
-        this.$store.dispatch('deleteArticle', {
+        this.$store.dispatch('deleteDishtype', {
           params: {
             id: this.del.id
           }

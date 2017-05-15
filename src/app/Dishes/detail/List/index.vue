@@ -7,10 +7,34 @@
       @on-ok="handleDelOk">
       <p>确认删除该记录？</p>
     </Modal>
+    <Modal
+      width="300"
+      v-model="add.modal"
+      title="添加菜品标签">
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+        <Form-item label="标签名称" prop="dishtagName">
+          <Row>
+            <i-col span="12">
+              <Input v-model="formValidate.dishtagName" placeholder="请输入标签名称"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="标签类型" prop="dishtagType">
+          <Row>
+            <i-col span="12">
+              <Input v-model="formValidate.dishtagType" placeholder="请输入标签类型"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item>
+          <Button type="success" @click="handleSave('formValidate')" class="margin-right-sm">保存</Button>
+        </Form-item>
+      </Form>
+    </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">菜品管理</Breadcrumb-item>
-      <Breadcrumb-item>标签</Breadcrumb-item>
+      <Breadcrumb-item>菜品详细详细</Breadcrumb-item>
     </Breadcrumb>
     <!-- 分页 -->
     <List :current="current" :columns="columns" :data="dishtag.dishtags.page.list"
@@ -18,7 +42,7 @@
           @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <!--<Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>-->
+          <Button class="margin-right-sm" type="primary" @click="handleAdd">新增</Button>
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
@@ -52,12 +76,44 @@
     },
     data () {
       return {
+        id: '',
+        formValidate: {
+          dishtagName: '',
+          dishtagType: ''
+        },
+        ruleValidate: {
+          dishtagName: [
+            {
+              required: true,
+              message: '菜名不能为空'
+            },
+            {
+              max: 30,
+              message: '菜名不能多于 30 个字'
+            }
+          ],
+          dishtagType: [
+            {
+              required: true,
+              message: '类型名称不能为空'
+            },
+            {
+              max: 2000,
+              message: '类型名称长度过长'
+            }
+          ]
+        },
         del: {
           modal: false,
           id: 0
         },
         search: {
           title: ''
+        },
+        dish_spin: false,
+        add: {
+          modal: false,
+          id: 0
         },
         current: 1,
         columns: [
@@ -112,15 +168,49 @@
           }
         })
       },
+      getDishtag (id) {
+        this.$store.dispatch('getDishtag', {
+          params: {
+            dishId: id
+          }
+        })
+      },
+      handleAdd (id) {
+        this.$set(this.add, 'id', id)
+        this.$set(this.add, 'modal', true)
+      },
+      handleSave (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            const action = this.id ? 'putDishtag' : 'postDishtag'
+            const uri = this.id
+
+            console.info(this.formValidate)
+            this.$store.dispatch(action, {
+              uri,
+              data: this.formValidate
+            }).then(() => {
+              this.$Message.success((this.id ? '编辑' : '新增') + '成功！')
+              this.resetFields()
+              this.$Modal.remove()
+              this.$set(this.add, 'modal', false)
+            })
+          } else {
+            this.$Message.error('保存失败')
+          }
+        })
+      },
+      handleEdit (id) {
+        this.getDishtag(id)
+        this.$set(this.add, 'id', id)
+        this.$set(this.add, 'modal', true)
+      },
       handlePageChange (current) {
         this.get(current)
       },
       handleSearch () {
         this.get()
         this.$set(this, 'current', 1)
-      },
-      handleEdit (id) {
-        this.$router.push(`/articles/form/${id}`)
       },
       handleDel (id) {
         this.$set(this.del, 'modal', true)
