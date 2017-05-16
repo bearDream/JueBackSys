@@ -9,6 +9,11 @@
     name: 'search'
   }
 </script>
-
-<style lang="scss" scoped src="./theme/styles/index.scss">
+<style>
+  .search {
+    position: absolute;
+    min-width: 300px;
+    right: -10px;
+    top: 0;
+  }
 </style>

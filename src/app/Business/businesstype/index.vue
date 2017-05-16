@@ -9,25 +9,24 @@
     </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
-      <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
-      <Breadcrumb-item>角色管理</Breadcrumb-item>
+      <Breadcrumb-item href="#">商家</Breadcrumb-item>
+      <Breadcrumb-item href="#">商家管理</Breadcrumb-item>
     </Breadcrumb>
-    <!-- 分页 -->
-    <List :current="current" :columns="columns" :data="role.roles.page.list"
-      :total="role.roles.page.total"
-      @on-change="handlePageChange">
+    <List :current="current" :columns="columns" :data="businessname.businessnames.page.list"
+          :total="businessname.businessnames.list.total"
+          @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <Button class="margin-right-sm button" type="primary" @click="$router.push('log/form')">新增</Button>
+          <!--<Button class="margin-right-sm" type="primary" @click="$router.push('log/form')">新增</Button>-->
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
               <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
-                @on-enter="handleSearch"></Input>
+                     @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
-              <Button type="primary" @click="handleSearch" class="button">查询</Button>
+              <Button type="primary" @click="handleSearch">查询</Button>
             </Form-item>
           </Form>
         </ListSearch>
@@ -35,6 +34,7 @@
     </List>
   </div>
 </template>
+
 <script>
   import { mapState } from 'vuex'
   import consts from '@/utils/consts'
@@ -43,7 +43,6 @@
 
   export default {
     name: 'list',
-
     components: {
       List,
       ListHeader,
@@ -62,26 +61,43 @@
         current: 1,
         columns: [
           {
-            title: '角色id',
-            key: 'roleId',
-            width: 80
+            title: '商家ID',
+            key: 'businessId',
+            width: 60
           },
           {
-            title: '角色名',
-            key: 'roleName',
-            width: 125
+            title: '店名',
+            key: 'name'
+          },
+          {
+            title: '经理',
+            key: 'name'
+          },
+          {
+            title: '地址',
+            key: 'address'
+          },
+          {
+            title: '电话',
+            key: 'tel'
+          },
+          {
+            title: '图片',
+            key: 'businessImage'
           },
           {
             title: '内容',
-            key: 'roleContent',
-            width: 125
+            key: 'content'
+          },
+          {
+            title: '显示',
+            key: 'isShow'
           },
           {
             title: '添加时间',
             key: 'addTime',
-            width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
+              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
             }
           },
           {
@@ -89,26 +105,23 @@
             key: 'action',
             width: 125,
             render: (row, column, index) => {
-              return `</a><i-button type="ghost" size="small" @click="handleEdit(${row.roleId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.roleId})">删除</i-button>`
+              return `<i-button type="ghost" size="small" @click="handleEdit(${row.id})">编辑</i-button>
+                <i-button type="ghost" size="small" @click="handleDel(${row.id})">删除</i-button>`
             }
           }
         ]
       }
     },
     computed: mapState([
-      'role'
+      'businessname'
     ]),
     created () {
-      console.info(this.$store)
       this.get()
     },
     methods: {
-        // 拉取数据
       get (current = 1) {
         this.$set(this, 'current', current)
-
-        this.$store.dispatch('getRoles', {
+        this.$store.dispatch('getBusinessname', {
           params: {
             offset: (current - 1) * consts.PAGE_SIZE,
             limit: consts.PAGE_SIZE,
@@ -127,12 +140,11 @@
         this.$router.push(`/articles/form/${id}`)
       },
       handleDel (id) {
-        alert(id)
         this.$set(this.del, 'modal', true)
         this.$set(this.del, 'id', id)
       },
       handleDelOk () {
-        this.$store.dispatch('deleteRole', {
+        this.$store.dispatch('deleteArticle', {
           params: {
             id: this.del.id
           }
@@ -144,4 +156,3 @@
     }
   }
 </script>
-

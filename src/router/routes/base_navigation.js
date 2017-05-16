@@ -12,6 +12,10 @@ export default {
       component: resolve => require(['@/app/Base/List'], resolve)
     },
     {
+      path: 'tagFrame',
+      component: resolve => require(['@/app/Base/tag/List'], resolve)
+    },
+    {
       path: 'form/:id?',
       component: resolve => require(['@/app/Base/Form'], resolve)
     }

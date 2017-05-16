@@ -9,11 +9,10 @@
       <!-- 中间内容区域  包括了左边的sidebar和右边的navigation和body -->
       <div>
         <Row>
-          <i-col span="6">
+          <i-col span="5">
             <Sidebar ref="sidebar"></Sidebar>
           </i-col>
-          <i-col span="2"></i-col>
-          <i-col span="14">
+          <i-col span="18">
             <Row>
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>

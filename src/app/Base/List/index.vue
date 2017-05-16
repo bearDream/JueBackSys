@@ -23,11 +23,11 @@
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
-              <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
+              <Input type="text"  placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
                 @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
-              <Button type="primary" @click="handleSearch">查询</Button>
+              <Button type="primary" @click="handleSearch" class="button" >查询</Button>
             </Form-item>
           </Form>
         </ListSearch>
@@ -35,7 +35,101 @@
     </List>
   </div>
 </template>
+<style>
+  .button{
+    background-color: #B9C89F;
+    border: none;
+    color: #718D1C;
+    font-weight: bold;
+    border: 1px solid #B9C89F;
+  }
+  .button:hover{
+    background-color: #B9C89F;
+    border: none;
+    color: #718D1C;
+    font-weight: bold;
+    border: 1px solid #B9C89F;
+  }
+  /*fhdfhdhdhdhdhdh*/
+  li.ivu-page-item:hover {
+    border-color:#648D1C;
+    background-color: #648D1C;
+  }
 
+  li.ivu-page-item-active {
+    border-color:#648D1C;
+    background-color: #648D1C;
+  }
+span.ivu-page-total{
+  color:#648D1C;
+  font-weight: bold;
+}
+  div.ivu-page-options-elevator{
+    color:#648D1C;
+    font-weight: bold;
+  }
+ div.ivu-table-cell div:first-child button:last-child{
+    color: red;
+   border: 1px solid red;
+  }
+  /*div.ivu-table-cell div:first-child button:last-child{*/
+    /*background-color: red;*/
+    /*color: #FCFCFC;*/
+    /*border-radius: 5px;*/
+  /*}*/
+  div.ivu-table-cell div:first-child button:first-child{
+    color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+  /*div.ivu-table-cell div:first-child button:first-child{*/
+    /*background-color: #648D1C;*/
+    /*color: #FCFCFC;*/
+    /*border-radius: 5px;*/
+  /*}*/
+ div.ivu-modal-footer button:last-child{
+    background-color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+  div.ivu-modal-footer button:first-child:hover{
+    color: #648D1C;
+  }
+  form.ivu-form button{
+    background-color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+  form.ivu-form button:hover{
+    background-color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+  div.ivu-form-item-content button{
+    background-color: #B9C89F;
+    border: none;
+    color: #648D1C;
+    font-weight: bold;
+    border: 1px solid #B9C89F;
+  }
+  div.ivu-form-item-content button:hover{
+    background-color: #B9C89F;
+    border: none;
+    color: #648D1C;
+    font-weight: bold;
+    border: 1px solid #B9C89F;
+  }
+  div.header-center button:first-child{
+    color: #648D1C;
+  }
+  div.header-center button:first-child:hover{
+    color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+  div.header-center button:last-child{
+    color: #648D1C;
+  }
+  div.header-center button:last-child:hover{
+    color: #648D1C;
+    border: 1px solid #648D1C;
+  }
+</style>
 <script>
   import { mapState } from 'vuex'
   import consts from '@/utils/consts'

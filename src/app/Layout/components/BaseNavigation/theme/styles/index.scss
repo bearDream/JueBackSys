@@ -1,9 +1,8 @@
 .header {
-  background-color: white;
-  border-bottom: 1px solid #dfe4e9;
+ background-color: white;
 
   .header-center {
-    width: 1200px;
+    width: 100%;
     height: 60px;
     line-height: 60px;
     margin: 0 auto;
@@ -14,22 +13,40 @@
       text-align: right;
     }
   }
+
 }
 ul.ivu-menu>li {
-  width:25%;
-  border:1px solid #C3C3C3 !important;
-  background-color:#fff;
+  width:33.33%;
+  border-left:2px solid #EDEDED !important;
+  border-bottom: 1px solid transparent !important;
+  background-color:#FCFCFC;
   animation:backgroundColor .5 linear;
+  color: #648D1C !important;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+ul.ivu-menu>li:first-child{
+  border-left: none !important;
 }
 ul.ivu-menu>li.ivu-menu-item-selected{
   background-color:#B9C89F;
 }
-ul.ivu-menu>li.ivu-menu-item:hover{
-  background-color:#B9C89F;
-}
-ul.ivu-menu>li>i{
-  margin:auto 23px;
-  font-size:48px;
-}
+//页码
 
+//按钮
+.button{
+  background-color: #B9C89F;
+  border: none;
+  color: #718D1C;
+  font-weight: bold;
+  border: 1px solid #B9C89F;
+}
+.button:hover{
+  background-color: #B9C89F;
+  border: none;
+  color: #718D1C;
+  font-weight: bold;
+  border: 1px solid #B9C89F;
+}
 

@@ -44,7 +44,6 @@ $ npm install --save-dev mock json-server
 
 # 安装 node-sass、sass-loader
 $ npm install --save-dev node-sass sass-loader
-
 # 开发调试
 $ npm run dev
 
