@@ -191,7 +191,7 @@
         current: 1,
         columns: [
           {
-            title: '商家ID',
+            title: '商家类型ID',
             key: 'businessTypeId'
           },
           {
@@ -218,8 +218,8 @@
             key: 'action',
             width: 125,
             render: (row, column, index) => {
-              return `<i-button type="ghost" size="small" @click="handleEdit(${row.businessId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.businessId})">删除</i-button>`
+              return `<i-button type="ghost" size="small" @click="handleEdit(${row.businessTypeId})">编辑</i-button>
+                <i-button type="ghost" size="small" @click="handleDel(${row.businessTypeId})">删除</i-button>`
             }
           }
         ]
