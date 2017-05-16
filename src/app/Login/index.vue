@@ -84,6 +84,7 @@
                 auth.login(res.data[0].data)
                 this.$router.push('/')
                 this.$Message.success('登录成功')
+                this.$store.dispatch('login', {})
               })
           } else {
             this.$Message.error('请检查用户名和密码是否正确')

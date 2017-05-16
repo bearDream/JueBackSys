@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="main">
-      <!-- 顶部title -->
-      <Header class="header"></Header>
       <Row>
         <i-col>
           <p style="height: 30px"></p>
@@ -14,8 +12,7 @@
           <i-col span="6">
             <Sidebar ref="sidebar"></Sidebar>
           </i-col>
-          <i-col span="2"></i-col>
-          <i-col span="14">
+          <i-col span="18">
             <Row>
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
@@ -38,7 +35,6 @@
 <script>
   import { mapState } from 'vuex'
   import Sidebar from './components/Sidebar'
-  import Header from './components/Header'
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
@@ -51,7 +47,6 @@
     ]),
     components: {
       Sidebar,
-      Header,
       Body,
       BaseNavigationtio,
       BusinessNavigation,
@@ -61,11 +56,13 @@
       console.info(this.navigation.base)
     },
     beforeRouteUpdate (to, from, next) {
-      console.info('--------beforeRouteUpdate----------')
       let path = to.path
       // 控制导航栏的显示
       switch (path) {
         case '/baseFrame':
+          this.$store.dispatch('show_base_nav')
+          break
+        case '/logFrame':
           this.$store.dispatch('show_base_nav')
           break
         case '/businessFrame':

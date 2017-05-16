@@ -19,6 +19,7 @@
     name: 'header',
     methods: {
       handleLogout () {
+        this.$store.dispatch('logout', {})
         this.$router.push('/logout')
         this.$Message.success('退出成功')
       },

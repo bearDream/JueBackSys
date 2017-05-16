@@ -7,30 +7,43 @@
       @on-ok="handleDelOk">
       <p>确认删除该记录？</p>
     </Modal>
+
     <Modal
       v-model="add.modal"
-      title="添加角色"
+      title="添加商家"
       @on-ok="handleAddOk">
-
       <!-- 表单 -->
       <div>
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-          <Form-item label="角色名：" prop="roleName">
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="85">
+          <Form-item label="商家ID：" prop="businessId">
             <Row>
-              <i-col span="12">
-                <Input v-model="formValidate.roleName" placeholder="请输入角色名"></Input>
+              <i-col span="18">
+                <Input v-model="formValidate.businessId" placeholder="请输入新的商家id"></Input>
               </i-col>
             </Row>
           </Form-item>
-          <Form-item label="角色类别" prop="roleType">
-            <Radio-group v-model="formValidate.roleType">
-              <Radio label="1"><span>管理员</span></Radio>
-              <Radio label="2"><span>普通用户</span></Radio>
-            </Radio-group>
+          <Form-item label="商家名：" prop="name">
+            <Row>
+              <i-col span="18">
+                <Input v-model="formValidate.name" placeholder="请输入新的的商家名"></Input>
+              </i-col>
+            </Row>
           </Form-item>
-          <Form-item label="角色介绍" prop="roleContent">
+          <Form-item label="商家电话：" prop="tel">
+            <Row>
+              <i-col span="18">
+                <Input v-model="formValidate.tel" placeholder="请输入电话"></Input>
+              </i-col>
+            </Row>
+          </Form-item>
+          <Form-item label="商家地址：" prop="address">
+            <Row>
+              <i-col span="18">
+                <Input v-model="formValidate.address" placeholder="用户地址"></Input>
+              </i-col>
+            </Row>
             <!--<Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>-->
-            <Editor ref="editor" v-model="formValidate.roleContent" @change="handleEditorChange"></Editor>
+            <!--<Editor ref="editor" v-model="formValidate.content" @change="handleEditorChange"></Editor>-->
           </Form-item>
           <Button type="success" long @click="handleSave('formValidate')">保存</Button>
         </Form>
@@ -40,19 +53,21 @@
       <div slot="footer">
       </div>
     </Modal>
+
+
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
-      <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
-      <Breadcrumb-item>角色管理</Breadcrumb-item>
+      <Breadcrumb-item href="#">商家</Breadcrumb-item>
+      <Breadcrumb-item href="">商家管理</Breadcrumb-item>
     </Breadcrumb>
     <Spin fix v-show="role_spin">
       <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
       <div>Loading</div>
     </Spin>
     <!-- 分页 -->
-    <List :current="current" :columns="columns" :data="role.roles.page.list"
-      :total="role.roles.page.total"
-      @on-change="handlePageChange">
+    <List :current="current" :columns="columns" :data="businessname.businessnames.page.list"
+          :total="businessname.businessnames.page.total"
+          @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
           <Button class="margin-right-sm" type="primary" @click="handleAdd">新增</Button>
@@ -60,8 +75,8 @@
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
-              <Input type="text" placeholder="请输入角色名" v-model="search.title" style="width: 230px;"
-                @on-enter="handleSearch"></Input>
+              <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
+                     @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
               <Button type="primary" @click="handleSearch">查询</Button>
@@ -79,9 +94,8 @@
   import time from '@/utils/helpers/timeLite'
   import List, { ListHeader, ListOperations, ListSearch } from '@/components/List'
   import Editor from '@/components/Editor'
-
   export default {
-    name: 'list',
+    name: 'businessname',
     components: {
       List,
       ListHeader,
@@ -91,46 +105,72 @@
     },
     data () {
       return {
-        id: '',
-        roleType: '管理员角色',
-        roleContent: '',
+        businessId: '',
+        name: '',
+        address: '',
+        tel: '',
+        content: '',
+        businessImage: '',
+        isShow: '',
+        addTime: '',
         formValidate: {
-          roleName: '',
-          roleType: '1',
-          roleContent: ''
+          businessId: '',
+          name: '',
+          address: '',
+          tel: '',
+          content: '',
+          businessImage: '',
+          isShow: '',
+          addTime: ''
         },
         ruleValidate: {
-          roleName: [
+          businessId: [
             {
               required: true,
-              message: '角色名不能为空'
+              message: '商家id不能为空'
+            }
+          ],
+          name: [
+            {
+              required: true,
+              message: '商家名不能为空'
             },
             {
               max: 15,
-              message: '角色名不能多于 15 个字'
+              message: '商家名不能多于 15 个字'
             }
           ],
-          roleType: [
+          tel: [
             {
-              required: false,
-              message: '角色类型不能为空'
+              required: true,
+              message: '电话不能为空'
+            },
+            {
+              max: 11,
+              message: '电话不能多于11个数字'
             }
           ],
-          roleContent: [
-            {
-              required: false,
-              message: '角色介绍不能为空'
-            }
-          ]
+          content: [{
+            required: true,
+            message: '内容不能为空'
+          }],
+          address: [{
+            required: true,
+            message: '地址不能为空'
+          }]
+        },
+        add: {
+          id: 0,
+          modal: false
         },
         role_spin: false,
         del: {
           modal: false,
           id: 0
         },
-        add: {
-          id: 0,
-          modal: false
+        edt: {
+          modal: false,
+          id: 0
         },
         search: {
           title: ''
@@ -138,26 +178,30 @@
         current: 1,
         columns: [
           {
-            title: '角色id',
-            key: 'roleId',
-            width: 80
+            title: '商家ID',
+            key: 'businessId'
           },
           {
-            title: '角色名',
-            key: 'roleName',
-            width: 125
+            title: '店名',
+            key: 'name'
           },
           {
-            title: '内容',
-            key: 'roleContent',
-            width: 125
+            title: '地址',
+            key: 'address'
+          },
+          {
+            title: '图片',
+            key: 'businessImage'
+          },
+          {
+            title: '商家信息',
+            key: 'content'
           },
           {
             title: '添加时间',
             key: 'addTime',
-            width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
+              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
             }
           },
           {
@@ -165,34 +209,37 @@
             key: 'action',
             width: 125,
             render: (row, column, index) => {
-              return `</a><i-button type="ghost" size="small" @click="handleEdit(${row.roleId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.roleId})">删除</i-button>`
+              return `<i-button type="ghost" size="small" @click="handleEdit(${row.businessId})">编辑</i-button>
+                <i-button type="ghost" size="small" @click="handleDel(${row.businessId})">删除</i-button>`
             }
           }
         ]
       }
     },
     computed: mapState([
-      'role'
+      'businessname'
     ]),
     // 用于随时监视vuex管理的role.role对象是否有数据，当有数据时即将数据加入到formValidate中，这样就能将数据显示出来了
     watch: {
-      'role.role': {
+      'businessname.businessname': {
         handler (newVal) {
+          console.info('-----------------------------------------------------------')
+          console.info(newVal.data.page.list[0])
           this.$set(this, 'formValidate', newVal.data.page.list[0])
         }
       }
     },
     created () {
-      this.$store.dispatch('show_base_nav')
+      console.info(this.$store)
+      this.$set(this, 'role_spin', true)
       this.get()
+      this.$set(this, 'role_spin', false)
     },
     methods: {
-        // 拉取数据
       get (current = 1) {
         this.$set(this, 'current', current)
 
-        this.$store.dispatch('getRoles', {
+        this.$store.dispatch('getBusinessnames', {
           params: {
             offset: (current - 1) * consts.PAGE_SIZE,
             limit: consts.PAGE_SIZE,
@@ -200,11 +247,10 @@
           }
         })
       },
-      // 拉去单条role的具体数据
-      getRole (id) {
-        this.$store.dispatch('getRole', {
+      getBusinessname (id) {
+        this.$store.dispatch('getBusinessname', {
           params: {
-            roleId: id
+            businessId: id
           }
         })
       },
@@ -216,11 +262,7 @@
         this.$set(this, 'current', 1)
       },
       handleEdit (id) {
-        this.getRole(id)
-        this.$set(this.add, 'id', id)
-        this.$set(this.add, 'modal', true)
-      },
-      handleAdd (id) {
+        this.getBusinessname(id)
         this.$set(this.add, 'id', id)
         this.$set(this.add, 'modal', true)
       },
@@ -228,10 +270,14 @@
         this.$set(this.del, 'modal', true)
         this.$set(this.del, 'id', id)
       },
+      handleAdd (id) {
+        this.$set(this.add, 'id', id)
+        this.$set(this.add, 'modal', true)
+      },
       handleDelOk () {
-        this.$store.dispatch('deleteRole', {
+        this.$store.dispatch('deleteBusinessname', {
           params: {
-            roleId: this.del.id
+            id: this.del.id
           }
         }).then(() => {
           this.$Message.success('删除成功！')
@@ -239,12 +285,11 @@
         })
       },
       handleAddOk () {
-
       },
       handleSave (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            const action = this.id ? 'putRole' : 'postRole'
+            const action = this.id ? 'putBusinessname' : 'postBusinessname'
             const uri = this.id
 
 //            console.info(this.formValidate)
@@ -263,7 +308,7 @@
       },
       handleEditorChange (html) {
         console.info(html)
-        this.$set(this.formValidate, 'roleContent', html)
+        this.$set(this.formValidate, 'content', html)
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
