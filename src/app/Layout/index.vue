@@ -55,9 +55,13 @@
     },
     beforeRouteUpdate (to, from, next) {
       let path = to.path
+//      alert(path)
       // 控制导航栏的显示
       switch (path) {
         case '/baseFrame':
+          this.$store.dispatch('show_base_nav')
+          break
+        case '/logFrame':
           this.$store.dispatch('show_base_nav')
           break
         case '/businessFrame':

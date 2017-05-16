@@ -4,6 +4,7 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 import log from './modules/log'
+import login from './modules/login'
 import role from './modules/role'
 import navigation from './modules/navigation'
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   modules: {
     log,
     navigation,
-    role
+    role,
+    login
   }
 })
