@@ -11,8 +11,8 @@ export default {
       component: resolve => require(['@/app/Dishes/sort/List'], resolve)
     },
     {
-      path: '/detailFrame',
-      component: resolve => require(['@/app/Dishes/detail/List'], resolve)
+      path: '/tagFrame',
+      component: resolve => require(['@/app/Dishes/tag/List'], resolve)
     },
     {
       path: '/dietFrame',

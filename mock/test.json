@@ -324,8 +324,67 @@
     }
   },
   "nutrition": {
-    "dishName": "111",
-    "dishDesc": "111"
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "dishtype_id asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 4,
+        "pages": 1,
+        "list": [
+          {
+            "dishId": 1,
+            "dishName": "麻婆豆腐",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 2,
+            "dishName": "青椒土豆丝",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 3,
+            "dishName": "灯影牛肉",
+            "dishDesc": "特色菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 4,
+            "dishName": "重庆火锅",
+            "dishDesc": "火锅",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
   },
   "role": {
     "roleName": "全局",

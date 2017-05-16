@@ -124,20 +124,30 @@
         columns: [
           {
             title: '序号',
-            key: 'nutritionId',
+            key: 'numId',
             width: 80
           },
           {
             title: '油脂',
-            key: 'grease'
+            key: 'userId'
           },
           {
             title: '热量',
-            key: 'heat'
+            key: 'businessId'
           },
           {
             title: '糖含量',
-            key: 'sugarContent',
+            key: 'number',
+            width: 125
+          },
+          {
+            title: '糖含量',
+            key: 'isExpired',
+            width: 125
+          },
+          {
+            title: '糖含量',
+            key: 'popleNum',
             width: 125
           },
           {

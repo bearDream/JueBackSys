@@ -12,19 +12,18 @@
       v-model="add.modal"
       title="添加菜品分类">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <Form-item label="菜品名称" prop="dishName">
-          <Row>
-            <i-col span="12">
-              <Input v-model="formValidate.dishName" placeholder="请输入菜品类名称"></Input>
-            </i-col>
-          </Row>
-        </Form-item>
         <Form-item label="菜品类型" prop="typeName">
           <Row>
-            <i-col span="12">
+            <i-col span="16">
               <Input v-model="formValidate.typeName" placeholder="请输入菜品类型"></Input>
             </i-col>
           </Row>
+        </Form-item>
+        <Form-item label="是否显示" prop="isShow">
+          <Radio-group>
+            <Radio label="显示"></Radio>
+            <Radio label="不显示"></Radio>
+          </Radio-group>
         </Form-item>
         <Form-item>
           <Button type="success" @click="handleSave('formValidate')" class="margin-right-sm">保存</Button>
@@ -79,19 +78,9 @@
         id: '',
         formValidate: {
           typeName: '',
-          dishName: ''
+          isShow: ''
         },
         ruleValidate: {
-          dishName: [
-            {
-              required: true,
-              message: '菜名不能为空'
-            },
-            {
-              max: 30,
-              message: '菜名不能多于 30 个字'
-            }
-          ],
           typeName: [
             {
               required: true,
@@ -119,15 +108,23 @@
         columns: [
           {
             title: '序号',
-            key: 'dishtypeId'
+            key: 'dishtypeId',
+            width: 70
           },
           {
-            title: '名称',
-            key: 'typeName'
+            title: '类型名称',
+            key: 'typeName',
+            width: 90
           },
           {
             title: '菜品序号',
-            key: 'dishId'
+            key: 'dishId',
+            width: 90
+          },
+          {
+            title: '是否显示',
+            key: 'isShow',
+            width: 90
           },
           {
             title: '添加时间',

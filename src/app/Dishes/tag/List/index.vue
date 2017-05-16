@@ -11,18 +11,25 @@
       width="300"
       v-model="add.modal"
       title="添加菜品标签">
-      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <Form-item label="标签名称" prop="dishtagName">
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+        <Form-item label="标签名称" prop="name">
           <Row>
-            <i-col span="12">
-              <Input v-model="formValidate.dishtagName" placeholder="请输入标签名称"></Input>
+            <i-col span="20">
+              <Input v-model="formValidate.name" placeholder="请输入标签名称"></Input>
             </i-col>
           </Row>
         </Form-item>
-        <Form-item label="标签类型" prop="dishtagType">
+        <Form-item label="标签类型" prop="tagType">
           <Row>
-            <i-col span="12">
-              <Input v-model="formValidate.dishtagType" placeholder="请输入标签类型"></Input>
+            <i-col span="20">
+              <Input v-model="formValidate.tagType" placeholder="请输入标签类型"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="标签内容描述" prop="content">
+          <Row>
+            <i-col span="20">
+              <Input v-model="formValidate.content" placeholder="请输入内容描述"></Input>
             </i-col>
           </Row>
         </Form-item>
@@ -34,7 +41,7 @@
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">菜品管理</Breadcrumb-item>
-      <Breadcrumb-item>菜品详细详细</Breadcrumb-item>
+      <Breadcrumb-item>标签</Breadcrumb-item>
     </Breadcrumb>
     <!-- 分页 -->
     <List :current="current" :columns="columns" :data="dishtag.dishtags.page.list"
@@ -78,18 +85,19 @@
       return {
         id: '',
         formValidate: {
-          dishtagName: '',
-          dishtagType: ''
+          name: '',
+          tagType: '',
+          content: ''
         },
         ruleValidate: {
           dishtagName: [
             {
               required: true,
-              message: '菜名不能为空'
+              message: '标签名不能为空'
             },
             {
               max: 30,
-              message: '菜名不能多于 30 个字'
+              message: '标签名不能多于 30 个字'
             }
           ],
           dishtagType: [
@@ -98,7 +106,7 @@
               message: '类型名称不能为空'
             },
             {
-              max: 2000,
+              max: 200,
               message: '类型名称长度过长'
             }
           ]
@@ -118,16 +126,24 @@
         current: 1,
         columns: [
           {
-            title: '序号',
-            key: 'dishtagId'
+            title: '标签序号',
+            key: 'tagId',
+            width: 90
           },
           {
             title: '名称',
-            key: 'dishtagName'
+            key: 'name',
+            width: 70
           },
           {
-            title: '菜品序号',
-            key: 'dishtagType'
+            title: '标签类型',
+            key: 'tagType',
+            width: 90
+          },
+          {
+            title: '标签内容',
+            key: 'content',
+            width: 100
           },
           {
             title: '添加时间',

@@ -3,26 +3,68 @@
     <Modal
       width="300"
       v-model="del.modal"
-      title="确认框"
       @on-ok="handleDelOk">
-      <p>确认删除该记录？</p>
+      <p style="color:#f60;text-align:center">
+        确认删除
+      </p>
     </Modal>
-    <Modal
-      width="300"
-      v-model="add.modal"
-      title="添加菜品">
-      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+    <Modal width="600" v-model="add.modal">
+      <p style="color:#f60;text-align:left">
+        <span>{{ form_title }}</span>
+      </p>
+      <hr/>
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
         <Form-item label="菜品名称" prop="dishName">
           <Row>
-            <i-col span="12">
+            <i-col span="20">
               <Input v-model="formValidate.dishName" placeholder="请输入菜品名称"></Input>
             </i-col>
           </Row>
         </Form-item>
-        <Form-item label="菜品类型" prop="dishDesc">
+        <Form-item label="菜品类型" prop="dishType">
           <Row>
-            <i-col span="12">
-              <Input v-model="formValidate.dishDesc" placeholder="请输入菜品类型"></Input>
+            <i-col span="20">
+              <Input v-model="formValidate.dishType" placeholder="请输入菜品类型"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="菜品简单介绍" prop="dishDesc">
+          <Row>
+            <i-col span="20">
+              <Input v-model="formValidate.dishDesc" placeholder="请输入菜品的简单介绍"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="菜品详细介绍" prop="dishContent">
+          <Row>
+            <i-col span="20">
+              <Input type="textarea" v-model="formValidate.dishContent" placeholder="请输入菜品的详细介绍"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="菜品价格" prop="dishPrice">
+          <Row>
+            <i-col span="20">
+              <Input v-model="formValidate.dishPrice" placeholder="请输入菜品价格"></Input>
+            </i-col>
+          </Row>
+        </Form-item>
+        <Form-item label="是否显示" prop="isShow">
+          <Radio-group>
+            <Radio label="显示"></Radio>
+            <Radio label="不显示"></Radio>
+          </Radio-group>
+        </Form-item>
+        <Form-item label="是否参加活动" prop="isFavorable">
+          <Radio-group>
+            <Radio label="参加"></Radio>
+            <Radio label="不参加"></Radio>
+          </Radio-group>
+        </Form-item>
+        <Form-item label="折扣价格" prop="favorablePrice">
+          <Row>
+            <i-col span="20">
+              <Input v-model="formValidate.favorablePrice" placeholder="请输入折扣价格"></Input>
             </i-col>
           </Row>
         </Form-item>
@@ -82,9 +124,16 @@
     data () {
       return {
         id: '',
+        form_title: '新增',
         formValidate: {
           dishName: '',
-          dishDesc: ''
+          dishDesc: '',
+          dishType: '',
+          dishContent: '',
+          dishPrice: '',
+          isFavorable: '',
+          favorablePrice: '',
+          isShow: ''
         },
         ruleValidate: {
           dishName: [
@@ -97,14 +146,40 @@
               message: '菜名不能多于 30 个字'
             }
           ],
+          dishType: [
+            {
+              required: true,
+              message: '菜品类型不能为空'
+            },
+            {
+              max: 30,
+              message: '类型不能多于 30 个字'
+            }
+          ],
           dishDesc: [
             {
               required: true,
-              message: '内容不能为空'
+              message: '简单内容不能为空'
+            },
+            {
+              max: 200,
+              message: '内容长度过长'
+            }
+          ],
+          dishContent: [
+            {
+              required: true,
+              message: '详细内容不能为空'
             },
             {
               max: 2000,
               message: '内容长度过长'
+            }
+          ],
+          dishPrice: [
+            {
+              required: true,
+              message: '价格不能为空'
             }
           ]
         },
@@ -123,49 +198,59 @@
         current: 1,
         columns: [
           {
-            title: '序号',
-            key: 'dishBusinessId'
-          },
-          {
             title: '菜品序号',
-            key: 'dishId'
+            key: 'dishBusinessId',
+            width: 45
           },
           {
             title: '商家序号',
-            key: 'businessId'
+            key: 'businessId',
+            width: 45
           },
           {
             title: '菜品名称',
-            key: 'dishName'
+            key: 'dishName',
+            width: 90
           },
           {
             title: '菜品类型',
-            key: 'dishType'
-          },
-          {
-            title: '菜品详细介绍',
-            key: 'dishContent'
+            key: 'dishType',
+            width: 90
           },
           {
             title: '菜品简短介绍',
-            key: 'dishDesc'
+            key: 'dishDesc',
+            width: 120
+          },
+          {
+            title: '菜品详细介绍',
+            key: 'dishContent',
+            width: 200
+          },
+          {
+            title: '菜品价格',
+            key: 'dishPrice',
+            width: 70
           },
           {
             title: '是否参加活动',
-            key: 'isFavorable'
+            key: 'isFavorable',
+            width: 80
           },
           {
             title: '是否显示',
-            key: 'isShow'
-          },
-          {
-            title: '是否置顶',
-            key: 'isTop'
+            key: 'isShow',
+            width: 70
           },
           {
             title: '订单数量',
-            key: 'dishId',
-            width: 80
+            key: 'orderCount',
+            width: 70
+          },
+          {
+            title: '折扣价格',
+            key: 'favorablePrice',
+            width: 70
           },
           {
             title: '添加时间',
@@ -220,6 +305,7 @@
       handleAdd (id) {
         this.$set(this.add, 'id', id)
         this.$set(this.add, 'modal', true)
+        this.$set(this.add, 'title', '新增菜品详细信息')
       },
       handleSave (name) {
         this.$refs[name].validate((valid) => {
@@ -252,6 +338,7 @@
         this.getDish(id)
         this.$set(this.add, 'id', id)
         this.$set(this.add, 'modal', true)
+        this.$set(this.add, 'title', '修改菜品详细信息')
       },
       handleDel (id) {
         alert(id)
