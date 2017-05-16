@@ -9,16 +9,16 @@
     </Modal>
     <Modal
       v-model="add.modal"
-      title="添加角色"
+      title="添加商家分类"
       @on-ok="handleAddOk">
 
       <!-- 表单 -->
       <div>
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
-          <Form-item label="创建商家id" prop="businessId">
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+          <Form-item label="创建商家id" prop="businessTypeId">
             <Row>
               <i-col span="18">
-                <Input v-model="formValidate.businessId" placeholder="请输入的商家名"></Input>
+                <Input v-model="formValidate.businessTypeId" placeholder="请输入的商家ID"></Input>
               </i-col>
             </Row>
           </Form-item>
@@ -26,15 +26,15 @@
           <Form-item label="创建商家名" prop="name">
             <Row>
               <i-col span="18">
-                <Input v-model="formValidate.name" placeholder="请输入编辑的商家名"></Input>
+                <Input v-model="formValidate.typeName" placeholder="请输入编辑的商家名"></Input>
               </i-col>
             </Row>
           </Form-item>
 
-          <Form-item label="创建商家类型" prop="type">
+          <Form-item label="输入商家内容" prop="content">
             <Row>
               <i-col span="18">
-                <Input v-model="formValidate.businessType" placeholder="请输入编辑的商家名"></Input>
+                <Input v-model="formValidate.content" placeholder="输入商家内容"></Input>
               </i-col>
             </Row>
           </Form-item>
@@ -126,18 +126,27 @@
     },
     data () {
       return {
-        businessId: '',
-        name: '',
-        businessType: '',
-        businessImage: '',
+        businessTypeId: '',
+        typeName: '',
+        parentId: '',
+        content: '',
         formValidate: {
-          businessId: '',
-          name: '',
-          businessType: '',
-          businessImage: ''
+          businessTypeId: '',
+          typeName: '',
+          content: ''
         },
         ruleValidate: {
-          name: [
+          businessTypeId: [
+            {
+              required: true,
+              message: 'ID不能为空'
+            },
+            {
+              max: 15,
+              message: 'ID不能过15个'
+            }
+          ],
+          typeName: [
             {
               required: true,
               message: '名字不能为空'
@@ -147,20 +156,20 @@
               message: '名字不能过15个'
             }
           ],
-          businessType: [
+          parentId: [
             {
-              required: false,
-              message: '类型不能为空'
-            }
-          ],
-          businessId: [
-            {
-              required: false,
-              message: '商家id不能为空'
+              required: true,
+              message: 'id不能为空'
             },
             {
               max: 15,
               message: 'id不能超过15个'
+            }
+          ],
+          content: [
+            {
+              required: true,
+              message: '内容不能为空'
             }
           ]
         },
@@ -183,22 +192,22 @@
         columns: [
           {
             title: '商家ID',
-            key: 'businessId'
+            key: 'businessTypeId'
           },
           {
             title: '店名',
-            key: 'name'
+            key: 'typeName'
           },
           {
-            title: '类型',
-            key: 'businessType'
+            title: 'parentId',
+            key: 'parentId'
           },
           {
-            title: '图片',
-            key: 'businessImage'
+            title: '内容',
+            key: 'content'
           },
           {
-            title: '添加时间',
+            title: '时间',
             key: 'addTime',
             render (row, column, index) {
               return `<span>${time.getDateTime(row.addTime + '000')}</span>`

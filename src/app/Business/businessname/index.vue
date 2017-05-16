@@ -10,15 +10,15 @@
 
     <Modal
       v-model="add.modal"
-      title="添加角色"
+      title="添加商家"
       @on-ok="handleAddOk">
       <!-- 表单 -->
       <div>
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-          <Form-item label="商家ID：" prop="business_id">
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="85">
+          <Form-item label="商家ID：" prop="businessId">
             <Row>
               <i-col span="18">
-                <Input v-model="formValidate.business_id" placeholder="请输入新的商家id"></Input>
+                <Input v-model="formValidate.businessId" placeholder="请输入新的商家id"></Input>
               </i-col>
             </Row>
           </Form-item>
@@ -29,14 +29,14 @@
               </i-col>
             </Row>
           </Form-item>
-          <Form-item label="商家电话" prop="tel">
+          <Form-item label="商家电话：" prop="tel">
             <Row>
               <i-col span="18">
                 <Input v-model="formValidate.tel" placeholder="请输入电话"></Input>
               </i-col>
             </Row>
           </Form-item>
-          <Form-item label="商家地址" prop="address">
+          <Form-item label="商家地址：" prop="address">
             <Row>
               <i-col span="18">
                 <Input v-model="formValidate.address" placeholder="用户地址"></Input>
@@ -105,23 +105,31 @@
     },
     data () {
       return {
+        businessId: '',
         name: '',
         address: '',
         tel: '',
         content: '',
-        business_image: '',
-        is_show: '',
-        add_time: '',
+        businessImage: '',
+        isShow: '',
+        addTime: '',
         formValidate: {
+          businessId: '',
           name: '',
           address: '',
           tel: '',
           content: '',
-          business_image: '',
-          is_show: '',
-          add_time: ''
+          businessImage: '',
+          isShow: '',
+          addTime: ''
         },
         ruleValidate: {
+          businessId: [
+            {
+              required: true,
+              message: '商家id不能为空'
+            }
+          ],
           name: [
             {
               required: true,
@@ -134,17 +142,22 @@
           ],
           tel: [
             {
-              required: false,
+              required: true,
               message: '电话不能为空'
-            }
-          ],
-          business_id: [
+            },
             {
-              required: false,
-              message: '商家ID不能为空'
+              max: 11,
+              message: '电话不能多于11个数字'
             }
           ],
-          content: [{}]
+          content: [{
+            required: true,
+            message: '内容不能为空'
+          }],
+          address: [{
+            required: true,
+            message: '地址不能为空'
+          }]
         },
         add: {
           id: 0,
@@ -166,7 +179,7 @@
         columns: [
           {
             title: '商家ID',
-            key: 'business_id'
+            key: 'businessId'
           },
           {
             title: '店名',
@@ -178,7 +191,7 @@
           },
           {
             title: '图片',
-            key: 'business_image'
+            key: 'businessImage'
           },
           {
             title: '商家信息',
@@ -186,7 +199,7 @@
           },
           {
             title: '添加时间',
-            key: 'add_time',
+            key: 'addTime',
             render (row, column, index) {
               return `<span>${time.getDateTime(row.addTime + '000')}</span>`
             }

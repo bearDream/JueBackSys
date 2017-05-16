@@ -209,26 +209,26 @@
         "pages":7,
         "list":[
           {
-            "businessId": 1,
-            "userId": "1",
+            "business_id": 1,
+            "user_id": "1",
             "name": "显示的商家1信息",
             "address": "环城东路",
             "tel": 13987522021,
             "content": "显示的商家1内容",
-            "businessImage": "图片",
-            "isShow": null,
-            "addTime": "好评"
+            "business_image": "图片",
+            "is_show": null,
+            "add_time": "好评"
           },
           {
-            "businessId": 2,
-            "userId": 2,
+            "business_id": 2,
+            "user_id": 2,
             "name": "显示的商家2信息",
             "address": "东路",
             "tel": 13987522021,
             "content": "显示的商家2内容",
-            "businessImage": "图片",
-            "isShow": null,
-            "addTime": ""
+            "business_image": "图片",
+            "is_show": null,
+            "add_time": ""
           }
         ],
         "firstPage":1,
@@ -260,18 +260,18 @@
         "pages":7,
         "list": [
           {
-            "businessTypeId": 2,
-            "typeName": "清真",
-            "parentId": 2,
-            "content": null,
-            "addTime": 2017
+            "businessId": 2,
+            "name": "味道",
+            "businessType": "清真",
+            "businessImage": null,
+            "addTime": 149423485000
           },
           {
-            "businessTypeId": 4,
-            "typeName": "味道",
-            "parentId": 4,
-            "parentId": null,
-            "addTime": 2016
+            "businessId": 34,
+            "name": "味道",
+            "type": "清真",
+            "businessImage": null,
+            "addTime": 149423485000
           }
         ],
         "firstPage":1,
