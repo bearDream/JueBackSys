@@ -1,28 +1,24 @@
 <template>
   <div>
-    <Breadcrumb>
-      <Breadcrumb-item href="/">首页</Breadcrumb-item>
-      <Breadcrumb-item href="#">文章管理</Breadcrumb-item>
-      <Breadcrumb-item href="/articles">文章列表</Breadcrumb-item>
-      <Breadcrumb-item>文章{{ id ? '编辑' : '新增' }}</Breadcrumb-item>
-    </Breadcrumb>
     <div>
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <Form-item label="标题" prop="title">
+        <Form-item label="角色名：" prop="roleName">
           <Row>
-            <Col span="12">
-              <Input v-model="formValidate.title" placeholder="请输入标题"></Input>
-            </Col>
+            <i-col span="12">
+              <Input v-model="formValidate.roleName" placeholder="请输入角色名"></Input>
+            </i-col>
           </Row>
         </Form-item>
-        <Form-item label="内容" prop="content">
-          <Editor ref="editor" v-model="formValidate.content" @change="handleEditorChange"></Editor>
-          <Input v-model="formValidate.content" style="display: none;"></Input>
+        <Form-item label="角色类别" prop="roleType">
+          <Radio-group v-model="formValidate.roleType">
+            <Radio label="1"><span>管理员</span></Radio>
+            <Radio label="2"><span>普通用户</span></Radio>
+          </Radio-group>
         </Form-item>
-        <Form-item>
-          <Button type="primary" @click="handleSave" class="margin-right-sm">保存</Button>
-          <Button type="ghost" @click="$router.push('/log')">返回</Button>
+        <Form-item label="角色介绍" prop="roleContent">
+          <Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>
         </Form-item>
+        <Button type="success" long @click="handleSave('formValidate')">保存</Button>
       </Form>
     </div>
   </div>
@@ -30,43 +26,49 @@
 
 <script>
   import { mapState } from 'vuex'
-  import Editor from '@/components/Editor'
 
   export default {
     name: 'form',
     components: {
-      Editor
+//      Editor
     },
     created () {
-      this.id = this.$route.params.id
+      this.id = this.$store
+      console.info('.....................---------------')
+      console.info(this.$store)
       this.id && this.get(this.id)
     },
     data () {
       return {
         id: '',
+        roleType: '管理员角色',
+        roleContent: '',
         formValidate: {
-          title: '',
-          content: ''
+          roleName: '',
+          roleType: '1',
+          roleContent: ''
         },
         ruleValidate: {
-          title: [
+          roleName: [
             {
               required: true,
-              message: '标题不能为空'
+              message: '角色名不能为空'
             },
             {
-              max: 100,
-              message: '标题不能多于 100 个字'
+              max: 15,
+              message: '角色名不能多于 15 个字'
             }
           ],
-          content: [
+          roleType: [
             {
-              required: true,
-              message: '内容不能为空'
-            },
+              required: false,
+              message: '角色类型不能为空'
+            }
+          ],
+          roleContent: [
             {
-              max: 2000,
-              message: '内容长度过长'
+              required: false,
+              message: '角色介绍不能为空'
             }
           ]
         }
@@ -74,40 +76,39 @@
     },
     methods: {
       get (uri) {
-        this.$store.dispatch('getArticle', {uri})
+        this.$store.dispatch('getRole', {uri})
       },
-      handleEditorChange (html) {
-        this.$set(this.formValidate, 'content', html)
-      },
-      handleSave () {
-        this.$refs.formValidate.validate((valid) => {
+      handleSave (name) {
+        this.$refs[name].validate((valid) => {
           if (valid) {
-            const action = this.id ? 'putArticle' : 'postArticle'
+            const action = this.id ? 'putRole' : 'postRole'
             const uri = this.id
 
+            console.info(this.formValidate)
             this.$store.dispatch(action, {
               uri,
               data: this.formValidate
             }).then(() => {
-              this.$Message.success((this.id ? '编辑' : '新增') + '成功！')
-              !this.id && this.resetFields()
+              this.$Message.success((this.id ? '编辑角色' : '新增角色') + '成功！')
+              this.resetFields()
+              this.$Modal.remove()
             })
+          } else {
+            this.$Message.error('保存失败!')
           }
         })
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
-        this.$refs.editor.html('')
       }
     },
     computed: mapState([
-      'articles'
+      'role'
     ]),
     watch: {
-      'articles.article': {
+      'role.role': {
         handler (newVal) {
           this.$set(this, 'formValidate', newVal.data)
-          this.$refs.editor.html(newVal.data.content)
         }
       }
     }

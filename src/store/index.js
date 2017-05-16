@@ -4,6 +4,7 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 import log from './modules/log'
+import login from './modules/login'
 import role from './modules/role'
 import businessname from './modules/businessname'
 import businesstype from './modules/businesstype'
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     businessname,
     businesstype,
     businesstable,
-    businesstake
+    businesstake,
+    login
   }
 })

@@ -328,85 +328,83 @@
     }
   ],
   "role": {
-    "id": 1,
-    "code": 1,
-    "msg": "后端正常",
-    "data": {
-      "page": {
-        "pageNum": 1,
-        "pageSize": 10,
-        "size": 10,
-        "orderBy": "log_addtime asc",
-        "startRow": 1,
-        "endRow": 10,
-        "total": 3,
-        "pages": 7,
-        "list": [
-          {
-            "roleId": 1,
-            "roleName": "全局管理员",
-            "roleContent": "可以操作所有内容",
-            "addTime": 1494138098000,
-            "roleYxbz": 1,
-            "roleType": 2,
-            "promission": null
-          },
-          {
-            "roleId": 11,
-            "roleName": "日志管理员",
-            "roleContent": null,
-            "addTime": 1494123049000,
-            "roleYxbz": 0,
-            "roleType": 2,
-            "promission": null
-          },
-          {
-            "roleId": 8,
-            "roleName": "标签管理员",
-            "roleContent": null,
-            "addTime": 1494122809000,
-            "roleYxbz": 0,
-            "roleType": 2,
-            "promission": null
-          }
-        ],
-        "firstPage": 1,
-        "prePage": 0,
-        "nextPage": 1,
-        "lastPage": 1,
-        "isFirstPage": true,
-        "isLastPage": false,
-        "hasPreviousPage": false,
-        "hasNextPage": true,
-        "navigatePages": 1,
-        "navigatepageNums": [
-          1
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": {
+        "page":{
+        "pageNum":1,
+          "pageSize":10,
+          "size":10,
+          "orderBy":"log_addtime asc",
+          "startRow":1,
+          "endRow":3,
+          "total":3,
+          "pages":1,
+          "list":[
+            {
+              "roleId": 1,
+              "roleName": "全局管理员",
+              "roleContent": "可以操作所有内容",
+              "addTime": 1494138098000,
+              "roleYxbz": 1,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 11,
+              "roleName": "日志管理员",
+              "roleContent": null,
+              "addTime": 1494123049000,
+              "roleYxbz": 0,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 8,
+              "roleName": "标签管理员",
+              "roleContent": null,
+              "addTime": 1494122809000,
+              "roleYxbz": 0,
+              "roleType": 2,
+              "promission": null
+            }
+          ],
+          "firstPage":1,
+          "prePage":0,
+          "nextPage":1,
+          "lastPage":1,
+          "isFirstPage":true,
+          "isLastPage":false,
+          "hasPreviousPage":false,
+          "hasNextPage":true,
+          "navigatePages":1,
+          "navigatepageNums":[1
         ]
       }
     }
-  },
-  "tag": {
+  },"tag": {
     "code": 0,
-    "msg": "后台正常",
+      "msg": "后台正常",
     "data": {
       "page": {
         "pageNum": 1,
-        "pageSize": 10,
+      "pageSize": 10,
         "size": 10,
         "orderBy": "log_addtime asc",
         "startRow": 1,
-        "endRow": 10,
-        "total": 1,
+      "endRow": 10,
+      "total": 1,
         "pages": 1,
         "list": [
-          {
-            "tagId": 1,
-            "name": "微辣",
-            "content": "有点微辣，刚刚好",
-            "tagType": 1,
-            "addTime": 1494391775000
-          }
-        ],
+        {
+          "tagId": 1,
+          "name": "微辣",
+          "content": "有点微辣，刚刚好",
+          "tagType": 1,
+          "addTime": 1494391775000
+        }
+      ],
         "firstPage": 1,
         "prePage": 0,
         "nextPage": 1,

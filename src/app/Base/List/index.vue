@@ -12,9 +12,8 @@
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
       <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <!-- 分页 -->
     <List :current="current" :columns="columns" :data="log.logs.page.list"
-      :total="log.logs.page.total"
+      :total="pageTotal"
       @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
@@ -56,6 +55,8 @@
           modal: false,
           id: 0
         },
+        pageTotal: '',
+        pageList: '',
         search: {
           title: ''
         },
@@ -99,10 +100,12 @@
       'navigation'
     ]),
     created () {
+      this.$store.dispatch('show_base_nav')
       this.get()
+      console.info(this.$store.state.log.logs.page.total)
+      this.$set(this, 'pageTotal', this.$store.state.log.logs.page.total)
     },
     methods: {
-        // 拉取数据
       get (current = 1) {
         this.$set(this, 'current', current)
 
@@ -141,3 +144,18 @@
     }
   }
 </script>
+<style>
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+  .demo-spin-col{
+    height: 100px;
+    position: relative;
+    border: 1px solid #eee;
+  }
+</style>

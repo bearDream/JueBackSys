@@ -17,7 +17,6 @@
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
-                <UserNavigationtio v-show="navigation.user"></UserNavigationtio>
               </i-col>
             </Row>
             <Row>
@@ -60,6 +59,9 @@
       // 控制导航栏的显示
       switch (path) {
         case '/baseFrame':
+          this.$store.dispatch('show_base_nav')
+          break
+        case '/logFrame':
           this.$store.dispatch('show_base_nav')
           break
         case '/businessFrame':
