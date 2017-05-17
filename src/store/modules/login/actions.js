@@ -1,5 +1,6 @@
 import types from './types'
-// navigation的所有状态管理
+import LogOutModel from '@/models/actions/logout'
+
 export default {
   /**
    * 设置显示baseNav
@@ -13,10 +14,13 @@ export default {
   /**
    * 登出
    */
-  logout ({commit}) {
-    commit(types.is_login, {
-      data: false
-    })
+  logoutAction ({commit}) {
+    new LogOutModel().GET({})
+      .then((res) => {
+        commit(types.is_login, {
+          data: false
+        })
+      })
   }
 
 }

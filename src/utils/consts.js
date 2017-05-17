@@ -8,10 +8,10 @@ const DEV = 'DEV'
 const PROD = 'PROD'
 
 // 当前环境
-const ENV = HOST === 'localhost:8080' ? DEV : PROD
+const ENV = HOST === 'http://localhost:3000' ? DEV : PROD
 
 // 基础地址
-const BASE_URL = ENV === DEV ? 'http://localhost:3000' : 'http://localhost:3000'
+const BASE_URL = ENV === DEV ? 'http://localhost:3000' : 'http://localhost:8088/api'
 
 // 接口地址
 const API_URL = BASE_URL

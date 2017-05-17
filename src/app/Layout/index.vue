@@ -1,5 +1,8 @@
 <template>
   <div>
+    <transition name="slide-fade">
+      <Header v-show="login.is_login"></Header>
+    </transition>
     <div class="main">
       <Row>
         <i-col>
@@ -39,18 +42,28 @@
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
   import DishNavigationtio from './components/DishNavigationtio'
+  import Header from './components/Header'
 
   export default {
     name: 'layout',
     computed: mapState([
-      'navigation'
+      'navigation',
+      'login'
     ]),
     components: {
       Sidebar,
       Body,
       BaseNavigationtio,
       BusinessNavigation,
-      DishNavigationtio
+      DishNavigationtio,
+      Header
+    },
+    watch: {
+      'login.is_login': {
+        handler (newVal) {
+          this.$route.push('/login')
+        }
+      }
     },
     created () {
       console.info(this.navigation.base)

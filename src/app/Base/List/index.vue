@@ -80,16 +80,15 @@
             key: 'logAddtime',
             width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
+              return `<span>${time.getDateTime(row.logAddtime)}</span>`
             }
           },
           {
             title: '操作',
             key: 'action',
-            width: 125,
+            width: 100,
             render: (row, column, index) => {
-              return `<i-button type="ghost" size="small" @click="handleEdit(${row.id})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.id})">删除</i-button>`
+              return `<i-button type="error" @click="handleDel(${row.id})">删除</i-button>`
             }
           }
         ]
@@ -102,7 +101,6 @@
     created () {
       this.$store.dispatch('show_base_nav')
       this.get()
-      console.info(this.$store.state.log.logs.page.total)
       this.$set(this, 'pageTotal', this.$store.state.log.logs.page.total)
     },
     methods: {

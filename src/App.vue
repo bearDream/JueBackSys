@@ -1,25 +1,18 @@
 <template>
   <div id="app">
     <!-- 顶部title -->
-    <transition name="slide-fade">
-      <Header v-show="login.is_login"></Header>
-    </transition>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
   import Header from './app/Layout/components/Header'
-  import { mapState } from 'vuex'
 
   export default {
     name: 'app',
     components: {
       Header
-    },
-    computed: mapState([
-      'login'
-    ])
+    }
   }
 </script>
 <style lang="scss" scoped>
