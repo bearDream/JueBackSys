@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
   // router.app.$store.dispatch('logout')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     axios.defaults.withCredentials = true
-    axios.get(consts.API_URL + '/login/isLogin', {})
+    axios.get(consts.API_URL + '/isLogin', {})
       .then(function (res) {
         console.log(res.data)
         let data = res.data

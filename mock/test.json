@@ -12,12 +12,11 @@
       }
     }
   ],
-  "user": [
-    {
+  "user": {
       "id": 1,
       "code": 1,
       "msg": "后端正常",
-      "data": [
+      "data":
         {
           "userId": 1,
           "username": null,
@@ -38,9 +37,7 @@
           "level": 1,
           "roleId": 1
         }
-      ]
-    }
-  ],
+    },
   "log": {
     "code": 0,
     "msg": "后台正常",
@@ -177,6 +174,11 @@
       }
     }
   },
+  "isLogin": {
+    "code": 0,
+    "msg": "后台正常",
+    "data": "已登录"
+  },
   "dish": {
     "id": 1,
     "code": 1,
@@ -239,22 +241,22 @@
         ]
       }
     }
-  ],
-  "businessname":{
+  },
+  "businessname": {
     "id": 1,
     "code": 1,
     "msg": "businessname后端正常",
     "data": {
-      "page":
-      {"pageNum":1,
-        "pageSize":10,
-        "size":10,
-        "orderBy":"log_addtime asc",
-        "startRow":1,
-        "endRow":10,
-        "total":3,
-        "pages":7,
-        "list":[
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 3,
+        "pages": 7,
+        "list": [
           {
             "businessId": 1,
             "userId": "1",
@@ -278,19 +280,21 @@
             "addTime": ""
           }
         ],
-        "firstPage":1,
-        "prePage":0,
-        "nextPage":1,
-        "lastPage":1,
-        "isFirstPage":true,
-        "isLastPage":false,
-        "hasPreviousPage":false,
-        "hasNextPage":true,
-        "navigatePages":1,
-        "navigatepageNums":[1]
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
       }
     }
-  ],
+  },
   "dishtype": {
     "id": 1,
     "code": 1,
@@ -352,21 +356,22 @@
           1
         ]
       }
+    }
   },
-  "businesstype":{
+  "businesstype": {
     "id": 1,
     "code": 1,
     "msg": "businesstype后端正常",
     "data": {
       "page": {
-        "pageNum":1,
-        "pageSize":10,
-        "size":10,
-        "orderBy":"log_addtime asc",
-        "startRow":1,
-        "endRow":10,
-        "total":3,
-        "pages":7,
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 3,
+        "pages": 7,
         "list": [
           {
             "businessTypeId": 2,
@@ -383,57 +388,19 @@
             "addTime": 2016
           }
         ],
-        "firstPage":1,
-        "prePage":0,
-        "nextPage":1,
-        "lastPage":1,
-        "isFirstPage":true,
-        "isLastPage":false,
-        "hasPreviousPage":false,
-        "hasNextPage":true,
-        "navigatePages":1,
-        "navigatepageNums":[1]
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
       }
-    }
-  },
-  "dishtype": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "dishtypeId": 1,
-          "typeName": "超辣火锅",
-          "dishId": 1,
-          "isShow": 0,
-          "addTime": 1494391398000,
-          "parentId": null
-        }
-      ]
-    }
-  ],
-  "nutrition": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "nurtritionId": 3,
-          "grease": "sss",
-          "heat": "889",
-          "sugarContent": "88",
-          "addTime": 1494241984000
-        },
-        {
-          "nurtritionId": 1,
-          "grease": "SDS",
-          "heat": "123",
-          "sugarContent": "ASDA",
-          "addTime": 1494231359000
-        }
-      ]
     }
   },
   "nutrition": {
@@ -483,8 +450,10 @@
             "addTime": 1494391398000,
             "parentId": null
           }
-        ],
-  ],
+        ]
+      }
+    }
+  },
   "role": {
       "id": 1,
       "code": 1,
@@ -541,7 +510,8 @@
         ]
       }
     }
-  },"tag": {
+  },
+  "tag": {
     "code": 0,
       "msg": "后台正常",
     "data": {
@@ -614,7 +584,7 @@
         ]
       }
     }
-  ],
+  },
   "dishtag": {
     "id": 1,
     "code": 1,
