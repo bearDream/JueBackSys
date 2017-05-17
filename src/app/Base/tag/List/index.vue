@@ -9,7 +9,7 @@
     </Modal>
     <Modal
       v-model="add.modal"
-      title="添加角色"
+      title="添加标签"
       @on-ok="handleAddOk">
 
       <!-- 表单 -->
@@ -43,7 +43,7 @@
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
-      <Breadcrumb-item>角色管理</Breadcrumb-item>
+      <Breadcrumb-item>全局标签管理</Breadcrumb-item>
     </Breadcrumb>
     <Spin fix v-show="role_spin">
       <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>

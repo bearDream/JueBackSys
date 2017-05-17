@@ -6,7 +6,7 @@
     <Menu-item name="sortFrame">
       菜品分类
     </Menu-item>
-    <Menu-item name="tagFrame">
+    <Menu-item name="dishTagFrame">
       标签
     </Menu-item>
     <Menu-item name="dietFrame">

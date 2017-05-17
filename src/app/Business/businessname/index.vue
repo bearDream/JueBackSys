@@ -241,8 +241,8 @@
 
         this.$store.dispatch('getBusinessnames', {
           params: {
-            offset: (current - 1) * consts.PAGE_SIZE,
-            limit: consts.PAGE_SIZE,
+            pageNum: (current - 1) * consts.PAGE_SIZE,
+            pageSize: consts.PAGE_SIZE,
             ...this.search
           }
         })
