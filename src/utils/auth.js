@@ -1,7 +1,8 @@
 import storage from './helpers/storageLite'
+import Model from '@/models/actions/login'
+import LogOutModel from '@/models/actions/logout'
 
 const USERINFO = 'userinfo'
-const TOKEN = 'token'
 
 export default {
   name: 'auth',
@@ -12,8 +13,7 @@ export default {
    */
   get () {
     return {
-      [USERINFO]: storage.get(USERINFO),
-      [TOKEN]: storage.get(TOKEN)
+      [USERINFO]: storage.get(USERINFO)
     }
   },
 
@@ -22,19 +22,18 @@ export default {
    * @param {string} manager 登录管理员
    * @param {string} token 登录 token
    */
-  login ({userinfo, token}) {
-    console.warn(token)
-    console.warn(userinfo)
-    storage.set(USERINFO, userinfo)
-    storage.set(TOKEN, token)
+  login ({data}) {
+    storage.set(USERINFO, data)
   },
 
   /**
    * 登出
    */
   logout () {
-    storage.remove(USERINFO)
-    storage.remove(TOKEN)
+    new LogOutModel().GET({})
+      .then((res) => {
+        storage.remove(USERINFO)
+      })
   },
 
   /**
@@ -42,6 +41,9 @@ export default {
    * @return {boolean}
    */
   loggedIn () {
-    return !!storage.get(USERINFO) && !!storage.get(TOKEN)
+    new Model.GET({}).then((res) => {
+      console.info(res.data)
+    })
+    // return !!storage.get(USERINFO)
   }
 }

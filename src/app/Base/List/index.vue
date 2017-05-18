@@ -3,17 +3,17 @@
     <Modal
       width="300"
       v-model="del.modal"
-      title="确认框"
+      title="删除日志"
       @on-ok="handleDelOk">
-      <p>确认删除该记录？</p>
+      <p>确认删除该条日志？</p>
     </Modal>
     <Breadcrumb>
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">基础信息管理</Breadcrumb-item>
       <Breadcrumb-item>日志管理</Breadcrumb-item>
     </Breadcrumb>
-    <List :current="current" :columns="columns" :data="log.logs.page.list"
-      :total="log.logs.page.total"
+    <List :current="current" :columns="columns" :data="pageList"
+      :total="pageTotal"
       @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
@@ -21,8 +21,8 @@
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
-            <Form-item prop="title">
-              <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
+            <Form-item prop="userId">
+              <Input type="text" placeholder="请输入用户名" v-model="search.userId" style="width: 230px;"
                 @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
@@ -55,8 +55,10 @@
           modal: false,
           id: 0
         },
+        pageTotal: 1,
+        pageList: [],
         search: {
-          title: ''
+          userId: ''
         },
         current: 1,
         columns: [
@@ -78,16 +80,15 @@
             key: 'logAddtime',
             width: 180,
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
+              return `<span>${time.getDateTime(row.logAddtime)}</span>`
             }
           },
           {
             title: '操作',
             key: 'action',
-            width: 125,
+            width: 100,
             render: (row, column, index) => {
-              return `<i-button type="ghost" size="small" @click="handleEdit(${row.id})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.id})">删除</i-button>`
+              return `<i-button type="error" @click="handleDel(${row.logId})">删除</i-button>`
             }
           }
         ]
@@ -98,7 +99,30 @@
       'navigation'
     ]),
     created () {
+      this.$store.dispatch('show_base_nav')
       this.get()
+      var me = this
+      // 异步请求的原因，因此需要用定时器来模拟设置数据
+      setTimeout(function () {
+        console.info(me.$store.state.log.logs.page.list)
+        if (me.$store.getters.getLogs !== null) {
+          me.$set(me, 'pageTotal', me.$store.state.log.logs.page.total)
+          me.$set(me, 'pageList', me.$store.state.log.logs.page.list)
+        } else {
+          me.$Notice.error({
+            title: '网络出错',
+            desc: '网络请求失败，请联系后台人员'
+          })
+        }
+      }, 500)
+    },
+    watch: {
+      'log.logs': {
+        handler (newVal) {
+          this.$set(this, 'pageTotal', this.$store.state.log.logs.page.total)
+          this.$set(this, 'pageList', this.$store.state.log.logs.page.list)
+        }
+      }
     },
     methods: {
       get (current = 1) {
@@ -106,8 +130,8 @@
 
         this.$store.dispatch('getLogs', {
           params: {
-            offset: (current - 1) * consts.PAGE_SIZE,
-            limit: consts.PAGE_SIZE,
+            pageNum: current,
+            pageSize: consts.PAGE_SIZE,
             ...this.search
           }
         })
@@ -127,9 +151,9 @@
         this.$set(this.del, 'id', id)
       },
       handleDelOk () {
-        this.$store.dispatch('deleteArticle', {
+        this.$store.dispatch('deleteLog', {
           params: {
-            id: this.del.id
+            logId: this.del.id
           }
         }).then(() => {
           this.$Message.success('删除成功！')
@@ -139,3 +163,18 @@
     }
   }
 </script>
+<style>
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+  .demo-spin-col{
+    height: 100px;
+    position: relative;
+    border: 1px solid #eee;
+  }
+</style>

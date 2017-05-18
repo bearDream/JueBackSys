@@ -1,5 +1,8 @@
 <template>
   <div>
+    <transition name="slide-fade">
+      <Header v-show="login.is_login"></Header>
+    </transition>
     <div class="main">
       <Row>
         <i-col>
@@ -12,12 +15,12 @@
           <i-col span="6">
             <Sidebar ref="sidebar"></Sidebar>
           </i-col>
-          <i-col span="2"></i-col>
-          <i-col span="16">
+          <i-col span="18">
             <Row>
               <i-col>
                 <BaseNavigationtio v-show="navigation.base"></BaseNavigationtio>
                 <BusinessNavigation v-show="navigation.business"></BusinessNavigation>
+                <DishNavigationtio v-show="navigation.dish"></DishNavigationtio>
               </i-col>
             </Row>
             <Row>
@@ -38,17 +41,29 @@
   import Body from './components/Body'
   import BaseNavigationtio from './components/BaseNavigation'
   import BusinessNavigation from './components/BusinessNavigation'
+  import DishNavigationtio from './components/DishNavigationtio'
+  import Header from './components/Header'
 
   export default {
     name: 'layout',
     computed: mapState([
-      'navigation'
+      'navigation',
+      'login'
     ]),
     components: {
       Sidebar,
       Body,
       BaseNavigationtio,
-      BusinessNavigation
+      BusinessNavigation,
+      DishNavigationtio,
+      Header
+    },
+    watch: {
+      'login.is_login': {
+        handler (newVal) {
+          this.$route.push('/login')
+        }
+      }
     },
     created () {
       console.info(this.navigation.base)
@@ -60,11 +75,14 @@
         case '/baseFrame':
           this.$store.dispatch('show_base_nav')
           break
+        case '/logFrame':
+          this.$store.dispatch('show_base_nav')
+          break
         case '/businessFrame':
           this.$store.dispatch('show_business_nav')
           break
-        case '/userFrame':
-          this.$store.dispatch('show_user_nav')
+        case '/dishFrame':
+          this.$store.dispatch('show_dish_nav')
           break
       }
       this.$nextTick(() => {

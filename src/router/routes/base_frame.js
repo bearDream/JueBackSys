@@ -15,6 +15,11 @@ export default {
       component: resolve => require(['@/app/Base/role/List'], resolve)
     },
     {
+      // 兼容用户点击左边sidebar时可以找到一个日志
+      path: '/tagFrame',
+      component: resolve => require(['@/app/Base/tag/list'], resolve)
+    },
+    {
       path: 'form/:id?',
       component: resolve => require(['@/app/Base/Form'], resolve)
     }

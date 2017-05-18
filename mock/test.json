@@ -12,6 +12,32 @@
       }
     }
   ],
+  "user": {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data":
+        {
+          "userId": 1,
+          "username": null,
+          "password": "c4814e54a84bf3c46fb49fee7eee770a",
+          "tel": "13759498504",
+          "realName": "",
+          "age": null,
+          "sex": "3",
+          "idCard": null,
+          "bankCard": null,
+          "address": null,
+          "weixin": null,
+          "openid": null,
+          "logins": 0,
+          "alipay": null,
+          "status": 0,
+          "type": 2,
+          "level": 1,
+          "roleId": 1
+        }
+    },
   "log": {
     "code": 0,
     "msg": "后台正常",
@@ -148,83 +174,12 @@
       }
     }
   },
-  "dish": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "dishId": 1,
-          "dishName": "嘿嘿嘿",
-          "dishDesc": "86",
-          "addTime": 1494295023000,
-          "dishContent": null
-        }
-      ]
-    }
-  ],
-  "business": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "businessId": 1,
-          "userId": 1,
-          "name": "外婆味道",
-          "address": "环城东路",
-          "tel": 1888888888,
-          "businessImage": null,
-          "isShow": 0,
-          "addTime": 1494391285000,
-          "content": null
-        }
-      ]
-    }
-  ],
-  "dishtype": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "dishtypeId": 1,
-          "typeName": "超辣火锅",
-          "dishId": 1,
-          "isShow": 0,
-          "addTime": 1494391398000,
-          "parentId": null
-        }
-      ]
-    }
-  ],
-  "nutrition": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "nurtritionId": 3,
-          "grease": "sss",
-          "heat": "889",
-          "sugarContent": "88",
-          "addTime": 1494241984000
-        },
-        {
-          "nurtritionId": 1,
-          "grease": "SDS",
-          "heat": "123",
-          "sugarContent": "ASDA",
-          "addTime": 1494231359000
-        }
-      ]
-    }
-  ],
-  "role": {
+  "isLogin": {
+    "code": 0,
+    "msg": "后台正常",
+    "data": "已登录"
+  },
+  "dish": {
     "id": 1,
     "code": 1,
     "msg": "后端正常",
@@ -233,38 +188,96 @@
         "pageNum": 1,
         "pageSize": 10,
         "size": 10,
-        "orderBy": "log_addtime asc",
+        "orderBy": "dishtype_id asc",
         "startRow": 1,
-        "endRow": 3,
-        "total": 3,
+        "endRow": 10,
+        "total": 4,
         "pages": 1,
         "list": [
           {
-            "roleId": 1,
-            "roleName": "全局管理员",
-            "roleContent": "可以操作所有内容",
-            "addTime": 1494138098000,
-            "roleYxbz": 1,
-            "roleType": 2,
-            "promission": null
+            "dishId": 1,
+            "dishName": "麻婆豆腐",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
           },
           {
-            "roleId": 11,
-            "roleName": "日志管理员",
-            "roleContent": null,
-            "addTime": 1494123049000,
-            "roleYxbz": 0,
-            "roleType": 2,
-            "promission": null
+            "dishId": 2,
+            "dishName": "青椒土豆丝",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
           },
           {
-            "roleId": 8,
-            "roleName": "标签管理员",
-            "roleContent": null,
-            "addTime": 1494122809000,
-            "roleYxbz": 0,
-            "roleType": 2,
-            "promission": null
+            "dishId": 3,
+            "dishName": "灯影牛肉",
+            "dishDesc": "特色菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 4,
+            "dishName": "重庆火锅",
+            "dishDesc": "火锅",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "businessname": {
+    "id": 1,
+    "code": 1,
+    "msg": "businessname后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 3,
+        "pages": 7,
+        "list": [
+          {
+            "businessId": 1,
+            "userId": "1",
+            "name": "显示的商家1信息",
+            "address": "环城东路",
+            "tel": 13987522021,
+            "content": "显示的商家1内容",
+            "businessImage": "图片",
+            "isShow": null,
+            "addTime": "好评"
+          },
+          {
+            "businessId": 2,
+            "userId": 2,
+            "name": "显示的商家2信息",
+            "address": "东路",
+            "tel": 13987522021,
+            "content": "显示的商家2内容",
+            "businessImage": "图片",
+            "isShow": null,
+            "addTime": ""
           }
         ],
         "firstPage": 1,
@@ -282,12 +295,236 @@
       }
     }
   },
-  "tag": [
-    {
+  "dishtype": {
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "dishtype_id asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 4,
+        "pages": 1,
+        "list": [
+          {
+            "dishtypeId": 1,
+            "typeName": "家常菜",
+            "dishId": 1,
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishtypeId": 2,
+            "typeName": "特色菜",
+            "dishId": 3,
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishtypeId": 3,
+            "typeName": "超辣火锅",
+            "dishId": 4,
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishtypeId": 4,
+            "typeName": "西餐",
+            "dishId": 5,
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "businesstype": {
+    "id": 1,
+    "code": 1,
+    "msg": "businesstype后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 3,
+        "pages": 7,
+        "list": [
+          {
+            "businessTypeId": 2,
+            "typeName": "清真",
+            "parentId": 2,
+            "content": null,
+            "addTime": 2017
+          },
+          {
+            "businessTypeId": 4,
+            "typeName": "味道",
+            "parentId": 4,
+            "parentId": null,
+            "addTime": 2016
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "nutrition": {
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "dishtype_id asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 4,
+        "pages": 1,
+        "list": [
+          {
+            "dishId": 1,
+            "dishName": "麻婆豆腐",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 2,
+            "dishName": "青椒土豆丝",
+            "dishDesc": "家常菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 3,
+            "dishName": "灯影牛肉",
+            "dishDesc": "特色菜",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          },
+          {
+            "dishId": 4,
+            "dishName": "重庆火锅",
+            "dishDesc": "火锅",
+            "isShow": 0,
+            "addTime": 1494391398000,
+            "parentId": null
+          }
+        ]
+      }
+    }
+  },
+  "role": {
       "id": 1,
       "code": 1,
       "msg": "后端正常",
-      "data": [
+      "data": {
+        "page":{
+        "pageNum":1,
+          "pageSize":10,
+          "size":10,
+          "orderBy":"log_addtime asc",
+          "startRow":1,
+          "endRow":3,
+          "total":3,
+          "pages":1,
+          "list":[
+            {
+              "roleId": 1,
+              "roleName": "全局管理员",
+              "roleContent": "可以操作所有内容",
+              "addTime": 1494138098000,
+              "roleYxbz": 1,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 11,
+              "roleName": "日志管理员",
+              "roleContent": null,
+              "addTime": 1494123049000,
+              "roleYxbz": 0,
+              "roleType": 2,
+              "promission": null
+            },
+            {
+              "roleId": 8,
+              "roleName": "标签管理员",
+              "roleContent": null,
+              "addTime": 1494122809000,
+              "roleYxbz": 0,
+              "roleType": 2,
+              "promission": null
+            }
+          ],
+          "firstPage":1,
+          "prePage":0,
+          "nextPage":1,
+          "lastPage":1,
+          "isFirstPage":true,
+          "isLastPage":false,
+          "hasPreviousPage":false,
+          "hasNextPage":true,
+          "navigatePages":1,
+          "navigatepageNums":[1
+        ]
+      }
+    }
+  },
+  "tag": {
+    "code": 0,
+      "msg": "后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+      "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+      "endRow": 10,
+      "total": 1,
+        "pages": 1,
+        "list": [
         {
           "tagId": 1,
           "name": "微辣",
@@ -295,115 +532,115 @@
           "tagType": 1,
           "addTime": 1494391775000
         }
-      ]
+      ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
     }
-  ],
-  "user": {
+  },
+  "businesstable": {
+    "code": 0,
+    "msg": "businesstable后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 1,
+        "pages": 1,
+        "list": [
+          {
+            "tagId": 1,
+            "name": "微辣",
+            "content": "有点微辣，刚刚好",
+            "tagType": 1,
+            "addTime": 1494391775000
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "dishtag": {
     "id": 1,
     "code": 1,
     "msg": "后端正常",
     "data": {
-      "page":
-      {"pageNum":1,
-        "pageSize":10,
-        "size":10,
-        "orderBy":"log_addtime asc",
-        "startRow":1,
-        "endRow":10,
-        "total":3,
-        "pages":7,
-        "list":[
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "dish_id asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 4,
+        "pages": 1,
+        "list": [
           {
-            "userId": 1,
-            "username": "小丽",
-            "password": "c4814e54a84bf3c46fb49fee7eee770a",
-            "tel": "13759498504",
-            "realName": "",
-            "age": null,
-            "sex": "3",
-            "idCard": null,
-            "bankCard": null,
-            "address": null,
-            "weixin": null,
-            "openid": null,
-            "logins": 0,
-            "alipay": null,
-            "status": 0,
-            "type": 2,
-            "level": 1,
-            "roleId": 1
+            "dishtagId": 1,
+            "dishtagName": "微辣",
+            "addTime": "13759498504于Sun May 07 14:21:10 CST 2017添加",
+            "dishtagType": "辣",
+            "params": null
           },
           {
-            "userId": 2,
-            "username": "小明",
-            "password": "c4814e54a84bf3c46fb49fee7eee770a",
-            "tel": "13759498504",
-            "realName": "",
-            "age": null,
-            "sex": "3",
-            "idCard": null,
-            "bankCard": null,
-            "address": null,
-            "weixin": null,
-            "openid": null,
-            "logins": 0,
-            "alipay": null,
-            "status": 0,
-            "type": 2,
-            "level": 2,
-            "roleId": 1
+            "dishtagId": 2,
+            "dishtagName": "中辣",
+            "addTime": "13759498504于Sun May 07 14:21:10 CST 2017添加",
+            "dishtagType": "辣",
+            "params": null
           },
           {
-            "userId": 3,
-            "username": "小华",
-            "password": "c4814e54a84bf3c46fb49fee7eee770a",
-            "tel": "13759498504",
-            "realName": "",
-            "age": null,
-            "sex": "3",
-            "idCard": null,
-            "bankCard": null,
-            "address": null,
-            "weixin": null,
-            "openid": null,
-            "logins": 0,
-            "alipay": null,
-            "status": 0,
-            "type": 2,
-            "level": 3,
-            "roleId": 1
+            "dishtagId": 3,
+            "dishtagName": "特辣",
+            "addTime": "13759498504于Sun May 07 14:21:10 CST 2017添加",
+            "dishtagType": "辣",
+            "params": null
           },
           {
-            "userId": 4,
-            "username": "小强",
-            "password": "c4814e54a84bf3c46fb49fee7eee770a",
-            "tel": "13759498504",
-            "realName": "",
-            "age": null,
-            "sex": "3",
-            "idCard": null,
-            "bankCard": null,
-            "address": null,
-            "weixin": null,
-            "openid": null,
-            "logins": 0,
-            "alipay": null,
-            "status": 0,
-            "type": 2,
-            "level": 4,
-            "roleId": 1
+            "dishtagId": 4,
+            "dishtagName": "麻辣",
+            "addTime": "13759498504于Sun May 07 14:21:10 CST 2017添加",
+            "dishtagType": "辣",
+            "params": null
           }
         ],
-        "firstPage":1,
-        "prePage":0,
-        "nextPage":1,
-        "lastPage":1,
-        "isFirstPage":true,
-        "isLastPage":false,
-        "hasPreviousPage":false,
-        "hasNextPage":true,
-        "navigatePages":1,
-        "navigatepageNums":[1]
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
       }
     }
   }

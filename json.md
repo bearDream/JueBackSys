@@ -1,0 +1,499 @@
+{
+  "login": [
+    {
+      "code": 1,
+      "msg": "后端正常",
+      "data": {
+        "userinfo": {
+          "id": 1,
+          "username": "zc"
+        },
+        "token": "1ed12r23r23r23r23r232r34"
+      }
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": [
+        {
+          "userId": 1,
+          "username": null,
+          "password": "c4814e54a84bf3c46fb49fee7eee770a",
+          "tel": "13759498504",
+          "realName": "",
+          "age": null,
+          "sex": "3",
+          "idCard": null,
+          "bankCard": null,
+          "address": null,
+          "weixin": null,
+          "openid": null,
+          "logins": 0,
+          "alipay": null,
+          "status": 0,
+          "type": 2,
+          "level": 1,
+          "roleId": 1
+        }
+      ]
+    }
+  ],
+  "log": {
+    "code": 0,
+    "msg": "后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 62,
+        "pages": 7,
+        "list": [
+          {
+            "logId": 1,
+            "logAddtime": 1494138070000,
+            "actionkey": "PUT",
+            "logContent": "13759498504于Sun May 07 14:21:10 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 2,
+            "logAddtime": 1494138098000,
+            "actionkey": "PUT",
+            "logContent": "13759498504于Sun May 07 14:21:38 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 3,
+            "logAddtime": 1494206183000,
+            "actionkey": "GET",
+            "logContent": "13759498504于Mon May 08 09:16:23 CST 2017操作了方法",
+            "controllerkey": "/role",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 4,
+            "logAddtime": 1494206207000,
+            "actionkey": "GET",
+            "logContent": "13759498504于Mon May 08 09:16:47 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 5,
+            "logAddtime": 1494206891000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:28:11 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 6,
+            "logAddtime": 1494207011000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:30:11 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 7,
+            "logAddtime": 1494207836000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:43:56 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 8,
+            "logAddtime": 1494208048000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:47:28 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 9,
+            "logAddtime": 1494208413000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:53:33 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          },
+          {
+            "logId": 11,
+            "logAddtime": 1494208681000,
+            "actionkey": "POST",
+            "logContent": "13759498504于Mon May 08 09:58:01 CST 2017操作了方法",
+            "controllerkey": "/authority",
+            "userId": 1,
+            "logIp": "10.1.180.145",
+            "params": null
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 2,
+        "lastPage": 7,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 8,
+        "navigatepageNums": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  },
+  "dish": [
+    {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": [
+        {
+          "dishId": 1,
+          "dishName": "嘿嘿嘿",
+          "dishDesc": "86",
+          "addTime": 1494295023000,
+          "dishContent": null
+        }
+      ]
+    }
+  ],
+  "businessname":{
+    "id": 1,
+    "code": 1,
+    "msg": "businessname后端正常",
+    "data": {
+      "page":
+      {"pageNum":1,
+        "pageSize":10,
+        "size":10,
+        "orderBy":"log_addtime asc",
+        "startRow":1,
+        "endRow":10,
+        "total":3,
+        "pages":7,
+        "list":[
+          {
+            "business_id": 1,
+            "user_id": "1",
+            "name": "显示的商家1信息",
+            "address": "环城东路",
+            "tel": 13987522021,
+            "content": "显示的商家1内容",
+            "business_image": "图片",
+            "is_show": null,
+            "add_time": "好评"
+          },
+          {
+            "business_id": 2,
+            "user_id": 2,
+            "name": "显示的商家2信息",
+            "address": "东路",
+            "tel": 13987522021,
+            "content": "显示的商家2内容",
+            "business_image": "图片",
+            "is_show": null,
+            "add_time": ""
+          }
+        ],
+        "firstPage":1,
+        "prePage":0,
+        "nextPage":1,
+        "lastPage":1,
+        "isFirstPage":true,
+        "isLastPage":false,
+        "hasPreviousPage":false,
+        "hasNextPage":true,
+        "navigatePages":1,
+        "navigatepageNums":[1]
+      }
+    }
+  },
+  "businesstype":{
+    "id": 1,
+    "code": 1,
+    "msg": "businesstype后端正常",
+    "data": {
+      "page": {
+        "pageNum":1,
+        "pageSize":10,
+        "size":10,
+        "orderBy":"log_addtime asc",
+        "startRow":1,
+        "endRow":10,
+        "total":3,
+        "pages":7,
+        "list": [
+          {
+            "businessId": 2,
+            "name": "味道",
+            "businessType": "清真",
+            "businessImage": null,
+            "addTime": 149423485000
+          },
+          {
+            "businessId": 34,
+            "name": "味道",
+            "type": "清真",
+            "businessImage": null,
+            "addTime": 149423485000
+          }
+        ],
+        "firstPage":1,
+        "prePage":0,
+        "nextPage":1,
+        "lastPage":1,
+        "isFirstPage":true,
+        "isLastPage":false,
+        "hasPreviousPage":false,
+        "hasNextPage":true,
+        "navigatePages":1,
+        "navigatepageNums":[1]
+      }
+    }
+  },
+  "dishtype": [
+    {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": [
+        {
+          "dishtypeId": 1,
+          "typeName": "超辣火锅",
+          "dishId": 1,
+          "isShow": 0,
+          "addTime": 1494391398000,
+          "parentId": null
+        }
+      ]
+    }
+  ],
+  "nutrition": [
+    {
+      "id": 1,
+      "code": 1,
+      "msg": "后端正常",
+      "data": [
+        {
+          "nurtritionId": 3,
+          "grease": "sss",
+          "heat": "889",
+          "sugarContent": "88",
+          "addTime": 1494241984000
+        },
+        {
+          "nurtritionId": 1,
+          "grease": "SDS",
+          "heat": "123",
+          "sugarContent": "ASDA",
+          "addTime": 1494231359000
+        }
+      ]
+    }
+  ],
+  "role": {
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 3,
+        "pages": 7,
+        "list": [
+          {
+            "roleId": 1,
+            "roleName": "全局管理员",
+            "roleContent": "可以操作所有内容",
+            "addTime": 1494138098000,
+            "roleYxbz": 1,
+            "roleType": 2,
+            "promission": null
+          },
+          {
+            "roleId": 11,
+            "roleName": "日志管理员",
+            "roleContent": null,
+            "addTime": 1494123049000,
+            "roleYxbz": 0,
+            "roleType": 2,
+            "promission": null
+          },
+          {
+            "roleId": 8,
+            "roleName": "标签管理员",
+            "roleContent": null,
+            "addTime": 1494122809000,
+            "roleYxbz": 0,
+            "roleType": 2,
+            "promission": null
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "tag": {
+    "code": 0,
+    "msg": "后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 1,
+        "pages": 1,
+        "list": [
+          {
+            "tagId": 1,
+            "name": "微辣",
+            "content": "有点微辣，刚刚好",
+            "tagType": 1,
+            "addTime": 1494391775000
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "businesstable": {
+    "code": 0,
+    "msg": "businesstable后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 1,
+        "pages": 1,
+        "list": [
+          {
+            "tagId": 1,
+            "name": "微辣",
+            "content": "有点微辣，刚刚好",
+            "tagType": 1,
+            "addTime": 1494391775000
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  },
+  "businesstake": {
+    "code": 0,
+    "msg": "businesstable后台正常",
+    "data": {
+      "page": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 10,
+        "orderBy": "log_addtime asc",
+        "startRow": 1,
+        "endRow": 10,
+        "total": 1,
+        "pages": 1,
+        "list": [
+          {
+            "tagId": 1,
+            "name": "微辣",
+            "content": "有点微辣，刚刚好",
+            "tagType": 1,
+            "addTime": 1494391775000
+          }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
+        "nextPage": 1,
+        "lastPage": 1,
+        "isFirstPage": true,
+        "isLastPage": false,
+        "hasPreviousPage": false,
+        "hasNextPage": true,
+        "navigatePages": 1,
+        "navigatepageNums": [
+          1
+        ]
+      }
+    }
+  }
+}

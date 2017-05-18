@@ -9,8 +9,8 @@
            </Form-item>
          </i-col>
          <i-col span="24">
-          <Form-item prop="username" label="" class="userForm">
-             <Input type="text"style="width:265px;" @on-enter="handleLogin" v-model="formValidate.username" placeholder="用户名">
+          <Form-item prop="tel" label="" class="userForm">
+             <Input type="text"style="width:265px;" @on-enter="handleLogin" v-model="formValidate.tel" placeholder="用户名">
              <Icon type="person" slot="prepend"></Icon>
              </Input>
            </Form-item><br>
@@ -51,14 +51,14 @@
     data () {
       return {
         formValidate: {
-          username: 'admin',
-          password: 'admin123456'
+          tel: '',
+          password: ''
         },
         ruleValidate: {
-          username: [
+          tel: [
             {
               required: true,
-              message: '用户不能为空'
+              message: '用户名不能为空'
             }
           ],
           password: [
@@ -72,18 +72,24 @@
     },
     methods: {
       handleLogin () {
+        let loginfo = this.formValidate
         this.$refs.formValidate.validate((valid) => {
           if (valid) {
             new Model()
-              .GET({
-                data: this.formValidate
+              .POST({
+                params: loginfo
               })
               .then((res) => {
-                console.info('..........................')
-                console.info(res.data[0].data)
-                auth.login(res.data[0].data)
-                this.$router.push('/')
-                this.$Message.success('登录成功')
+                console.info(res.data)
+                let data = res.data
+                if (data !== null && data.code !== -1) {
+                  this.$router.push('/')
+                  this.$Message.success('登录成功')
+                  this.$store.dispatch('login', {})
+                  auth.login(res.data)
+                } else {
+                  this.$Message.error(data.msg)
+                }
               })
           } else {
             this.$Message.error('请检查用户名和密码是否正确')

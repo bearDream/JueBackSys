@@ -179,17 +179,13 @@
     watch: {
       'role.role': {
         handler (newVal) {
-          console.info('-----------------------------------------------------------')
-          console.info(newVal.data.page.list[0])
           this.$set(this, 'formValidate', newVal.data.page.list[0])
         }
       }
     },
     created () {
-      console.info(this.$store)
-      this.$set(this, 'role_spin', true)
+      this.$store.dispatch('show_base_nav')
       this.get()
-      this.$set(this, 'role_spin', false)
     },
     methods: {
         // 拉取数据
@@ -198,8 +194,8 @@
 
         this.$store.dispatch('getRoles', {
           params: {
-            offset: (current - 1) * consts.PAGE_SIZE,
-            limit: consts.PAGE_SIZE,
+            pageNum: current,
+            pageSize: consts.PAGE_SIZE,
             ...this.search
           }
         })

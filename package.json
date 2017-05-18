@@ -24,8 +24,7 @@
     "kindeditor": "^4.1.10",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
-    "vuex": "^2.2.1",
-    "wangeditor": "^2.1.23"
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

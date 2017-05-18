@@ -123,13 +123,15 @@ $ npm install --save vuex
 |-- config                           // 项目开发环境配置
 |-- src                              // 源码目录
 |   |-- app                          // 业务代码
-|       |-- Articles                 // 文章业务模块
+|       |-- Base                     // 基础信息
 |       |-- Home                     // 首页
 |       |-- Layout                   // 页面布局结构（除登录页外）
 |       |-- Login                    // 登录页
 |       |-- NotFound                 // 404 页
 |       |-- Root                     // 根页面
 |       |-- Unauthorized             // 未授权页面（在开发权限相关系统时有用）
+|       |-- Business                 // 商家
+|       |-- log                      // 日志
 |   |-- components                   // 公共组件
 |   |-- i18n                         // 全局国际化
 |   |-- models                       // 数据模型（主要在 store 中用到）

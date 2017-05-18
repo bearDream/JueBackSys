@@ -70,6 +70,8 @@ export default class REST {
       url = url + this._objToUrl(params)
     }
 
+    axios.defaults.withCredentials = true
+
     return new Promise((resolve, reject) => {
       axios({
         baseURL: this.baseURL,

@@ -6,7 +6,7 @@
 </WhiteSpace>
 -->
 <template>
-  <div :class="[size, ...dirs]">
+  <div :class="[size, dirs]">
     <slot></slot>
   </div>
 </template>
