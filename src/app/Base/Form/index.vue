@@ -62,7 +62,7 @@
           content: [
             {
               required: true,
-              message: '内容不能为空'
+              message: '   内容不能为空'
             },
             {
               max: 2000,
