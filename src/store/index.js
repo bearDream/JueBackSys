@@ -5,6 +5,7 @@ import actions from './actions'
 import mutations from './mutations'
 import log from './modules/log'
 import role from './modules/role'
+import user from './modules/user'
 import navigation from './modules/navigation'
 
 Vue.use(Vuex)
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   modules: {
     log,
     navigation,
-    role
+    role,
+    user
   }
 })

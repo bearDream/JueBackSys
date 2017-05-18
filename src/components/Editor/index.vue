@@ -1,6 +1,6 @@
 <template>
   <!--<div>-->
-    <!--<textarea  ref="content">{{ value }}</textarea>-->
+  <!--<textarea  ref="content">{{ value }}</textarea>-->
   <!--</div>-->
   <div id="editor-container">
     <div id="editor-trigger" ref="editor">
@@ -13,8 +13,8 @@
 
 <script>
   import 'wangeditor'
-//  import 'kindeditor/themes/default/default.css'
-//  import _consts from './utils/consts'
+  //  import 'kindeditor/themes/default/default.css'
+  //  import _consts from './utils/consts'
 
   const Wangeditor = window.wangEditor
 

@@ -12,35 +12,6 @@
       }
     }
   ],
-  "user": [
-    {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data": [
-        {
-          "userId": 1,
-          "username": null,
-          "password": "c4814e54a84bf3c46fb49fee7eee770a",
-          "tel": "13759498504",
-          "realName": "",
-          "age": null,
-          "sex": "3",
-          "idCard": null,
-          "bankCard": null,
-          "address": null,
-          "weixin": null,
-          "openid": null,
-          "logins": 0,
-          "alipay": null,
-          "status": 0,
-          "type": 2,
-          "level": 1,
-          "roleId": 1
-        }
-      ]
-    }
-  ],
   "log": {
     "code": 0,
     "msg": "后台正常",
@@ -326,5 +297,114 @@
         }
       ]
     }
-  ]
+  ],
+  "user": {
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+      "page":
+      {"pageNum":1,
+        "pageSize":10,
+        "size":10,
+        "orderBy":"log_addtime asc",
+        "startRow":1,
+        "endRow":10,
+        "total":3,
+        "pages":7,
+        "list":[
+          {
+            "userId": 1,
+            "username": "小丽",
+            "password": "c4814e54a84bf3c46fb49fee7eee770a",
+            "tel": "13759498504",
+            "realName": "",
+            "age": null,
+            "sex": "3",
+            "idCard": null,
+            "bankCard": null,
+            "address": null,
+            "weixin": null,
+            "openid": null,
+            "logins": 0,
+            "alipay": null,
+            "status": 0,
+            "type": 2,
+            "level": 1,
+            "roleId": 1
+          },
+          {
+            "userId": 2,
+            "username": "小明",
+            "password": "c4814e54a84bf3c46fb49fee7eee770a",
+            "tel": "13759498504",
+            "realName": "",
+            "age": null,
+            "sex": "3",
+            "idCard": null,
+            "bankCard": null,
+            "address": null,
+            "weixin": null,
+            "openid": null,
+            "logins": 0,
+            "alipay": null,
+            "status": 0,
+            "type": 2,
+            "level": 2,
+            "roleId": 1
+          },
+          {
+            "userId": 3,
+            "username": "小华",
+            "password": "c4814e54a84bf3c46fb49fee7eee770a",
+            "tel": "13759498504",
+            "realName": "",
+            "age": null,
+            "sex": "3",
+            "idCard": null,
+            "bankCard": null,
+            "address": null,
+            "weixin": null,
+            "openid": null,
+            "logins": 0,
+            "alipay": null,
+            "status": 0,
+            "type": 2,
+            "level": 3,
+            "roleId": 1
+          },
+          {
+            "userId": 4,
+            "username": "小强",
+            "password": "c4814e54a84bf3c46fb49fee7eee770a",
+            "tel": "13759498504",
+            "realName": "",
+            "age": null,
+            "sex": "3",
+            "idCard": null,
+            "bankCard": null,
+            "address": null,
+            "weixin": null,
+            "openid": null,
+            "logins": 0,
+            "alipay": null,
+            "status": 0,
+            "type": 2,
+            "level": 4,
+            "roleId": 1
+          }
+        ],
+        "firstPage":1,
+        "prePage":0,
+        "nextPage":1,
+        "lastPage":1,
+        "isFirstPage":true,
+        "isLastPage":false,
+        "hasPreviousPage":false,
+        "hasNextPage":true,
+        "navigatePages":1,
+        "navigatepageNums":[1]
+      }
+    }
+  }
 }
