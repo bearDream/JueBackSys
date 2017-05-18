@@ -1,18 +1,18 @@
 <template>
-  <Menu mode="horizontal" active-name="businesstypeFrame" @on-select="handleSelect">
+  <Menu mode="horizontal" active-name="businessnameFrame" @on-select="handleSelect">
     <Menu-item name="businesstakeFrame">
       <Icon type="ios-paper"></Icon>
       取号
-    </Menu-item>
-    <Menu-item name="businesstypeFrame">
-      <Icon type="ios-people"></Icon>
-      商家分类
     </Menu-item>
     <Menu-item name="businessnameFrame">
       <Icon type="settings"></Icon>
       商家
     </Menu-item>
-    <Menu-item name="businesstableFrame">
+    <Menu-item name="businesstypeFrame">
+      <Icon type="ios-people"></Icon>
+      商家分类
+    </Menu-item>
+    <Menu-item name="businesstagFrame">
       <Icon type="settings"></Icon>
       标签
     </Menu-item>

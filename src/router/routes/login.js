@@ -5,7 +5,7 @@ export default {
   path: 'login',
   component: resolve => require(['@/app/Login'], resolve),
   beforeEnter (to, from, next) {
-    axios.get(consts.API_URL + '/isLogin', {})
+    axios.get(consts.API_URL + '/login/isLogin', {})
       .then(function (res) {
         let data = res.data
         // 根据code判断是否登录

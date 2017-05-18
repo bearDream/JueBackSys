@@ -262,7 +262,7 @@
             title: '时间',
             key: 'addTime',
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
+              return `<span>${time.getDateTime(row.addTime)}</span>`
             }
           },
           {

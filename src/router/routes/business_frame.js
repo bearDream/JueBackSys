@@ -4,23 +4,23 @@ export default {
   children: [
     {
       path: '/',
-      component: resolve => require(['@/app/Business/businessname'], resolve)
+      component: resolve => require(['@/app/Business/info'], resolve)
     },
     {
       path: '/businessnameFrame',
-      component: resolve => require(['@/app/Business/businessname'], resolve)
+      component: resolve => require(['@/app/Business/info'], resolve)
     },
     {
       path: '/businesstypeFrame',
-      component: resolve => require(['@/app/Business/businesstype'], resolve)
+      component: resolve => require(['@/app/Business/type'], resolve)
     },
     {
-      path: '/businesstableFrame',
-      component: resolve => require(['@/app/Business/businesstable'], resolve)
+      path: '/businesstagFrame',
+      component: resolve => require(['@/app/Business/tag'], resolve)
     },
     {
       path: '/businesstakeFrame',
-      component: resolve => require(['@/app/Business/businesstake'], resolve)
+      component: resolve => require(['@/app/Business/takeNum'], resolve)
     },
     {
       path: 'form/:id?',

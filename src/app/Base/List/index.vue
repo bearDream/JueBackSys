@@ -21,8 +21,8 @@
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
-            <Form-item prop="userId">
-              <Input type="text" placeholder="请输入用户名" v-model="search.userId" style="width: 230px;"
+            <Form-item prop="tel">
+              <Input type="text" placeholder="请输入管理员电话" v-model="search.tel" style="width: 230px;"
                 @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
@@ -68,15 +68,30 @@
             width: 60
           },
           {
-            title: '用户id',
-            key: 'userId'
+            title: '管理员电话',
+            width: 120,
+            key: 'tel'
           },
           {
             title: '操作方法',
-            key: 'actionkey'
+            key: 'actionkey',
+            width: 100,
+            render: (row, colum, index) => {
+              let action = row.actionkey
+              switch (action) {
+                case 'PUT':return '修改数据'
+                case 'POST':return '<span>添加数据</span>'
+                case 'DELETE':return '<span style="color: #b54342">删除数据</span>'
+                case 'GET':return '查询数据'
+              }
+            }
           },
           {
-            title: '添加时间',
+            title: '日志',
+            key: 'logContent'
+          },
+          {
+            title: '操作时间',
             key: 'logAddtime',
             width: 180,
             render (row, column, index) {
@@ -86,7 +101,7 @@
           {
             title: '操作',
             key: 'action',
-            width: 100,
+            width: 90,
             render: (row, column, index) => {
               return `<i-button type="error" @click="handleDel(${row.logId})">删除</i-button>`
             }

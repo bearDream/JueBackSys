@@ -7,6 +7,7 @@ import home from './routes/home'
 import businessFrame from './routes/business_frame'
 import baseFrame from './routes/base_frame'
 import dishFrame from './routes/dishes_frame'
+import userFrame from './routes/user_frame'
 
 import baseNavigation from './routes/base_navigation'
 
@@ -35,7 +36,8 @@ const router = new Router({
             baseFrame,
             businessFrame,
             dishFrame,
-            baseNavigation
+            baseNavigation,
+            userFrame
           ],
           meta: {
             requiresAuth: true
@@ -59,7 +61,7 @@ router.beforeEach((to, from, next) => {
   // router.app.$store.dispatch('logout')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     axios.defaults.withCredentials = true
-    axios.get(consts.API_URL + '/isLogin', {})
+    axios.get(consts.API_URL + '/login/isLogin', {})
       .then(function (res) {
         console.log(res.data)
         let data = res.data

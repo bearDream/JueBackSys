@@ -50,8 +50,8 @@
       <div>Loading</div>
     </Spin>
     <!-- 分页 -->
-    <List :current="current" :columns="columns" :data="user.users.page.list"
-          :total="user.users.page.total"
+    <List :current="current" :columns="columns" :data="userList"
+          :total="userTotal"
           @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
@@ -92,6 +92,8 @@
     data () {
       return {
         id: '',
+        userTotal: 1,
+        userList: [],
         userType: '管理员用户',
         userContent: '',
         formValidate: {
@@ -193,13 +195,29 @@
           console.info(newVal.data.page.list[0])
           this.$set(this, 'formValidate', newVal.data.page.list[0])
         }
+      },
+      'user.users': {
+        handler (newVal) {
+          this.$set(this, 'userTotal', this.$store.state.user.users.page.total)
+          this.$set(this, 'userList', this.$store.state.user.users.page.list)
+        }
       }
     },
     created () {
       console.info(this.$store)
-      this.$set(this, 'user_spin', true)
       this.get()
-      this.$set(this, 'user_spin', false)
+      let me = this
+      setTimeout(function () {
+        if (me.$store.getters.getUsers !== null) {
+          me.$set(me, 'userTotal', me.$store.state.user.users.page.total)
+          me.$set(me, 'userList', me.$store.state.user.users.page.list)
+        } else {
+          me.$Notice.error({
+            title: '网络出错',
+            desc: '网络请求失败，请联系后台人员'
+          })
+        }
+      }, 500)
     },
     methods: {
       // 拉取数据

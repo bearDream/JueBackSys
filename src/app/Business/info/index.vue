@@ -3,9 +3,9 @@
     <Modal
       width="300"
       v-model="del.modal"
-      title="确认框"
+      title="确认删除"
       @on-ok="handleDelOk">
-      <p>确认删除该记录？</p>
+      <p>确认删除该商家？</p>
     </Modal>
 
     <Modal
@@ -201,7 +201,7 @@
             title: '添加时间',
             key: 'addTime',
             render (row, column, index) {
-              return `<span>${time.getDateTime(row.addTime + '000')}</span>`
+              return `<span>${time.getDateTime(row.addTime)}</span>`
             }
           },
           {
