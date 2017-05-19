@@ -28,6 +28,8 @@
               <Radio label="2"><span>普通用户</span></Radio>
             </Radio-group>
           </Form-item>
+          <Form-item label="角色权限" prop="promission">
+          </Form-item>
           <Form-item label="角色介绍" prop="roleContent">
             <!--<Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>-->
             <Editor ref="editor" v-model="formValidate.roleContent" @change="handleEditorChange"></Editor>
@@ -92,6 +94,8 @@
     data () {
       return {
         id: '',
+        Module: [],
+        Method: [],
         roleType: '管理员角色',
         roleContent: '',
         formValidate: {

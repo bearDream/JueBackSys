@@ -17,7 +17,7 @@ export default {
    * @param {Object} res 返回数据
    */
   errorHandler (res) {
-    iView.Message.error(res.response.data.error.message)
+    iView.Message.error(res.response.data.code)
   },
 
   /**

@@ -4,5 +4,8 @@ export default {
   },
   getUser: function (state) {
     return state.user
+  },
+  getAllUser: function (state) {
+    return state.allUser
   }
 }

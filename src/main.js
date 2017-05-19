@@ -8,7 +8,6 @@ import store from '@/store'
 import iView from 'iview'
 import './theme/global/index.scss'
 import './theme/iview/index.less'
-
 Vue.config.productionTip = false
 
 Vue.use(iView)

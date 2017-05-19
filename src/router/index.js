@@ -75,9 +75,11 @@ router.beforeEach((to, from, next) => {
           })
         }
       })
-      .catch(function (err) {
-        console.log(err)
+      .catch(() => next({
+        path: 'login',
+        query: {redirect: to.fullPath}
       })
+      )
   } else {
     next()
   }
@@ -85,7 +87,25 @@ router.beforeEach((to, from, next) => {
 
 // 路由结束时回调
 router.afterEach((to, from, next) => {
+  let path = to.path
   iView.LoadingBar.finish()
+  // 控制导航栏的显示
+  switch (path) {
+    case '/baseFrame':
+      router.app.$store.dispatch('show_base_nav')
+      break
+    case '/logFrame':
+      router.app.$store.dispatch('show_base_nav')
+      break
+    case '/businessFrame':
+      router.app.$store.dispatch('show_business_nav')
+      break
+    case '/dishFrame':
+      router.app.$store.dispatch('show_dish_nav')
+      break
+    default:
+      router.app.$store.dispatch('show_none_nav')
+  }
 })
 
 export default router

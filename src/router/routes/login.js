@@ -14,9 +14,7 @@ export default {
         } else {
           next()
         }
-      })
-      .catch(function (err) {
-        console.log(err)
-      })
+      }).catch(() => next('/')
+      )
   }
 }

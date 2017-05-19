@@ -11,8 +11,6 @@ export default {
       commit(types.GET_BUSINESSNAMES, {
         data: res.data.data
       })
-      console.info('--------------------------------')
-      console.info(res.data.data)
     })
   },
 
@@ -20,6 +18,7 @@ export default {
    * 获取详情
    */
   getBusinessname ({commit}, {uri}) {
+    alert(uri)
     return new Model().GET({uri}).then((res) => {
       commit(types.GET_BUSINESSNAME, {
         data: res.data
@@ -44,6 +43,9 @@ export default {
    * 修改数据
    */
   putBusinessname ({commit}, {data}) {
-    return new Model().PUT({data})
+    var datas = new URLSearchParams()
+    datas.append('businessId', 1)
+    return new Model().PUT(datas)
+    // return new Model().PUT({data})
   }
 }
