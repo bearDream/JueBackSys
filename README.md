@@ -37,6 +37,28 @@ $ npm run e2e
 $ npm test
 ```
 
+# 关于前后台联调的代理问题
+由于vue-cli集成了http-proxy-middleware这个代理模块，因此可以很轻松的设置代理，使用如下：
+```
+var proxyTable: {
+  '/api': {
+    target: 'http://localhost:8088',
+    changeOrigin: true
+  }
+}
+
+var proxyTable = config.dev.proxyTable
+
+// proxy api requests
+Object.keys(proxyTable).forEach(function (context) {
+  var options = proxyTable[context]
+  if (typeof options === 'string') {
+    options = { target: options }
+  }
+  app.use(proxyMiddleware(options.filter || context, options))
+```
+上述代码轻松的将所有访问以api开头的全部代理到localhost:8088端口下了
+
 ## 介绍
 基于 vue-cli + iView 的 Vue js 后台管理系统，在 vue-cli 基础上做了一些合理的修改和增强。功能包括：调试、构建、代码规范校验、单元测试、国际化等。
 

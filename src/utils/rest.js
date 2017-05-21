@@ -69,11 +69,12 @@ export default class REST {
       url = url + this._objToUrl(params)
     }
 
-    axios.defaults.withCredentials = true
-
+    console.info('............')
+    console.info(data)
     // 如果是PUT请求，则需要进行特殊处理
     if (method === 'PUT') {
-      this.headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+      // this.headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+      this.headers = {'Content-Type': 'application/json'}
     }
 
     if (method === 'POST') {

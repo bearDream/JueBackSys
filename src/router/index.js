@@ -8,8 +8,8 @@ import businessFrame from './routes/business_frame'
 import baseFrame from './routes/base_frame'
 import dishFrame from './routes/dishes_frame'
 import userFrame from './routes/user_frame'
-
 import baseNavigation from './routes/base_navigation'
+import dishNavigation from './routes/dish_navigation'
 
 import login from './routes/login'
 import logout from './routes/logout'
@@ -35,8 +35,10 @@ const router = new Router({
             home,
             baseFrame,
             businessFrame,
-            dishFrame,
             baseNavigation,
+            dishNavigation,
+            userFrame,
+            dishFrame,
             userFrame
           ],
           meta: {
@@ -58,7 +60,6 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
 
-  // router.app.$store.dispatch('logout')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     axios.defaults.withCredentials = true
     axios.get(consts.API_URL + '/login/isLogin', {})

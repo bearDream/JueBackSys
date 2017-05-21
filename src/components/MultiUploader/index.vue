@@ -1,6 +1,7 @@
 <template>
   <div>
     <Upload
+      multiple
       ref="upload"
       :show-upload-list="false"
       :default-file-list="defaultList"

@@ -6,6 +6,9 @@
       title="确认删除"
       @on-ok="handleDelOk">
       <p>确认删除该商家？</p>
+      <p slot="footer">
+        <Button type="error" long :loading="deleteLoading" @click="handleDelOk('formValidate')">确认删除</Button>
+      </p>
     </Modal>
 
     <Modal
@@ -17,11 +20,20 @@
       </p>
       <!-- 表单 -->
       <div>
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="85">
-          <Form-item label="商家首页大图上传：" prop="name">
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
+          <Form-item label="商家首页大图：" prop="businessImage">
             <Row>
               <i-col span="18">
-                <ImageUpload :max-size="2048"></ImageUpload>
+                <ImageUpload :max-size="2048" :src="imgURL" v-on:listenToChildEvent="showImageUrl"></ImageUpload>
+                <Input v-show="false" v-model="formValidate.businessImage"/>
+              </i-col>
+            </Row>
+          </Form-item>
+          <Form-item label="商家幻灯片图片：" prop="businessCarouselImage">
+            <Row>
+              <i-col span="18">
+                <MultiUpload  v-on:listenToChildEvent="showImageUrl"></MultiUpload>
+                <Input v-show="false" v-model="formValidate.businessCarouselImage"/>
               </i-col>
             </Row>
           </Form-item>
@@ -36,7 +48,7 @@
             <Row>
               <i-col span="18">
                 <Select v-model="formValidate.userId" filterable remote :remote-method="searchUser" :loading="loading1">
-                  <Option v-for="item in users" :value="item.userId" :key="new Date()">{{ item.tel }}</Option>
+                  <Option v-for="item in users" :value="item.userId" :key="new Date()">{{ item.username }}</Option>
                 </Select>
               </i-col>
             </Row>
@@ -64,8 +76,6 @@
                 <Input v-model="formValidate.address" placeholder="用户地址"></Input>
               </i-col>
             </Row>
-            <!--<Input v-model="formValidate.roleContent" type="textarea" :autosize="{minRows: 2,maxRows: 5}" style="width: 300px" placeholder="请输入角色介绍"></Input>-->
-            <!--<Editor ref="editor" v-model="formValidate.content" @change="handleEditorChange"></Editor>-->
           </Form-item>
           <Form-item label="商家介绍：" prop="content">
             <Row>
@@ -79,7 +89,7 @@
       <!-- 表单 -->
 
       <div slot="footer">
-        <Button type="success" long @click="handleSave('formValidate')">保存</Button>
+        <Button type="success" long :loading="businessLoading" @click="handleSave('formValidate')">保存</Button>
       </div>
     </Modal>
 
@@ -126,6 +136,7 @@
   import List, { ListHeader, ListOperations, ListSearch } from '@/components/List'
   import Editor from '@/components/Editor'
   import ImageUpload from '@/components/Uploader'
+  import MultiUpload from '@/components/MultiUploader'
 
   export default {
     name: 'businessname',
@@ -135,7 +146,8 @@
       ListOperations,
       ListSearch,
       Editor,
-      ImageUpload
+      ImageUpload,
+      MultiUpload
     },
     data () {
       return {
@@ -151,8 +163,11 @@
         loading1: false,
         content: '',
         businessImage: '',
+        imgURL: '',
         isShow: '',
         addTime: '',
+        businessLoading: false,
+        deleteLoading: false,
         formValidate: {
           businessId: '',
           name: '',
@@ -160,6 +175,7 @@
           tel: '',
           content: '',
           businessImage: '',
+          businessCarouselImage: '',
           isShow: '1',
           addTime: '',
           userId: ''
@@ -167,8 +183,20 @@
         ruleValidate: {
           businessId: [
             {
-              required: true,
+              required: false,
               message: '商家id不能为空'
+            }
+          ],
+          businessImage: [
+            {
+              required: false,
+              message: '商家展示大图不能为空'
+            }
+          ],
+          businessCarouselImage: [
+            {
+              required: false,
+              message: '商家幻灯片图片不能为空'
             }
           ],
           name: [
@@ -220,7 +248,7 @@
           id: 0
         },
         search: {
-          businessId: ''
+          name: ''
         },
         current: 1,
         columns: [
@@ -254,10 +282,41 @@
           {
             title: '操作',
             key: 'action',
-            width: 125,
-            render: (row, column, index) => {
-              return `<i-button type="ghost" size="small" @click="handleEdit(${row.businessId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.businessId})">删除</i-button>`
+            width: 155,
+            align: 'center',
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'text',
+                    size: 'small',
+                    icon: 'edit'
+                  },
+                  style: {
+                    marginRight: '3px'
+                  },
+                  on: {
+                    click: () => {
+                      let row = params.row
+                      this.getBusinessname(row.businessId)
+                    }
+                  }
+                }, '修改'),
+                h('Button', {
+                  props: {
+                    type: 'text',
+                    size: 'small',
+                    icon: 'android-delete'
+                  },
+                  on: {
+                    click: () => {
+                      let row = params.row
+                      this.$set(this.del, 'modal', true)
+                      this.$set(this.del, 'businessId', row.businessId)
+                    }
+                  }
+                }, '删除')
+              ])
             }
           }
         ]
@@ -268,21 +327,19 @@
     ]),
     // 用于随时监视vuex管理的role.role对象是否有数据，当有数据时即将数据加入到formValidate中，这样就能将数据显示出来了
     watch: {
-//      'businessname.businessname': {
-//        handler (newVal) {
-//          console.info('-----------------------------------------------------------')
-//          console.info(newVal.data.page)
-//          this.$set(this, 'formValidate', newVal.data.page.list[0])
-//        }
-//      },
+      // 当点击修改的时候，会将businessId赋值给add.businessId，并刺激formValidate的数据自动加载
       'add.businessId': {
         handler (newVal) {
-          console.info('-----------------------------------------------------------')
-          console.info(this.$store.getters.getBusinessname)
-          const me = this
-          setTimeout(function () {
-            me.$set(me, 'formValidate', me.$store.getters.getBusinessname.data)
-          }, 500)
+          let businessData = this.$store.getters.getBusinessname
+          if (businessData === null) {
+            this.$Notice.error({
+              title: '网络错误',
+              desc: '权限不足'
+            })
+            this.$set(this.add, 'modal', false)
+          } else {
+            this.$set(this, 'formValidate', this.$store.getters.getBusinessname)
+          }
         }
       }
     },
@@ -308,11 +365,19 @@
           this.$set(this, 'businessTotal', this.$store.getters.getBusinessnames.page.total)
         })
       },
-      // 获取某个商家的数据
+      // 获取某个商家的数据,编辑的时候将数据拿出来
       getBusinessname (id) {
-        alert(id)
         this.$store.dispatch('getBusinessname', {
           uri: 'get' + '?' + 'businessId=' + id
+        }).then(() => {
+          // 拉取到数据之后再设置一系列数据
+          this.$set(this, 'editModalButton', 'PUT')
+          this.$set(this, 'editModalTitle', '修改商家信息')
+          if (this.$store.getters.getBusinessname !== null) {
+            this.$set(this, 'formValidate', this.$store.getters.getBusinessname)
+          }
+          this.$set(this.add, 'businessId', id)
+          this.$set(this.add, 'modal', true)
         })
       },
       // 获取所有用户
@@ -321,17 +386,12 @@
           // 远程获取数据，将数据放到users中
           this.$store.dispatch('getAllUsers', {
             params: {tel: query}
+          }).then(() => {
+            let userlist = this.$store.getters.getAllUser.data.page.list
+            if (userlist != null) {
+              this.users = userlist
+            }
           })
-//          setTimeout(() => {
-//            this.loading1 = false
-//            const list = this.list.map(item => {
-//              return {
-//                value: item,
-//                label: item
-//              }
-//            })
-//            this.users = list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1)
-//          }, 200)
         } else {
           this.users = []
         }
@@ -343,29 +403,25 @@
         this.get()
         this.$set(this, 'current', 1)
       },
-      handleEdit (id) {
-        this.getBusinessname(id)
-        this.$set(this, 'editModalButton', 'PUT')
-        this.$set(this, 'editModalTitle', '修改商家信息')
-        if (this.$store.getters.getBusinessname !== null) {
-          this.$set(this, 'formValidate', this.$store.getters.getBusinessname.data)
-        }
-        this.$set(this.add, 'businessId', id)
-        this.$set(this.add, 'modal', true)
-      },
-      handleDel (id) {
-        this.$set(this.del, 'modal', true)
-        this.$set(this.del, 'id', id)
-      },
       handleAdd (id) {
+        // 设置编辑窗口信息
+        this.$set(this, 'editModalButton', 'POST')
+        this.$set(this, 'editModalTitle', '添加商家信息')
+        // 显示对话框
         this.$set(this.add, 'modal', true)
+        // 重置表单信息
+        this.resetFields()
+        this.$set(this.formValidate, 'businessId', null)
       },
       handleDelOk () {
+        this.$set(this, 'deleteLoading', true)
         this.$store.dispatch('deleteBusinessname', {
           params: {
-            id: this.del.id
+            businessId: this.del.businessId
           }
         }).then(() => {
+          this.$set(this, 'deleteLoading', false)
+          this.$set(this.del, 'modal', false)
           this.$Message.success('删除成功！')
           this.get()
         })
@@ -375,14 +431,14 @@
       handleSave (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
+            this.$set(this, 'businessLoading', true)
             const action = this.editModalButton === 'POST' ? 'postBusinessname' : 'putBusinessname'
-            const uri = this.id
 
-//            console.info(this.formValidate)
+            console.info(this.formValidate)
             this.$store.dispatch(action, {
-              uri,
               data: this.formValidate
             }).then((res) => {
+              this.$set(this, 'businessLoading', false)
               let data = res.data
               if (data.code === -1) {
                 this.$Notice.error({
@@ -403,6 +459,10 @@
       handleEditorChange (html) {
         console.info(html)
         this.$set(this.formValidate, 'content', html)
+      },
+      showImageUrl (data) {
+        console.info('+++++++++++++')
+        console.info(data)
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
