@@ -42,12 +42,6 @@
         uploadList: []
       }
     },
-    props: {
-      value: {
-        type: Number,
-        default: 0
-      }
-    },
     methods: {
       handleView (url) {
         this.imgURL = url
@@ -62,18 +56,26 @@
         this.$emit('on-change', null)
       },
       handleSuccess (res, file) {
-        file.url = res.data
-        file.name = ''
-
-        console.info('..........')
         console.info(res)
-        this.$emit('listenToChildEvent', file.url)
+        if (res.code === -1) {
+          this.$Notice.error({
+            title: '上传失败',
+            desc: res.msg
+          })
+        } else {
+          file.url = res.data
+          file.name = ''
 
-        if (this.uploadList.length > 1) {
-          this._remove(this.uploadList[0])
+          console.info('..........')
+          console.info(res)
+          this.$emit('listenToChildEvent', file.url)
+
+          if (this.uploadList.length > 1) {
+            this._remove(this.uploadList[0])
+          }
+
+          this.$emit('on-change', file)
         }
-
-        this.$emit('on-change', file)
       },
       handleFormatError () {
         this.$Message.error('文件格式不正确')
@@ -91,7 +93,11 @@
     },
     created () {
       // 单文件上传接口是singleUpload   多文件上传则是MultiUpload
-      this.$set(this, 'action', consts.UPLOAD_URL + '/singleUpload')
+      let urlType = this.$store.getters.getUrlType
+      let param = '?' + 'type=' + urlType
+      this.$set(this, 'action', consts.UPLOAD_URL + '/singleUpload' + param)
+      console.info(this.action)
+//      alert(this)
 //      if (this.value) {
 //        this.defaultList.push({
 //          'name': '',

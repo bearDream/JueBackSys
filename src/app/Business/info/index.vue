@@ -344,7 +344,9 @@
       }
     },
     created () {
-
+      this.$store.dispatch('setUrlType', {
+        params: 'business'
+      })
     },
     mounted () {
       this.get()
@@ -463,6 +465,7 @@
       showImageUrl (data) {
         console.info('+++++++++++++')
         console.info(data)
+        this.$set(this.formValidate, 'businessImage', data)
       },
       resetFields () {
         this.$refs.formValidate.resetFields()

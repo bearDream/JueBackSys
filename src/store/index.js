@@ -16,6 +16,7 @@ import dish from './modules/dish'
 import dishtype from './modules/dishtype'
 import dishtag from './modules/dishtag'
 import nutrition from './modules/nutrition'
+import UrlType from './modules/uploadUrlType'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -38,6 +39,7 @@ export default new Vuex.Store({
     dish,
     dishtype,
     dishtag,
-    nutrition
+    nutrition,
+    UrlType
   }
 })

@@ -11,7 +11,7 @@ const PROD = 'PROD'
 const ENV = HOST === 'http://localhost:3000' ? DEV : PROD
 
 // 基础地址
-const BASE_URL = ENV === DEV ? 'http://localhost:3000' : 'http://localhost:8080/api'
+const BASE_URL = ENV === DEV ? 'http://119.23.244.234/api' : 'http://localhost:8080/api'
 
 // 文件上传接口
 const UPLOAD_URL = '/api/upload'
