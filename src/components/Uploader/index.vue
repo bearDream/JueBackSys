@@ -32,6 +32,8 @@
 </template>
 <script>
   import consts from '@/utils/consts'
+  import { mapState } from 'vuex'
+
   export default {
     data () {
       return {
@@ -66,8 +68,6 @@
           file.url = res.data
           file.name = ''
 
-          console.info('..........')
-          console.info(res)
           this.$emit('listenToChildEvent', file.url)
 
           if (this.uploadList.length > 1) {
@@ -96,14 +96,33 @@
       let urlType = this.$store.getters.getUrlType
       let param = '?' + 'type=' + urlType
       this.$set(this, 'action', consts.UPLOAD_URL + '/singleUpload' + param)
-      console.info(this.action)
-//      alert(this)
-//      if (this.value) {
-//        this.defaultList.push({
-//          'name': '',
-//          'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
-//        })
-//      }
+    },
+    computed: mapState([
+      'businessname'
+    ]),
+    watch: {
+      // 当点击修改的时候，会将businessId赋值给add.businessId，并刺激formValidate的数据自动加载
+      'businessname.businessname.businessImage': {
+        handler (newVal) {
+          console.info('..........')
+          console.info(newVal)
+          let businessImage = newVal
+          if (businessImage !== null && businessImage !== '') {
+            let imageArr = []
+            imageArr = businessImage.split(',')
+            for (var i = 0; i < imageArr.length; i++) {
+              imageArr[i] = {
+                name: '',
+                url: imageArr[i],
+                percentage: 100,
+                status: 'finished',
+                uid: 100000 + i
+              }
+            }
+            this.$set(this, 'uploadList', imageArr)
+          }
+        }
+      }
     },
     mounted () {
       this.uploadList = this.$refs.upload.fileList

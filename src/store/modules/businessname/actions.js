@@ -26,6 +26,15 @@ export default {
   },
 
   /**
+   * 更改商家详情
+   */
+  setBusinessname ({commit}, {data}) {
+    commit(types.GET_BUSINESSNAME, {
+      data: data
+    })
+  },
+
+  /**
    * 删除
    */
   deleteBusinessname ({commit}, {params}) {

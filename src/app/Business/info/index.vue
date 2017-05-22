@@ -13,6 +13,9 @@
 
     <Modal
       v-model="add.modal"
+      :mask-closable="false"
+      width="700"
+      :styles="{top: '20px'}"
       @on-ok="handleAddOk">
       <p slot="header" style="color:#f60;text-align:center">
         <Icon type="information-circled"></Icon>
@@ -24,7 +27,7 @@
           <Form-item label="商家首页大图：" prop="businessImage">
             <Row>
               <i-col span="18">
-                <ImageUpload :max-size="2048" :src="imgURL" v-on:listenToChildEvent="showImageUrl"></ImageUpload>
+                <ImageUpload :src="imgURL" v-on:listenToChildEvent="showImageUrl"></ImageUpload>
                 <Input v-show="false" v-model="formValidate.businessImage"/>
               </i-col>
             </Row>
@@ -32,7 +35,7 @@
           <Form-item label="商家幻灯片图片：" prop="businessCarouselImage">
             <Row>
               <i-col span="18">
-                <MultiUpload  v-on:listenToChildEvent="showImageUrl"></MultiUpload>
+                <MultiUpload v-on:listenToChildEvent="changeCarouselImg"></MultiUpload>
                 <Input v-show="false" v-model="formValidate.businessCarouselImage"/>
               </i-col>
             </Row>
@@ -254,7 +257,8 @@
         columns: [
           {
             title: '商家ID',
-            key: 'businessId'
+            key: 'businessId',
+            width: 90
           },
           {
             title: '店名',
@@ -266,7 +270,20 @@
           },
           {
             title: '图片',
-            key: 'businessImage'
+            key: 'businessImage',
+            width: 150,
+            render: (h, params) => {
+              return h('div', [
+                h('img', {
+                  attrs: {
+                    src: params.row.businessImage
+                  },
+                  style: {
+                    width: '70%'
+                  }
+                })
+              ])
+            }
           },
           {
             title: '商家信息',
@@ -463,9 +480,14 @@
         this.$set(this.formValidate, 'content', html)
       },
       showImageUrl (data) {
-        console.info('+++++++++++++')
-        console.info(data)
         this.$set(this.formValidate, 'businessImage', data)
+      },
+      changeCarouselImg (data) {
+        let businessTemp = this.formValidate.businessCarouselImage
+        this.$set(this.formValidate, 'businessCarouselImage', data + ',' + businessTemp)
+        this.$store.dispatch('setBusinessname', {
+          data: this.formValidate
+        })
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
