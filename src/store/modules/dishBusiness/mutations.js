@@ -6,5 +6,8 @@ export default {
   },
   [types.GET_BUSINESSDISH] (state, payload) {
     state.businessDish = payload.data
+  },
+  [types.GET_NOTBUSINESSDISHS] (state, payload) {
+    state.notBusinessDish = payload.data
   }
 }

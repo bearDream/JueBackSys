@@ -1,43 +1,41 @@
 {
-  "login": [
-    {
-      "code": 1,
-      "msg": "后端正常",
-      "data": {
-        "userinfo": {
-          "id": 1,
-          "username": "zc"
-        },
-        "token": "1ed12r23r23r23r23r232r34"
-      }
+  "login": {
+    "code": 1,
+    "msg": "后端正常",
+    "data": {
+        "id": 1,
+        "username": "zc"
     }
-  ],
+  },
+
   "user": {
-      "id": 1,
-      "code": 1,
-      "msg": "后端正常",
-      "data":
-        {
-          "userId": 1,
-          "username": null,
-          "password": "c4814e54a84bf3c46fb49fee7eee770a",
-          "tel": "13759498504",
-          "realName": "",
-          "age": null,
-          "sex": "3",
-          "idCard": null,
-          "bankCard": null,
-          "address": null,
-          "weixin": null,
-          "openid": null,
-          "logins": 0,
-          "alipay": null,
-          "status": 0,
-          "type": 2,
-          "level": 1,
-          "roleId": 1
-        }
-    },
+    "id": 1,
+    "code": 1,
+    "msg": "后端正常",
+    "data": [
+      {
+        "userId": 1,
+        "username": null,
+        "password": "c4814e54a84bf3c46fb49fee7eee770a",
+        "tel": "13759498504",
+        "realName": "",
+        "age": null,
+        "sex": "3",
+        "idCard": null,
+        "bankCard": null,
+        "address": null,
+        "weixin": null,
+        "openid": null,
+        "logins": 0,
+        "alipay": null,
+        "status": 0,
+        "type": 2,
+        "level": 1,
+        "roleId": 1
+      }
+    ]
+  },
+
   "log": {
     "code": 0,
     "msg": "后台正常",
@@ -174,11 +172,7 @@
       }
     }
   },
-  "isLogin": {
-    "code": 0,
-    "msg": "后台正常",
-    "data": "已登录"
-  },
+
   "dish": {
     "id": 1,
     "code": 1,
@@ -242,6 +236,7 @@
       }
     }
   },
+
   "businessname": {
     "id": 1,
     "code": 1,
@@ -295,7 +290,8 @@
       }
     }
   },
-  "dishtype": {
+
+    "dishtype": {
     "id": 1,
     "code": 1,
     "msg": "后端正常",
@@ -358,7 +354,8 @@
       }
     }
   },
-  "businesstype": {
+
+    "businesstype":{
     "id": 1,
     "code": 1,
     "msg": "businesstype后端正常",
@@ -403,7 +400,7 @@
       }
     }
   },
-  "nutrition": {
+    "nutrition": {
     "id": 1,
     "code": 1,
     "msg": "后端正常",
@@ -513,7 +510,7 @@
   },
   "tag": {
     "code": 0,
-      "msg": "后台正常",
+    "msg": "后台正常",
     "data": {
       "page": {
         "pageNum": 1,

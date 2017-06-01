@@ -26,7 +26,7 @@
       @on-ok="handleAddOk">
       <p slot="header" style="color:#5ebdff;text-align:center">
         <Icon type="plus-round"></Icon>
-        <span>添加<span style="color: orangered; padding-left: 4px; padding-right: 4px;" v-text="add.name"></span>到商家店铺</span>
+        <span>添加<span style="color: orangered; padding-left: 4px; padding-right: 4px;" v-text="add.name"/>到 <span style="color: darkgray; padding-left: 4px; padding-right: 4px;" v-text="businessName"/> 商家店铺</span>
       </p>
       <!-- 表单 -->
       <div>
@@ -121,13 +121,13 @@
       <i-col span="11">
         <Card :bordered="false">
           <p slot="title">商家拥有菜品数量</p>
-          <span style="font-size: 20px; color: orangered">20</span><span>个菜品</span>
+          <span style="font-size: 20px; color: orangered" v-text="allDish"/><span>个菜品</span>
         </Card>
       </i-col>
       <i-col span="11" offset="2">
         <Card shadow>
           <p slot="title">商家被推荐菜品</p>
-          <span style="font-size: 20px; color: orangered">10</span><span>个菜品</span>
+          <span style="font-size: 20px; color: orangered" v-text="topDish"/><span>个菜品</span>
         </Card>
       </i-col>
     </Row>
@@ -182,6 +182,8 @@
     data () {
       return {
         editModalButton: 'POST',
+        allDish: 0,
+        topDish: 0,
         businessId: '',
         businessName: '',
         dishList: [],
@@ -320,6 +322,9 @@
     watch: {
     },
     created () {
+      if (this.$route.params.businessId === undefined) {
+        this.$router.go(-1)
+      }
       this.$set(this, 'businessId', this.$route.params.businessId)
       this.$set(this, 'businessName', this.$route.params.businessName)
       this.$set(this.formValidate, 'businessId', this.$route.params.businessId)
@@ -338,6 +343,22 @@
       get (current = 1) {
         this.$set(this, 'current', current)
 
+        // 获取该店铺没有的菜品数据
+        this.$store.dispatch('getNotBusinessDish', {
+          params: {
+            pageNum: (current - 1) * consts.PAGE_SIZE,
+            pageSize: consts.PAGE_SIZE,
+            businessId: this.businessId,
+            ...this.search
+          }
+        }).then(() => {
+          let data = this.$store.getters.getNotBusinessDishes
+          if (data.code !== -1) {
+            this.$set(this, 'dishList', this.$store.getters.getNotBusinessDishes.data.page.list)
+            this.$set(this, 'dishTotal', this.$store.getters.getNotBusinessDishes.data.page.total)
+          }
+        })
+        // 获取该店铺已有的菜品数据
         this.$store.dispatch('getBusinessDishs', {
           params: {
             pageNum: (current - 1) * consts.PAGE_SIZE,
@@ -346,9 +367,11 @@
             ...this.search
           }
         }).then(() => {
-          this.$set(this, 'dishList', this.$store.getters.getBusinessDishes.page.list)
-          this.$set(this, 'dishTotal', this.$store.getters.getBusinessDishes.page.total)
-          console.info(this.dishList)
+          let data = this.$store.getters.getBusinessDishes
+          if (data !== undefined) {
+            this.$set(this, 'allDish', this.$store.getters.getBusinessDishes.page.total)
+            this.$set(this, 'topDish', this.$store.getters.getBusinessDishes.topNum)
+          }
         })
       },
       // 获取所有tag标签
@@ -443,6 +466,7 @@
                 this.$Message.success((this.editModalButton === 'POST' ? '新增商家' : '修改商家') + '成功！')
                 this.resetFields()
                 this.$set(this.add, 'modal', false)
+                this.get()
               }
             })
           } else {

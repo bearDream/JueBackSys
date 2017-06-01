@@ -4,5 +4,8 @@ export default {
   },
   getBusinessDishes: function (state) {
     return state.businessDishs
+  },
+  getNotBusinessDishes: function (state) {
+    return state.notBusinessDish
   }
 }

@@ -1,5 +1,6 @@
 import types from './types'
 import Model from '../../../models/businessDish'
+import NotModel from '../../../models/notBusinessDish'
 
 // 角色的所有请求
 export default {
@@ -20,6 +21,17 @@ export default {
   getBusinessDish ({commit}, {uri}) {
     return new Model().GET({uri}).then((res) => {
       commit(types.GET_BUSINESSDISH, {
+        data: res.data
+      })
+    })
+  },
+
+  /**
+   * 获取该商家没有的菜品
+   */
+  getNotBusinessDish ({commit}, {params}) {
+    return new NotModel().GET({params}).then((res) => {
+      commit(types.GET_NOTBUSINESSDISHS, {
         data: res.data
       })
     })
