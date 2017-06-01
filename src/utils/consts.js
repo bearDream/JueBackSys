@@ -10,8 +10,10 @@ const PROD = 'PROD'
 // 当前环境
 const ENV = HOST === 'http://localhost:3000' ? DEV : PROD
 
+const ak = 'CObclvvLzT4gQTAg08oIrKo134TIWmEP'
+
 // 基础地址
-const BASE_URL = ENV === DEV ? 'http://119.23.244.234/api' : 'http://localhost:8080/api'
+const BASE_URL = ENV === DEV ? 'http://admin.chiprincess.cn/api' : '/api'
 
 // 文件上传接口
 const UPLOAD_URL = '/api/upload'
@@ -30,5 +32,6 @@ export default {
   API_URL,
   PAGE_SIZE,
   TITLE,
-  UPLOAD_URL
+  UPLOAD_URL,
+  ak
 }

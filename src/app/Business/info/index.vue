@@ -5,7 +5,13 @@
       v-model="del.modal"
       title="确认删除"
       @on-ok="handleDelOk">
-      <p>确认删除该商家？</p>
+      <p slot="header" style="color:#f60;text-align:center">
+        <Icon type="information-circled"></Icon>
+        <span>删除确认</span>
+      </p>
+      <div style="text-align:center">
+        <p>确认删除该商家？</p>
+      </div>
       <p slot="footer">
         <Button type="error" long :loading="deleteLoading" @click="handleDelOk('formValidate')">确认删除</Button>
       </p>
@@ -27,7 +33,7 @@
           <Form-item label="商家首页大图：" prop="businessImage">
             <Row>
               <i-col span="18">
-                <ImageUpload :src="imgURL" v-on:listenToChildEvent="showImageUrl"></ImageUpload>
+                <ImageUpload :src="imgURL" v-on:listenToChildEvent="showImageUrl" v-on:listenRemove="removeImage"></ImageUpload>
                 <Input v-show="false" v-model="formValidate.businessImage"/>
               </i-col>
             </Row>
@@ -35,7 +41,7 @@
           <Form-item label="商家幻灯片图片：" prop="businessCarouselImage">
             <Row>
               <i-col span="18">
-                <MultiUpload v-on:listenToChildEvent="changeCarouselImg"></MultiUpload>
+                <MultiUpload v-on:listenToChildEvent="changeCarouselImg" v-on:listenCarouselRemove="removeCarouselImage"></MultiUpload>
                 <Input v-show="false" v-model="formValidate.businessCarouselImage"/>
               </i-col>
             </Row>
@@ -49,9 +55,13 @@
           </Form-item>
           <Form-item label="掌柜用户名：" prop="userId">
             <Row>
-              <i-col span="18">
-                <Select v-model="formValidate.userId" filterable remote :remote-method="searchUser" :loading="loading1">
-                  <Option v-for="item in users" :value="item.userId" :key="new Date()">{{ item.username }}</Option>
+              <i-col  span="10">
+                <Input v-model="formValidate.username" ></Input>
+              </i-col>
+              <i-col span="10">
+                <Input v-model="formValidate.userId" v-show="false"></Input>
+                <Select v-on:on-change="setUserId"  placeholder="输入用户名进行搜索" filterable remote :remote-method="searchUser" :loading="loading1">
+                  <Option v-for="item in users" :value="item.userId + '|' + item.username" :key="item">{{ item.username }} <span style="float:right;color:#ccc">{{item.tel}}</span></Option>
                 </Select>
               </i-col>
             </Row>
@@ -75,8 +85,21 @@
           </Form-item>
           <Form-item label="商家地址：" prop="address">
             <Row>
+              <i-col span="10">
+                <Input v-model="formValidate.address" placeholder="请在下方地图上选择位置" disabled ></Input>
+              </i-col>
+              <i-col span="5">
+                <Input v-model="formValidate.latitude" placeholder="纬度" icon="ios-location" disabled ></Input>
+              </i-col>
+              <i-col span="5">
+                <Input v-model="formValidate.longtitude" placeholder="经度" icon="ios-location" disabled ></Input>
+              </i-col>
+            </Row>
+          </Form-item>
+          <Form-item>
+            <Row>
               <i-col span="18">
-                <Input v-model="formValidate.address" placeholder="用户地址"></Input>
+                <BMap v-on:getAddressCoordinate="getAddressCoordinate" v-on:getAddressLocation="getAddressLocation"></BMap>
               </i-col>
             </Row>
           </Form-item>
@@ -117,7 +140,7 @@
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
-              <Input type="text" placeholder="请输入用户名" v-model="search.title" style="width: 230px;"
+              <Input type="text" placeholder="请输入店铺名" v-model="search.name" style="width: 230px;"
                      @on-enter="handleSearch"></Input>
             </Form-item>
             <Form-item>
@@ -140,17 +163,21 @@
   import Editor from '@/components/Editor'
   import ImageUpload from '@/components/Uploader'
   import MultiUpload from '@/components/MultiUploader'
+  import BMap from '@/components/BMap'
+  import ICol from '../../../../node_modules/iview/src/components/grid/col'
 
   export default {
     name: 'businessname',
     components: {
+      ICol,
       List,
       ListHeader,
       ListOperations,
       ListSearch,
       Editor,
       ImageUpload,
-      MultiUpload
+      MultiUpload,
+      BMap
     },
     data () {
       return {
@@ -174,6 +201,7 @@
         formValidate: {
           businessId: '',
           name: '',
+          username: '',
           address: '',
           tel: '',
           content: '',
@@ -181,7 +209,9 @@
           businessCarouselImage: '',
           isShow: '1',
           addTime: '',
-          userId: ''
+          userId: '',
+          longtitude: '',
+          latitude: ''
         },
         ruleValidate: {
           businessId: [
@@ -231,7 +261,15 @@
           }],
           address: [{
             required: true,
-            message: '地址不能为空'
+            message: '请在地图上选择坐标位置'
+          }],
+          longtitude: [{
+            required: true,
+            message: '请在地图上选择坐标位置'
+          }],
+          latitude: [{
+            required: true,
+            message: '请在地图上选择坐标位置'
           }],
           isShow: [{
             required: true
@@ -258,20 +296,14 @@
           {
             title: '商家ID',
             key: 'businessId',
-            width: 90
-          },
-          {
-            title: '店名',
-            key: 'name'
-          },
-          {
-            title: '地址',
-            key: 'address'
+            align: 'center',
+            width: 80
           },
           {
             title: '图片',
             key: 'businessImage',
-            width: 150,
+            align: 'center',
+            width: 130,
             render: (h, params) => {
               return h('div', [
                 h('img', {
@@ -286,11 +318,18 @@
             }
           },
           {
-            title: '商家信息',
-            key: 'content'
+            title: '店名',
+            align: 'center',
+            key: 'name'
           },
           {
-            title: '添加时间',
+            title: '地址',
+            align: 'center',
+            key: 'address'
+          },
+          {
+            title: '最后修改时间',
+            align: 'center',
             key: 'addTime',
             render (row, column, index) {
               return `<span>${time.getDateTime(row.addTime)}</span>`
@@ -299,8 +338,7 @@
           {
             title: '操作',
             key: 'action',
-            width: 155,
-            align: 'center',
+            width: 240,
             render: (h, params) => {
               return h('div', [
                 h('Button', {
@@ -310,7 +348,6 @@
                     icon: 'edit'
                   },
                   style: {
-                    marginRight: '3px'
                   },
                   on: {
                     click: () => {
@@ -319,6 +356,21 @@
                     }
                   }
                 }, '修改'),
+                h('Button', {
+                  props: {
+                    type: 'text',
+                    size: 'small',
+                    icon: 'edit'
+                  },
+                  style: {
+                  },
+                  on: {
+                    click: () => {
+                      let row = params.row
+                      this.$router.push({name: 'businessDish', params: {businessId: row.businessId, businessName: row.name}})
+                    }
+                  }
+                }, '添加菜品'),
                 h('Button', {
                   props: {
                     type: 'text',
@@ -361,6 +413,8 @@
       }
     },
     created () {
+      this.$store.dispatch('show_business_nav')
+      // 指定上传的是business
       this.$store.dispatch('setUrlType', {
         params: 'business'
       })
@@ -369,6 +423,15 @@
       this.get()
     },
     methods: {
+      setUserId: function (data) {
+        console.info('.....changed.......')
+        console.info(data)
+        let userId = data.split('|')
+        if (userId.length > 1) {
+          this.$set(this.formValidate, 'userId', userId[0])
+          this.$set(this.formValidate, 'username', userId[1])
+        }
+      },
       // 获取list的数据
       get (current = 1) {
         this.$set(this, 'current', current)
@@ -394,9 +457,21 @@
           this.$set(this, 'editModalTitle', '修改商家信息')
           if (this.$store.getters.getBusinessname !== null) {
             this.$set(this, 'formValidate', this.$store.getters.getBusinessname)
+            this.$set(this.add, 'modal', true)
           }
-          this.$set(this.add, 'businessId', id)
-          this.$set(this.add, 'modal', true)
+          let userId = this.formValidate.userId
+          // 根据userId获取用户名username
+          this.$store.dispatch('getUser', {
+            uri: 'get' + '?' + 'userId=' + userId
+          }).then(() => {
+            // 拉取到数据之后再设置一系列数据
+            console.info(this.$store.getters.getUser)
+            let data = this.$store.getters.getUser
+            if (data.code !== -1) {
+              alert(data.data.username)
+              this.$set(this.formValidate, 'username', data.data.username)
+            }
+          })
         })
       },
       // 获取所有用户
@@ -404,7 +479,7 @@
         if (query !== '') {
           // 远程获取数据，将数据放到users中
           this.$store.dispatch('getAllUsers', {
-            params: {tel: query}
+            params: {username: query}
           }).then(() => {
             let userlist = this.$store.getters.getAllUser.data.page.list
             if (userlist != null) {
@@ -482,12 +557,46 @@
       showImageUrl (data) {
         this.$set(this.formValidate, 'businessImage', data)
       },
+      removeImage (url) {
+        console.info(url)
+        if (url === this.formValidate.businessImage) {
+          this.$set(this.formValidate, 'businessImage', '')
+        }
+      },
       changeCarouselImg (data) {
         let businessTemp = this.formValidate.businessCarouselImage
         this.$set(this.formValidate, 'businessCarouselImage', data + ',' + businessTemp)
         this.$store.dispatch('setBusinessname', {
           data: this.formValidate
         })
+      },
+      removeCarouselImage (url) {
+        let carouselImg = this.formValidate.businessCarouselImage
+        let imgArr = carouselImg.split(',')
+        let finalImgArry = ''
+        // 遍历查找要删除的那个图片url并删除
+        for (var i = 0; i < imgArr.length; i++) {
+          if (url === imgArr[i]) {
+            imgArr.splice(i, 1)
+          }
+        }
+        // 重新组装url
+        for (let i = 0; i < imgArr.length; i++) {
+          finalImgArry = imgArr[i] + ',' + finalImgArry
+        }
+        this.$set(this.formValidate, 'businessCarouselImage', data + ',' + finalImgArry)
+      },
+      getAddressLocation (e) {
+        console.info(e)
+        var address = e.province + e.district + e.city + e.street + e.streetNumber
+        console.info(address)
+        this.$set(this.formValidate, 'address', address)
+      },
+      getAddressCoordinate (e) {
+        console.info(e.lng)
+        console.info(e.lat)
+        this.$set(this.formValidate, 'longtitude', e.lng)
+        this.$set(this.formValidate, 'latitude', e.lat)
       },
       resetFields () {
         this.$refs.formValidate.resetFields()

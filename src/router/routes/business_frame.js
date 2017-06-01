@@ -23,6 +23,11 @@ export default {
       component: resolve => require(['@/app/Business/takeNum'], resolve)
     },
     {
+      path: '/businessDish/:businessId/:businessName',
+      name: 'businessDish',
+      component: resolve => require(['@/app/Business/BusinessDish'], resolve)
+    },
+    {
       path: 'form/:id?',
       component: resolve => require(['@/app/Business/Form'], resolve)
     }

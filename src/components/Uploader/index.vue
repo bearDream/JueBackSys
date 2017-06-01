@@ -55,7 +55,7 @@
       },
       handleRemove (file) {
         this._remove(file)
-        this.$emit('on-change', null)
+        this.$emit('listenRemove', file.url)
       },
       handleSuccess (res, file) {
         console.info(res)
@@ -84,7 +84,7 @@
         this.$Message.error('文件不能超过 2M')
       },
       handleBeforeUpload () {
-        const check = this.uploadList.length < 2
+        const check = this.uploadList.length < 1
         if (!check) {
           this.$Message.error('删除已有图片后再上传')
         }
@@ -98,13 +98,14 @@
       this.$set(this, 'action', consts.UPLOAD_URL + '/singleUpload' + param)
     },
     computed: mapState([
-      'businessname'
+      'businessname',
+      'dish'
     ]),
     watch: {
       // 当点击修改的时候，会将businessId赋值给add.businessId，并刺激formValidate的数据自动加载
       'businessname.businessname.businessImage': {
         handler (newVal) {
-          console.info('..........')
+          console.info('..........newValue')
           console.info(newVal)
           let businessImage = newVal
           if (businessImage !== null && businessImage !== '') {
@@ -112,7 +113,7 @@
             imageArr = businessImage.split(',')
             for (var i = 0; i < imageArr.length; i++) {
               imageArr[i] = {
-                name: '',
+                name: 'img' + i,
                 url: imageArr[i],
                 percentage: 100,
                 status: 'finished',
@@ -120,6 +121,39 @@
               }
             }
             this.$set(this, 'uploadList', imageArr)
+            this.$refs.upload.fileList = imageArr
+          } else {
+            console.info('清空.....')
+            this.$set(this, 'uploadList', [])
+            this.$refs.upload.fileList = []
+            console.info(this.uploadList)
+          }
+        }
+      },
+      'dish.dish.data.dishImage': {
+        handler (newVal) {
+          console.info('..........newValue')
+          console.info(newVal)
+          let businessImage = newVal
+          if (businessImage !== null && businessImage !== '') {
+            let imageArr = []
+            imageArr = businessImage.split(',')
+            for (var i = 0; i < imageArr.length; i++) {
+              imageArr[i] = {
+                name: 'img' + i,
+                url: imageArr[i],
+                percentage: 100,
+                status: 'finished',
+                uid: 100000 + i
+              }
+            }
+            this.$set(this, 'uploadList', imageArr)
+            this.$refs.upload.fileList = imageArr
+          } else {
+            console.info('清空.....')
+            this.$set(this, 'uploadList', [])
+            this.$refs.upload.fileList = []
+            console.info(this.uploadList)
           }
         }
       }

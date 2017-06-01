@@ -291,6 +291,7 @@
       }
     },
     created () {
+      this.$store.dispatch('show_business_nav')
       this.get()
     },
     methods: {

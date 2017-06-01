@@ -3,13 +3,13 @@
     <Modal
       width="300"
       v-model="del.modal"
-      title="确认框"
+      title="封禁用户"
       @on-ok="handleDelOk">
-      <p>确认删除该记录？</p>
+      <p>确认禁用该用户吗？</p>
     </Modal>
     <Modal
       v-model="add.modal"
-      title="添加用户"
+      title="修改用户信息"
       @on-ok="handleAddOk">
 
       <!-- 表单 -->
@@ -55,7 +55,7 @@
           @on-change="handlePageChange">
       <ListHeader>
         <ListOperations>
-          <Button class="margin-right-sm" type="primary" @click="handleAdd">新增</Button>
+          <!--<Button class="margin-right-sm" type="primary" @click="handleAdd">新增</Button>-->
         </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
@@ -76,7 +76,6 @@
 <script>
   import { mapState } from 'vuex'
   import consts from '@/utils/consts'
-  import time from '@/utils/helpers/timeLite'
   import List, { ListHeader, ListOperations, ListSearch } from '@/components/List'
   import Editor from '@/components/Editor'
 
@@ -155,17 +154,9 @@
             width: 80
           },
           {
-            title: '联络方式',
+            title: '电话',
             key: 'tel',
             width: 125
-          },
-          {
-            title: '时间',
-            key: 'addTime',
-            width: 180,
-            render (row, column, index) {
-              return `<span>${time.getDateTime(row.logAddtime + '000')}</span>`
-            }
           },
           {
             title: '等级',
@@ -178,7 +169,7 @@
             width: 125,
             render: (row, column, index) => {
               return `</a><i-button type="ghost" size="small" @click="handleEdit(${row.roleId})">编辑</i-button>
-                <i-button type="ghost" size="small" @click="handleDel(${row.userId})">删除</i-button>`
+                <i-button type="ghost" size="small" @click="handleDel(${row.userId})">封禁</i-button>`
             }
           }
         ]

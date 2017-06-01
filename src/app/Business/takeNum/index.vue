@@ -173,6 +173,7 @@
       'businesstake'
     ]),
     created () {
+      this.$store.dispatch('show_business_nav')
       console.info(this.$store)
       this.get()
       console.info(this.$store)

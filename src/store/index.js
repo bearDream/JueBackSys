@@ -17,6 +17,9 @@ import dishtype from './modules/dishtype'
 import dishtag from './modules/dishtag'
 import nutrition from './modules/nutrition'
 import UrlType from './modules/uploadUrlType'
+import tag from './modules/tag'
+import dishBusiness from './modules/dishBusiness'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -40,6 +43,8 @@ export default new Vuex.Store({
     dishtype,
     dishtag,
     nutrition,
-    UrlType
+    UrlType,
+    tag,
+    dishBusiness
   }
 })

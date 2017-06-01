@@ -1,5 +1,6 @@
 import types from './types'
 import Model from '../../../models/dishtype'
+import AllModel from '../../../models/dishAlltype'
 
 // 角色的所有请求
 export default {
@@ -9,6 +10,17 @@ export default {
   getDishtypes ({commit}, {params}) {
     return new Model().GET({params}).then((res) => {
       commit(types.GET_DISHTYPES, {
+        data: res.data.data
+      })
+    })
+  },
+
+  /**
+   * 获取所有菜品分类
+   */
+  getAllDishtypes ({commit}) {
+    return new AllModel().GET({}).then((res) => {
+      commit(types.GET_ALLDISHTYPES, {
         data: res.data.data
       })
     })
@@ -35,14 +47,14 @@ export default {
   /**
    * 添加数据
    */
-  postDishtype ({commit}, {params}) {
-    return new Model().POST({params})
+  postDishtype ({commit}, {data}) {
+    return new Model().POST({data})
   },
 
   /**
    * 修改数据
    */
-  putDishtype ({commit}, {params}) {
-    return new Model().PUT({params})
+  putDishtype ({commit}, {data}) {
+    return new Model().PUT({data})
   }
 }

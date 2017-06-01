@@ -169,6 +169,7 @@
       'dishtag'
     ]),
     created () {
+      this.$store.dispatch('show_dish_nav')
       this.get()
     },
     methods: {
