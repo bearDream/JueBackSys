@@ -19,6 +19,7 @@ import nutrition from './modules/nutrition'
 import UrlType from './modules/uploadUrlType'
 import tag from './modules/tag'
 import dishBusiness from './modules/dishBusiness'
+import loginInfo from './modules/loginInfo'
 
 Vue.use(Vuex)
 
@@ -45,6 +46,7 @@ export default new Vuex.Store({
     nutrition,
     UrlType,
     tag,
-    dishBusiness
+    dishBusiness,
+    loginInfo
   }
 })

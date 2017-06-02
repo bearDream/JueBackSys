@@ -1,11 +1,11 @@
 <template>
   <div class="header">
     <div class="header-center">
-      <Button type="ghost" size="large" icon="social-windows" @click="home" class="logo">后台管理系统</Button>
+      <Button type="ghost" size="large" icon="social-windows" @click="home" class="logo">蕨菜后台管理</Button>
       <div class="operations">
         <Button-group size="small">
-          <Button type="ghost" icon="android-person">当前用户：admin</Button>
-          <Button type="ghost" icon="log-out" @click="handleLogout">退出</Button>
+          <Button type="ghost" icon="android-person">当前用户：{{username}}</Button>
+          <Button type="error" icon="log-out" @click="handleLogout">退出</Button>
         </Button-group>
       </div>
     </div>
@@ -17,6 +17,16 @@
 
   export default {
     name: 'header',
+    data () {
+      return {
+        username: ''
+      }
+    },
+    created () {
+      if (this.$store.getters.getLoginUser !== undefined) {
+        this.$set(this, 'username', this.$store.getters.getLoginUser.username)
+      }
+    },
     methods: {
       handleLogout () {
         this.$store.dispatch('logoutAction')

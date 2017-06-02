@@ -468,7 +468,6 @@
             console.info(this.$store.getters.getUser)
             let data = this.$store.getters.getUser
             if (data.code !== -1) {
-              alert(data.data.username)
               this.$set(this.formValidate, 'username', data.data.username)
             }
           })
@@ -565,7 +564,12 @@
       },
       changeCarouselImg (data) {
         let businessTemp = this.formValidate.businessCarouselImage
-        this.$set(this.formValidate, 'businessCarouselImage', data + ',' + businessTemp)
+        // 当用户第一次上传图片的时候，防止在最后多了一个逗号，因此需要判断
+        if (businessTemp === '') {
+          this.$set(this.formValidate, 'businessCarouselImage', data)
+        } else {
+          this.$set(this.formValidate, 'businessCarouselImage', data + ',' + businessTemp)
+        }
         this.$store.dispatch('setBusinessname', {
           data: this.formValidate
         })
@@ -584,7 +588,7 @@
         for (let i = 0; i < imgArr.length; i++) {
           finalImgArry = imgArr[i] + ',' + finalImgArry
         }
-        this.$set(this.formValidate, 'businessCarouselImage', data + ',' + finalImgArry)
+        this.$set(this.formValidate, 'businessCarouselImage', finalImgArry.substring(0, finalImgArry.length - 1))
       },
       getAddressLocation (e) {
         console.info(e)

@@ -73,8 +73,6 @@
           console.info('..........')
           console.info(file)
           this.$emit('listenToChildEvent', file.url)
-
-          this.$emit('on-change', file)
         }
       },
       handleFormatError (file) {
@@ -113,6 +111,8 @@
       'businessname.businessname.businessCarouselImage': {
         handler (newVal) {
           let businessImage = newVal
+          console.info('图片：')
+          console.info(businessImage)
           if (businessImage !== null && businessImage !== '') {
             let imageArr = []
             imageArr = businessImage.split(',')
@@ -128,10 +128,8 @@
             this.$set(this, 'uploadList', imageArr)
             this.$refs.upload.fileList = imageArr
           } else {
-            console.info('清空.....')
             this.$set(this, 'uploadList', [])
             this.$refs.upload.fileList = []
-            console.info(this.uploadList)
           }
         }
       }

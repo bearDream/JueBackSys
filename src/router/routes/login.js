@@ -14,7 +14,7 @@ export default {
         } else {
           next()
         }
-      }).catch(() => next('/')
+      }).catch(() => console.info('出错了')
       )
   }
 }

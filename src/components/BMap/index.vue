@@ -21,7 +21,6 @@
       map.enableContinuousZoom()
       var geoc = new BMap.Geocoder()
       map.addEventListener('click', function (e) {
-        alert(e.point.lng + ',' + e.point.lat)
         that.$emit('getAddressCoordinate', e.point)
       })
       map.addEventListener('click', function (e) {
@@ -29,7 +28,6 @@
         geoc.getLocation(pt, function (rs) {
           var addComp = rs.addressComponents
           that.$emit('getAddressLocation', addComp)
-          alert(addComp.province + ', ' + addComp.city + ', ' + addComp.district + ', ' + addComp.street + ', ' + addComp.streetNumber)
         })
       })
       console.log(map)

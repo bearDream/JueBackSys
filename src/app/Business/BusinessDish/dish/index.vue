@@ -4,16 +4,16 @@
       width="300"
       v-model="del.modal"
       title="确认移除"
-      @on-ok="handleDelOk">
+      @on-ok="removeDish">
       <p slot="header" style="color:#f60;text-align:center">
         <Icon type="information-circled"></Icon>
-        <span>删除确认</span>
+        <span>移除确认</span>
       </p>
       <div style="text-align:center">
-        <p>确认删除该商家？</p>
+        <p>确认将该菜品从该商家移除？</p>
       </div>
       <p slot="footer">
-        <Button type="error" long :loading="deleteLoading" @click="handleDelOk('formValidate')">确认删除</Button>
+        <Button type="error" long :loading="deleteLoading" @click="removeDish">确认移除</Button>
       </p>
     </Modal>
 
@@ -22,11 +22,10 @@
       :mask-closable="false"
       width="700"
       :styles="{top: '20px'}"
-      @on-cancel="handleAddCancel"
       @on-ok="handleAddOk">
       <p slot="header" style="color:#5ebdff;text-align:center">
-        <Icon type="plus-round"></Icon>
-        <span>添加<span style="color: orangered; padding-left: 4px; padding-right: 4px;" v-text="add.name"/>到 <span style="color: darkgray; padding-left: 4px; padding-right: 4px;" v-text="businessName"/> 商家店铺</span>
+        <Icon type="edit" size="big"></Icon>
+        <span>修改 <span style="color: orangered; padding-left: 4px; padding-right: 4px;" v-text="add.name"/> </span>
       </p>
       <!-- 表单 -->
       <div>
@@ -110,38 +109,18 @@
       <Breadcrumb-item href="/">首页</Breadcrumb-item>
       <Breadcrumb-item href="#">商家</Breadcrumb-item>
       <Breadcrumb-item href="/businessFrame">商家管理</Breadcrumb-item>
-      <Breadcrumb-item href="">商家所属菜品管理</Breadcrumb-item>
+      <Breadcrumb-item href="#">商家所属菜品管理</Breadcrumb-item>
+      <Breadcrumb-item href="">商家所有菜品管理</Breadcrumb-item>
     </Breadcrumb>
     <Spin fix v-show="role_spin">
       <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
       <div>Loading</div>
     </Spin>
-    <Button type="success" long style="height: 40px;font-size: 15px;">{{businessName}}</Button>
-    <Row style="background:#eee;padding:20px">
-      <i-col span="11">
-        <Card :bordered="false">
-          <p slot="title">商家拥有菜品数量</p>
-          <span style="font-size: 20px; color: orangered" v-text="allDish"/><span>个菜品</span>
-        </Card>
-      </i-col>
-      <i-col span="11" offset="2">
-        <Card shadow>
-          <p slot="title">商家被推荐菜品</p>
-          <span style="font-size: 20px; color: orangered" v-text="topDish"/><span>个菜品</span>
-        </Card>
-      </i-col>
-    </Row>
-    <br/>
     <!-- 分页 -->
     <List :current="current" :columns="columns" :data="dishList"
           :total="dishTotal"
           @on-change="handlePageChange">
       <ListHeader>
-        <ListOperations>
-          <router-link :to="{ name: 'businessOweDish', params: { businessId: businessId }}">
-            <Button class="margin-right-sm" type="ghost">管理 <span style="color: rgba(0,204,102,0.82);">{{businessName}}</span> 拥有的菜品</Button>
-          </router-link>
-        </ListOperations>
         <ListSearch>
           <Form ref="formInline" inline>
             <Form-item prop="title">
@@ -205,7 +184,7 @@
         current: 1,
         del: {
           modal: false,
-          id: ''
+          dishBusinessId: ''
         },
         add: {
           modal: false,
@@ -248,7 +227,8 @@
           {
             title: '图片',
             key: 'dishImage',
-            width: 150,
+            width: 130,
+            align: 'center',
             render: (h, params) => {
               return h('div', [
                 h('img', {
@@ -269,16 +249,22 @@
             width: 120
           },
           {
-            title: '菜品类型',
+            title: '正常价格',
             align: 'center',
-            key: 'typeName',
-            width: 110
+            key: 'dishPrice',
+            width: 90
           },
           {
-            title: '菜品简介',
+            title: '活动价格',
             align: 'center',
-            key: 'dishDesc',
-            width: 220
+            key: 'favorablePrice',
+            width: 90
+          },
+          {
+            title: '销售量',
+            align: 'center',
+            key: 'orderCount',
+            width: 90
           },
           {
             title: '添加时间',
@@ -300,7 +286,7 @@
                   props: {
                     type: 'text',
                     size: 'small',
-                    icon: 'ios-plus-empty'
+                    icon: 'edit'
                   },
                   style: {
                     marginRight: '3px'
@@ -308,10 +294,28 @@
                   on: {
                     click: () => {
                       let row = params.row
-                      this.addDishToBusiness(row.dishId, row.dishName)
+                      this.editDishToBusiness(row.dishBusinessId, row.dishId, row.dishName)
                     }
                   }
-                }, '加入该店铺')
+                }, '修改'),
+                h('Button', {
+                  props: {
+                    type: 'text',
+                    size: 'small',
+                    icon: 'ios-trash-outline'
+                  },
+                  style: {
+                    marginRight: '3px',
+                    color: '#ed3f14'
+                  },
+                  on: {
+                    click: () => {
+                      let row = params.row
+                      this.$set(this.del, 'dishBusinessId', row.dishBusinessId)
+                      this.$set(this.del, 'modal', true)
+                    }
+                  }
+                }, '移除')
               ])
             }
           }
@@ -329,7 +333,6 @@
         this.$router.go(-1)
       }
       this.$set(this, 'businessId', this.$route.params.businessId)
-      this.$set(this, 'businessName', this.$route.params.businessName)
       this.$set(this.formValidate, 'businessId', this.$route.params.businessId)
       this.$store.dispatch('show_none_nav')
       // 指定上传的是business
@@ -347,21 +350,6 @@
         this.$set(this, 'current', current)
 
         // 获取该店铺没有的菜品数据
-        this.$store.dispatch('getNotBusinessDish', {
-          params: {
-            pageNum: (current - 1) * consts.PAGE_SIZE,
-            pageSize: consts.PAGE_SIZE,
-            businessId: this.businessId,
-            ...this.search
-          }
-        }).then(() => {
-          let data = this.$store.getters.getNotBusinessDishes
-          if (data.code !== -1) {
-            this.$set(this, 'dishList', this.$store.getters.getNotBusinessDishes.data.page.list)
-            this.$set(this, 'dishTotal', this.$store.getters.getNotBusinessDishes.data.page.total)
-          }
-        })
-        // 获取该店铺已有的菜品数据
         this.$store.dispatch('getBusinessDishs', {
           params: {
             pageNum: (current - 1) * consts.PAGE_SIZE,
@@ -371,46 +359,29 @@
           }
         }).then(() => {
           let data = this.$store.getters.getBusinessDishes
-          if (data !== undefined) {
-            this.$set(this, 'allDish', this.$store.getters.getBusinessDishes.page.total)
-            this.$set(this, 'topDish', this.$store.getters.getBusinessDishes.topNum)
+          console.info(data)
+          if (data.page !== undefined) {
+            this.$set(this, 'dishList', data.page.list)
+            this.$set(this, 'dishTotal', data.page.total)
           }
         })
       },
-      // 获取所有tag标签
-//      getTag (current = 1) {
-//        this.$set(this, 'current', current)
-//
-//        this.$store.dispatch('getTags', {
-//          params: {
-//            tagType: 1,
-//            ...this.searchTagKey
-//          }
-//        }).then(() => {
-//          var data = this.$store.getters.getTags.page
-//          if (data !== undefined) {
-//            this.$set(this, 'allDishTag', data.list)
-//            let tempData = []
-//            for (let i = 0; i < data.list.length; i++) {
-//              tempData.push({
-//                key: data.list[i].tagId,
-//                label: data.list[i].name,
-//                description: data.list[i].content
-//              })
-//            }
-//            this.$set(this, 'allDishTag', tempData)
-//            console.info('test......')
-//            console.info(this.allDishTag)
-//          }
-//        })
-//      },
-//      searchTag (data, query) {
-//        console.info(data)
-//        console.info(query)
-//      },
-      addDishToBusiness (dishId, dishName) {
+      editDishToBusiness (dishBusinessId, dishId, dishName) {
+        // 获取该菜的信息装到formValidate中
+        this.$store.dispatch('getBusinessDish', {
+          uri: 'get?dishBusinessId=' + dishBusinessId
+        }).then(() => {
+          let data = this.$store.getters.getBusinessDish
+          console.info(data)
+          if (data.code !== -1) {
+            // 这三个字段是boolean型的，因此要转成integer类型，防止以字符串形式传输
+            data.data.isShow = Number(data.data.isShow)
+            data.data.isFavorable = Number(data.data.isFavorable)
+            data.data.isTop = Number(data.data.isTop)
+            this.$set(this, 'formValidate', data.data)
+          }
+        })
         this.$set(this.add, 'name', dishName)
-        this.$set(this.formValidate, 'dishId', dishId)
         this.$set(this.add, 'modal', true)
       },
       handlePageChange (current) {
@@ -420,28 +391,16 @@
         this.get()
         this.$set(this, 'current', 1)
       },
-      handleAdd (id) {
-        // 设置编辑窗口信息
-        this.$set(this, 'editModalButton', 'POST')
-        this.$set(this, 'editModalTitle', '添加商家信息')
-        // 显示对话框
-        this.$set(this.add, 'modal', true)
-        // 重置表单信息
-        this.resetFields()
-        this.$set(this.formValidate, 'businessId', null)
-      },
-      handleAddCancel () {
-        this.resetFields()
-      },
-      handleDelOk () {
+      removeDish () {
         this.$set(this, 'deleteLoading', true)
-        this.$store.dispatch('deleteBusinessname', {
+        this.$store.dispatch('deleteBusinessDish', {
           params: {
-            businessId: this.del.businessId
+            dishBusinessId: this.del.dishBusinessId
           }
         }).then(() => {
           this.$set(this, 'deleteLoading', false)
           this.$set(this.del, 'modal', false)
+          this.$set(this.del, 'dishBusinessId', '')
           this.$Message.success('删除成功！')
           this.get()
         })
@@ -452,8 +411,6 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
             this.$set(this, 'businessLoading', true)
-            const action = this.editModalButton === 'POST' ? 'postBusinessDish' : 'putBusinessDish'
-
             console.info(this.formValidate)
 
             // 这三个字段是boolean型的，因此要转成integer类型，防止以字符串形式传输
@@ -461,7 +418,7 @@
             this.$set(this.formValidate, 'isFavorable', parseInt(this.formValidate.isFavorable))
             this.$set(this.formValidate, 'isTop', parseInt(this.formValidate.isTop))
 
-            this.$store.dispatch(action, {
+            this.$store.dispatch('putBusinessDish', {
               data: this.formValidate
             }).then((res) => {
               this.$set(this, 'businessLoading', false)
@@ -472,7 +429,7 @@
                   desc: data.msg
                 })
               } else {
-                this.$Message.success((this.editModalButton === 'POST' ? '新增商家' : '修改商家') + '成功！')
+                this.$Message.success('修改菜品数据成功')
                 this.resetFields()
                 this.$set(this.add, 'modal', false)
                 this.get()
@@ -521,6 +478,9 @@
       },
       resetFields () {
         this.$refs.formValidate.resetFields()
+      },
+      goBack () {
+        this.$router.go(-1)
       }
     }
   }

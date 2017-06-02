@@ -61,7 +61,7 @@
     watch: {
       'login.is_login': {
         handler (newVal) {
-          this.$route.push('/login')
+          this.$router.push('/login')
         }
       }
     },

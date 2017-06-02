@@ -85,6 +85,10 @@
                 if (data !== null && data.code !== -1) {
                   this.$router.push('/')
                   this.$Message.success('登录成功')
+                  let userInfo = JSON.parse(data.data)
+                  this.$store.dispatch('setLoginUser', {
+                    data: userInfo
+                  })
                   this.$store.dispatch('login', {})
                   auth.login(res.data)
                 } else {
