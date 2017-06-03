@@ -378,7 +378,7 @@
 
         this.$store.dispatch('getDishs', {
           params: {
-            pageNum: (current - 1) * consts.PAGE_SIZE,
+            pageNum: current,
             pageSize: consts.PAGE_SIZE,
             ...this.search
           }

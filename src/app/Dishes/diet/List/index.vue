@@ -10,7 +10,7 @@
         <span>删除确认</span>
       </p>
       <div style="text-align:center">
-        <p>确认删除该商家？</p>
+        <p>确认删除该营养价值信息？</p>
       </div>
       <p slot="footer">
         <Button type="error" long :loading="deleteLoading" @click="handleDelOk('formValidate')">确认删除</Button>
@@ -327,7 +327,7 @@
 
         this.$store.dispatch('getNutritions', {
           params: {
-            pageNum: (current - 1) * consts.PAGE_SIZE,
+            pageNum: current,
             pageSize: consts.PAGE_SIZE,
             ...this.search
           }
