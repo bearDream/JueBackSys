@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 20px">
     <Upload
       ref="upload"
       :show-upload-list="false"
