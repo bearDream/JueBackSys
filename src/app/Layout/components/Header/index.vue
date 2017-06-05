@@ -23,8 +23,10 @@
       }
     },
     created () {
-      if (this.$store.getters.getLoginUser !== undefined) {
+      if (this.$store.getters.getLoginUser.username !== undefined) {
         this.$set(this, 'username', this.$store.getters.getLoginUser.username)
+      } else {
+        this.$set(this, 'username', '系统管理员')
       }
     },
     methods: {

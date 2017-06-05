@@ -275,6 +275,52 @@
             width: 110
           },
           {
+            title: '适合人群',
+            align: 'center',
+            key: 'dishNutritionStatus',
+            width: 110,
+            render: (h, params) => {
+              switch (params.row.dishNutritionStatus) {
+                case 0:
+                  return h('div', [
+                    h('Tag', {
+                      props: {
+                        type: 'border',
+                        color: 'red'
+                      }
+                    }, '不健康')
+                  ])
+                case 1:
+                  return h('div', [
+                    h('Tag', {
+                      props: {
+                        type: 'border',
+                        color: 'yellow'
+                      }
+                    }, '标准')
+                  ])
+                case 2:
+                  return h('div', [
+                    h('Tag', {
+                      props: {
+                        type: 'border',
+                        color: 'green'
+                      }
+                    }, '减肥')
+                  ])
+                case 3:
+                  return h('div', [
+                    h('Tag', {
+                      props: {
+                        type: 'border',
+                        color: 'blue'
+                      }
+                    }, '塑形')
+                  ])
+              }
+            }
+          },
+          {
             title: '菜品简介',
             align: 'center',
             key: 'dishDesc',
@@ -349,7 +395,7 @@
         // 获取该店铺没有的菜品数据
         this.$store.dispatch('getNotBusinessDish', {
           params: {
-            pageNum: (current - 1) * consts.PAGE_SIZE,
+            pageNum: current,
             pageSize: consts.PAGE_SIZE,
             businessId: this.businessId,
             ...this.search
