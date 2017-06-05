@@ -10,8 +10,8 @@
       :on-format-error="handleFormatError"
       :on-exceeded-size="handleMaxSize"
       :before-upload="handleBeforeUpload"
-      action="//jsonplaceholder.typicode.com/posts/">
-      <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
+      :action="action">
+      <Button type="ghost" icon="ios-cloud-upload-outline">上传图片</Button>
     </Upload>
     <Modal title="查看图片" v-model="visible">
       <img :src="imgURL" v-if="visible" style="width: 100%">
@@ -31,19 +31,17 @@
   </div>
 </template>
 <script>
+  import consts from '@/utils/consts'
+  import { mapState } from 'vuex'
+
   export default {
     data () {
       return {
         defaultList: [],
+        action: '',
         imgURL: '',
         visible: false,
         uploadList: []
-      }
-    },
-    props: {
-      value: {
-        type: Number,
-        default: 0
       }
     },
     methods: {
@@ -57,17 +55,27 @@
       },
       handleRemove (file) {
         this._remove(file)
-        this.$emit('on-change', null)
+        this.$emit('listenRemove', file.url)
       },
       handleSuccess (res, file) {
-        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar'
-        file.name = ''
+        console.info(res)
+        if (res.code === -1) {
+          this.$Notice.error({
+            title: '上传失败',
+            desc: res.msg
+          })
+        } else {
+          file.url = res.data
+          file.name = ''
 
-        if (this.uploadList.length > 1) {
-          this._remove(this.uploadList[0])
+          this.$emit('listenToChildEvent', file.url)
+
+          if (this.uploadList.length > 1) {
+            this._remove(this.uploadList[0])
+          }
+
+          this.$emit('on-change', file)
         }
-
-        this.$emit('on-change', file)
       },
       handleFormatError () {
         this.$Message.error('文件格式不正确')
@@ -76,7 +84,7 @@
         this.$Message.error('文件不能超过 2M')
       },
       handleBeforeUpload () {
-        const check = this.uploadList.length < 2
+        const check = this.uploadList.length < 1
         if (!check) {
           this.$Message.error('删除已有图片后再上传')
         }
@@ -84,11 +92,70 @@
       }
     },
     created () {
-      if (this.value) {
-        this.defaultList.push({
-          'name': '',
-          'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
-        })
+      // 单文件上传接口是singleUpload   多文件上传则是MultiUpload
+      let urlType = this.$store.getters.getUrlType
+      let param = '?' + 'type=' + urlType
+      this.$set(this, 'action', consts.UPLOAD_URL + '/singleUpload' + param)
+    },
+    computed: mapState([
+      'businessname',
+      'dish'
+    ]),
+    watch: {
+      // 当点击修改的时候，会将businessId赋值给add.businessId，并刺激formValidate的数据自动加载
+      'businessname.businessname.businessImage': {
+        handler (newVal) {
+          console.info('..........newValue')
+          console.info(newVal)
+          let businessImage = newVal
+          if (businessImage !== null && businessImage !== '') {
+            let imageArr = []
+            imageArr = businessImage.split(',')
+            for (var i = 0; i < imageArr.length; i++) {
+              imageArr[i] = {
+                name: 'img' + i,
+                url: imageArr[i],
+                percentage: 100,
+                status: 'finished',
+                uid: 100000 + i
+              }
+            }
+            this.$set(this, 'uploadList', imageArr)
+            this.$refs.upload.fileList = imageArr
+          } else {
+            console.info('清空.....')
+            this.$set(this, 'uploadList', [])
+            this.$refs.upload.fileList = []
+            console.info(this.uploadList)
+          }
+        }
+      },
+      'dish.dish.data.dishImage': {
+        handler (newVal) {
+          console.info('..........newValue')
+          console.info(newVal)
+          let businessImage = newVal
+          if (businessImage !== null && businessImage !== '') {
+            let imageArr = []
+            imageArr = businessImage.split(',')
+            for (var i = 0; i < imageArr.length; i++) {
+              imageArr[i] = {
+                name: 'img' + i,
+                url: imageArr[i],
+                percentage: 100,
+                status: 'finished',
+                uid: 100000 + i
+              }
+            }
+            this.$set(this, 'uploadList', imageArr)
+            this.$refs.upload.fileList = imageArr
+          } else {
+            console.info('清空.....')
+            this.$set(this, 'uploadList', [])
+            this.$refs.upload.fileList = []
+            console.info(this.uploadList)
+          }
+        }
       }
     },
     mounted () {

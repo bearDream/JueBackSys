@@ -40,7 +40,7 @@
     methods: {
       handleSelect (name) {
 //        this.$router.push('baseNavigation/' + name)
-        this.$router.push(name)
+        this.$router.replace({path: '/' + name})
       },
       update (route) {
         const path = route ? route.path : this.$route.path

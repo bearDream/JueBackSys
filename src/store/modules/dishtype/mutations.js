@@ -6,5 +6,8 @@ export default {
   },
   [types.GET_DISHTYPE] (state, payload) {
     state.dishtype = payload.data
+  },
+  [types.GET_ALLDISHTYPES] (state, payload) {
+    state.dishalltypes = payload.data
   }
 }

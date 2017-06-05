@@ -37,6 +37,7 @@
   export default {
     name: 'form',
     created () {
+      this.$store.dispatch('show_dish_nav')
       this.id = this.$store
       console.info(this.$store)
       this.id && this.get(this.id)

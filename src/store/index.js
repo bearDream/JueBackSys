@@ -6,6 +6,7 @@ import mutations from './mutations'
 import log from './modules/log'
 import login from './modules/login'
 import role from './modules/role'
+import user from './modules/user'
 import businessname from './modules/businessname'
 import businesstype from './modules/businesstype'
 import businesstable from './modules/businesstable'
@@ -15,6 +16,11 @@ import dish from './modules/dish'
 import dishtype from './modules/dishtype'
 import dishtag from './modules/dishtag'
 import nutrition from './modules/nutrition'
+import UrlType from './modules/uploadUrlType'
+import tag from './modules/tag'
+import dishBusiness from './modules/dishBusiness'
+import loginInfo from './modules/loginInfo'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -27,6 +33,7 @@ export default new Vuex.Store({
   modules: {
     log,
     navigation,
+    user,
     role,
     businessname,
     businesstype,
@@ -36,6 +43,10 @@ export default new Vuex.Store({
     dish,
     dishtype,
     dishtag,
-    nutrition
+    nutrition,
+    UrlType,
+    tag,
+    dishBusiness,
+    loginInfo
   }
 })

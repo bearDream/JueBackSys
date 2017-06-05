@@ -7,8 +7,9 @@ import home from './routes/home'
 import businessFrame from './routes/business_frame'
 import baseFrame from './routes/base_frame'
 import dishFrame from './routes/dishes_frame'
-
+import userFrame from './routes/user_frame'
 import baseNavigation from './routes/base_navigation'
+import dishNavigation from './routes/dish_navigation'
 
 import login from './routes/login'
 import logout from './routes/logout'
@@ -34,8 +35,11 @@ const router = new Router({
             home,
             baseFrame,
             businessFrame,
+            baseNavigation,
+            dishNavigation,
+            userFrame,
             dishFrame,
-            baseNavigation
+            userFrame
           ],
           meta: {
             requiresAuth: true
@@ -56,10 +60,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
 
-  // router.app.$store.dispatch('logout')
   if (to.matched.some(record => record.meta.requiresAuth)) {
     axios.defaults.withCredentials = true
-    axios.get(consts.API_URL + '/isLogin', {})
+    axios.get(consts.API_URL + '/login/isLogin', {})
       .then(function (res) {
         console.log(res.data)
         let data = res.data
@@ -73,9 +76,11 @@ router.beforeEach((to, from, next) => {
           })
         }
       })
-      .catch(function (err) {
-        console.log(err)
+      .catch(() => next({
+        path: 'login',
+        query: {redirect: to.fullPath}
       })
+      )
   } else {
     next()
   }
@@ -83,7 +88,25 @@ router.beforeEach((to, from, next) => {
 
 // 路由结束时回调
 router.afterEach((to, from, next) => {
+  let path = to.path
   iView.LoadingBar.finish()
+  // 控制导航栏的显示
+  switch (path) {
+    case '/baseFrame':
+      router.app.$store.dispatch('show_base_nav')
+      break
+    case '/logFrame':
+      router.app.$store.dispatch('show_base_nav')
+      break
+    case '/businessFrame':
+      router.app.$store.dispatch('show_business_nav')
+      break
+    case '/dishFrame':
+      router.app.$store.dispatch('show_dish_nav')
+      break
+    default:
+      router.app.$store.dispatch('show_none_nav')
+  }
 })
 
 export default router

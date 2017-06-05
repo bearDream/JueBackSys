@@ -1,5 +1,5 @@
 import types from './types'
-import Model from '../../../models/businesstable'
+import Model from '../../../models/businesstag'
 
 // 角色的所有请求
 export default {

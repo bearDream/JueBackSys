@@ -7,11 +7,13 @@
 
 <script>
   import Header from './app/Layout/components/Header'
+  import BMap from 'BMap'
 
   export default {
     name: 'app',
     components: {
-      Header
+      Header,
+      BMap
     }
   }
 </script>

@@ -11,8 +11,6 @@ export default {
       commit(types.GET_BUSINESSNAMES, {
         data: res.data.data
       })
-      console.info('--------------------------------')
-      console.info(res.data.data)
     })
   },
 
@@ -22,8 +20,17 @@ export default {
   getBusinessname ({commit}, {uri}) {
     return new Model().GET({uri}).then((res) => {
       commit(types.GET_BUSINESSNAME, {
-        data: res.data
+        data: res.data.data
       })
+    })
+  },
+
+  /**
+   * 更改商家详情
+   */
+  setBusinessname ({commit}, {data}) {
+    commit(types.GET_BUSINESSNAME, {
+      data: data
     })
   },
 
